@@ -1,0 +1,48 @@
+name: "Build & Publish site"
+on:
+  # Run only when pushing to master branch
+  push:
+    branches:
+      - master
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    env:
+      DOCKERTAG: latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v13
+        with:
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/lb41az54kzk6j12p81br4bczary7m145/install
+          install_options: "--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve"
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v10
+        with:
+          name: srid
+          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          # Only needed for private caches
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: Build 🔧
+        run: |
+          nix -L run -j 4 . -- --help
+      - name: Publish Docker image to Docker Hub
+        # if: ${{ github.ref == env.MAINLINE && runner.os == 'Linux' }}
+        run: |
+          docker load -i $(nix-build docker.nix --argstr tag "${{ env.DOCKERTAG }}")
+          # docker tag "sridca/haskell-template:${{ env.DOCKERTAG }}" "sridca/haskell-template:${{env.NEURONVER}}"
+          echo ${{ secrets.DOCKER_PASS }} | docker login -u sridca --password-stdin
+          set -x
+          docker push "sridca/haskell-template:${{ env.DOCKERTAG }}"
+          # docker push "sridca/haskell-template:${{ env.haskell-templateVER }}"
+      - name: Generate website HTML 🔧
+        run: |
+          mkdir ./output
+          nix run . -- -C ./docs gen $(pwd)/output
+      - name: Deploy to website to gh-pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: output
+          cname: note.ema.srid.ca
+ 
