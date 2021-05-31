@@ -5,8 +5,6 @@
     "haskell.haskell",
     "arrterian.nix-env-selector",
     "bbenoist.nix",
-    "jnoortheen.nix-ide",
-    "heybourn.headwind",
-    "voorjaar.windicss-intellisense"
+    "jnoortheen.nix-ide"
   ]
 }
