@@ -1,21 +1,5 @@
 {
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
-  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
-  "files.associations": {
-    "*.tpl": "html"
-  },
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
-  // Per https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
-  "editor.quickSuggestions": {
-    "strings": true
-  },
-  "tailwindCSS.includeLanguages": {
-    "plaintext": "html"
-  },
-  "editor.colorDecorators": true,
-  "tailwindCSS.colorDecorators": true,
-  "html.format.contentUnformatted": "pre,code,textarea,bind,title",
-  "html.format.wrapLineLength": 100
+  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix"
 }
