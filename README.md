@@ -1,6 +1,6 @@
 # haskell-template
 
-Haskell project template optimized for a fully reproducible and friendly development environment. Based on Nix + Flakes + VSCode (HLS) + Relude.
+Haskell project template optimized for a fully reproducible and friendly development environment. Based on [Nix](https://notes.srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) + VSCode ([HLS](https://github.com/haskell/haskell-language-server)) + [Relude](https://github.com/kowainik/relude#relude).
 
 ## Getting Started
 
