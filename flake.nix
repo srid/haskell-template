@@ -1,5 +1,5 @@
 {
-  description = "haskell-template";
+  description = "haskell-template's description";
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
@@ -20,11 +20,13 @@
             root = ./.;
             withHoogle = false;
             overrides = self: super: with pkgs.haskell.lib; {
-              # lvar = self.callCabal2nix "lvar" inputs.ema.inputs.lvar { }; # Until lvar gets into nixpkgs
+              # Use callCabal2nix to override Haskell dependencies here
+              # cf. https://tek.brick.do/K3VXJd8mEKO7
             };
             modifier = drv:
               pkgs.haskell.lib.addBuildTools drv (with pkgs.haskellPackages;
               [
+                # Specify your build/dev dependencies here. 
                 cabal-fmt
                 cabal-install
                 ghcid
@@ -35,10 +37,10 @@
           };
       in
       {
-        # Used by `nix build` & `nix run`
+        # Used by `nix build` & `nix run` (prod exe)
         defaultPackage = project false;
 
-        # Used by `nix develop`
+        # Used by `nix develop` (dev shell)
         devShell = project true;
       });
 }
