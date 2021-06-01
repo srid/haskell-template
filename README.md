@@ -15,5 +15,5 @@ All but the final step need to be done only once.
 
 Then, before using it for real,
 
-- Rename `haskell-template` to `myproject` as well rename the cabal file to `myproject.cabal`. 
-- `git add . && git ci -m naming` followed `nix develop` (or `bin/run`) to verify.
+- Rename all occurrences of `haskell-template` to `myproject`, as well as rename the cabal file to `myproject.cabal`. 
+- Run `git add . && git ci -m rename` followed by `nix develop` (or `bin/run`) to verify that everything continues to work.
