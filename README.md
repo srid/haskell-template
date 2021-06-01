@@ -17,3 +17,9 @@ Then, before using it for real,
 
 - Rename all occurrences of `haskell-template` to `myproject`, as well as rename the cabal file to `myproject.cabal`. 
 - Run `git add . && git commit -m rename` followed by `nix develop` (or `bin/run`) to verify that everything continues to work.
+
+## Other templates
+
+Some related templates include,
+
+- https://github.com/serokell/templates/tree/master/haskell-cabal2nix
