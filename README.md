@@ -22,4 +22,5 @@ Then, before using it for real,
 
 Some related templates include,
 
-- https://github.com/serokell/templates/tree/master/haskell-cabal2nix
+- [Serokell's Flake template](https://github.com/serokell/templates/tree/master/haskell-cabal2nix)
+  - [Same, but using haskell.nix](https://github.com/serokell/templates/pull/2)
