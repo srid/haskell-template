@@ -19,6 +19,10 @@ Then, before using it for real,
     - To do this from commandline, run `nix run nixpkgs#sd -- haskell-template myproject * */*` 
 - Run `git add . && git commit -m rename` followed by `nix develop` (or `bin/run`) to verify that everything continues to work.
 
+## Tips
+
+- Run `nix flake update` to nixpkgs and other flake inputs.
+
 ## Other templates
 
 Some related templates include,
