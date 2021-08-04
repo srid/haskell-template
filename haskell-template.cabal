@@ -1,7 +1,7 @@
 cabal-version:      2.4
 name:               haskell-template
 version:            0.1.0.0
-license:            AGPL-3.0-only
+license:            MIT
 copyright:          2021 Sridhar Ratnakumar
 maintainer:         srid@srid.ca
 author:             Sridhar Ratnakumar
