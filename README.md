@@ -16,6 +16,7 @@ All but the final step need to be done only once.
 Then, before using it for real,
 
 - Rename all occurrences of `haskell-template` to `myproject`, as well as rename the cabal file to `myproject.cabal`. 
+    - To do this from commandline, run `nix run nixpkgs#sd -- haskell-template myproject * */*` 
 - Run `git add . && git commit -m rename` followed by `nix develop` (or `bin/run`) to verify that everything continues to work.
 
 ## Other templates
