@@ -23,9 +23,8 @@ Then, before using it for real,
 
 - Run `nix flake update` to nixpkgs and other flake inputs.
 
-## Other templates
+## Alternatives
 
-Some related templates include,
-
+- haskell.nix: [Getting started with Flakes](https://input-output-hk.github.io/haskell.nix/tutorials/getting-started-flakes/)
 - [Serokell's Flake template](https://github.com/serokell/templates/tree/master/haskell-cabal2nix)
   - [Same, but using haskell.nix](https://github.com/serokell/templates/pull/2)
