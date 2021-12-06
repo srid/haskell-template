@@ -17,6 +17,10 @@ To run the program with auto-recompile:
 
 - Press <kbd>Ctrl+Shift+B</kbd> in VSCode, or run `bin/run` (`bin/run-via-tmux` if you have tmux installed) in terminal, to launch Ghcid running your program.
 
+Open `Main.hs`, and expect all HLS IDE features like hover-over tooltip to work out of the box. Try changing the source, and expect Ghcid to re-compile and re-run the app in the terminal below.
+
+---
+
 Renaming the project:
 
 ```sh
