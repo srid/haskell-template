@@ -33,7 +33,7 @@ cd .. && mv haskell-template ${NAME} && cd ${NAME}
 
 ## Tips
 
-- Run `nix flake update` to nixpkgs and other flake inputs.
+- Run `nix flake update` to update all flake inputs. nixpkgs is pinned to a specific a rev, which you can advance to the latest rev reported in [status.nixos.org](https://status.nixos.org).
 
 ## Alternatives
 

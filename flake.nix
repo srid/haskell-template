@@ -1,7 +1,7 @@
 {
   description = "haskell-template's description";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/2df15ba83d0510a56f2583fd3481723835acb5a1";
+    nixpkgs.url = "github:nixos/nixpkgs/568e0bc498ee51fdd88e1e94089de05f2fdbd18b";
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -38,6 +38,9 @@
             overrides = self: super: with pkgs.haskell.lib; {
               # Use callCabal2nix to override Haskell dependencies here
               # cf. https://tek.brick.do/K3VXJd8mEKO7
+              # Example: 
+              # > NanoID = self.callCabal2nix "NanoID" inputs.NanoID { };
+              # Assumes that you have the 'NanoID' flake input defined.
             };
             modifier = drv:
               pkgs.haskell.lib.addBuildTools drv
