@@ -1,7 +1,7 @@
 {
   description = "haskell-template's description";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/568e0bc498ee51fdd88e1e94089de05f2fdbd18b";
+    nixpkgs.url = "github:nixos/nixpkgs/46821ea01c8f54d2a20f5a503809abfc605269d7";
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
