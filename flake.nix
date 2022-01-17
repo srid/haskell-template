@@ -1,7 +1,7 @@
 {
   description = "haskell-template's description";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/46821ea01c8f54d2a20f5a503809abfc605269d7";
+    nixpkgs.url = "github:nixos/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -14,9 +14,10 @@
         overlays = [ ];
         pkgs =
           import nixpkgs { inherit system overlays; config.allowBroken = true; };
+        hp = pkgs.haskellPackages; # pkgs.haskell.packages.ghc921;
         # https://github.com/NixOS/nixpkgs/issues/140774#issuecomment-976899227
         m1MacHsBuildTools =
-          pkgs.haskellPackages.override {
+          hp.override {
             overrides = self: super:
               let
                 workaround140774 = hpkg: with pkgs.haskell.lib;
@@ -30,7 +31,7 @@
               };
           };
         project = returnShellEnv:
-          pkgs.haskellPackages.developPackage {
+          hp.developPackage {
             inherit returnShellEnv;
             name = "haskell-template";
             root = ./.;
@@ -46,7 +47,7 @@
               pkgs.haskell.lib.addBuildTools drv
                 (with (if system == "aarch64-darwin"
                 then m1MacHsBuildTools
-                else pkgs.haskellPackages); [
+                else hp); [
                   # Specify your build/dev dependencies here. 
                   cabal-fmt
                   cabal-install
