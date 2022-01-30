@@ -32,17 +32,12 @@ executable haskell-template
     , directory
     , filepath
     , lens
-    , megaparsec
-    , monad-logger
     , mtl
-    , neat-interpolation
     , profunctors
     , relude
     , shower
-    , tagged
     , text
     , time
-    , unliftio
     , with-utf8
 
   mixins:
