@@ -1,7 +1,7 @@
 {
   description = "haskell-template's description";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
+    nixpkgs.url = "github:nixos/nixpkgs/5efc8ca954272c4376ac929f4c5ffefcc20551d5";
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -9,7 +9,7 @@
     };
   };
   outputs = inputs@{ self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ] (system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [ ];
         pkgs =
