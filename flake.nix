@@ -1,12 +1,12 @@
 {
   description = "haskell-template's description";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/554d2d8aa25b6e583575459c297ec23750adb6cb";
+    nixpkgs.url = "github:nixos/nixpkgs/b66b39216b1fef2d8c33cc7a5c72d8da80b79970";
     flake-utils.url = "github:numtide/flake-utils";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
+    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
+    flake-compat.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
@@ -14,22 +14,9 @@
         overlays = [ ];
         pkgs =
           import nixpkgs { inherit system overlays; config.allowBroken = true; };
+        # Change GHC version here. To get the appropriate value, run:
+        #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
         hp = pkgs.haskellPackages; # pkgs.haskell.packages.ghc921;
-        # https://github.com/NixOS/nixpkgs/issues/140774#issuecomment-976899227
-        m1MacHsBuildTools =
-          hp.override {
-            overrides = self: super:
-              let
-                workaround140774 = hpkg: with pkgs.haskell.lib;
-                  overrideCabal hpkg (drv: {
-                    enableSeparateBinOutput = false;
-                  });
-              in
-              {
-                ghcid = workaround140774 super.ghcid;
-                ormolu = workaround140774 super.ormolu;
-              };
-          };
         project = returnShellEnv:
           hp.developPackage {
             inherit returnShellEnv;
@@ -44,18 +31,15 @@
               # Assumes that you have the 'NanoID' flake input defined.
             };
             modifier = drv:
-              pkgs.haskell.lib.addBuildTools drv
-                (with (if system == "aarch64-darwin"
-                then m1MacHsBuildTools
-                else hp); [
-                  # Specify your build/dev dependencies here. 
-                  cabal-fmt
-                  cabal-install
-                  ghcid
-                  haskell-language-server
-                  ormolu
-                  pkgs.nixpkgs-fmt
-                ]);
+              pkgs.haskell.lib.addBuildTools drv (with hp; [
+                # Specify your build/dev dependencies here. 
+                cabal-fmt
+                cabal-install
+                ghcid
+                haskell-language-server
+                ormolu
+                pkgs.nixpkgs-fmt
+              ]);
           };
       in
       {
