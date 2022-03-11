@@ -24,11 +24,13 @@ Open `Main.hs`, and expect all HLS IDE features like hover-over tooltip to work 
 Renaming the project:
 
 ```sh
+git clone <your-clone-url>
+cd your-project
 NAME=myproject
+
 git mv haskell-template.cabal ${NAME}.cabal
 nix run nixpkgs#sd -- haskell-template ${NAME} * */*
 git add . && git commit -m rename
-cd .. && mv haskell-template ${NAME} && cd ${NAME}
 ```
 
 ## Tips
