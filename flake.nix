@@ -12,7 +12,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
-        pkgs = nixpkgs.legacyPackages.${system};  
+        pkgs = nixpkgs.legacyPackages.${system};
 
         # Change GHC version here. To get the appropriate value, run:
         #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
@@ -32,7 +32,7 @@
               # Assumes that you have the 'NanoID' flake input defined.
             };
             modifier = drv:
-              pkgs.haskell.lib.addBuildTools drv (with hp; [
+              pkgs.haskell.lib.addBuildTools drv (with hp; pkgs.lib.lists.optionals returnShellEnv [
                 # Specify your build/dev dependencies here. 
                 cabal-fmt
                 cabal-install
