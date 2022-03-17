@@ -23,3 +23,6 @@ cabal.project.local~
 .ghc.environment.*
 result
 result-*
+
+# direnv
+.direnv
