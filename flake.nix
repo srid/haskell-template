@@ -39,7 +39,7 @@
                   cabal-install
                   ghcid
                   haskell-language-server
-                  ormolu
+                  fourmolu
                   hlint
                   pkgs.nixpkgs-fmt
                 ]);

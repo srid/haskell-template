@@ -1,6 +1,6 @@
 # haskell-template
 
-Haskell project template optimized for a fully reproducible and friendly development environment. Based on [Nix](http://www.srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) + VSCode ([HLS](https://github.com/haskell/haskell-language-server)) + [ormolu](https://github.com/tweag/ormolu) autoformatting + [Relude](https://github.com/kowainik/relude#relude) as Prelude.
+Haskell project template optimized for a fully reproducible and friendly development environment. Based on [Nix](http://www.srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) + VSCode ([HLS](https://github.com/haskell/haskell-language-server)) + [fourmolu](https://github.com/fourmolu/fourmolu) autoformatting + [Relude](https://github.com/kowainik/relude#relude) as Prelude.
 
 ## Getting Started
 
