@@ -31,8 +31,8 @@ executable haskell-template
     , data-default
     , directory
     , filepath
-    , lens
     , mtl
+    , optics-core
     , profunctors
     , relude
     , shower
