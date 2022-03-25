@@ -55,13 +55,29 @@
         {
           # Used by `nix build` & `nix run` (prod exe)
           defaultPackage = project false;
+          # Used by `nix develop` (dev shell)
+          devShell = project true;
 
+          # Used by `nix run ...`
           apps = {
             format = inputs.lint-utils.apps.${system}.fourmoluStandard8107;
           };
 
-          # Used by `nix develop` (dev shell)
-          devShell = project true;
+          # Used by `nix flake check`
+          checks = {
+            format-haskell = inputs.lint-utils.linters.${system}.fourmoluStandardGHC8107;
+            format-cabal = inputs.lint-utils.linters.${system}.cabal;
+            format-nix = inputs.lint-utils.linters.${system}.nixpkgs-fmt;
+          };
+          check = 
+            pkgs.runCommand "combined-checks"
+              {
+                checksss = builtins.attrValues self.checks.${system};
+              } ''
+              echo $checksss
+              touch $out
+            '' ;
+
         }) // {
       # For hercules-CI support, 
       # https://docs.hercules-ci.com/hercules-ci/guides/upgrade-to-agent-0.9/#_upgrade_your_repositories
