@@ -8,6 +8,12 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
+    lint-utils = {
+      type = "git";
+      url = "https://gitlab.homotopic.tech/nix/lint-utils.git";
+      ref = "lc/fourmolu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }; 
   };
   outputs = inputs@{ self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem
@@ -49,6 +55,10 @@
         {
           # Used by `nix build` & `nix run` (prod exe)
           defaultPackage = project false;
+
+          apps = {
+            format = inputs.lint-utils.apps.${system}.fourmoluStandard8107;
+          };
 
           # Used by `nix develop` (dev shell)
           devShell = project true;

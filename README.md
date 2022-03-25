@@ -36,6 +36,7 @@ git add . && git commit -m rename
 ## Tips
 
 - Run `nix flake update` to update all flake inputs. nixpkgs is pinned to a specific a rev in `flake.nix`, which you can advance to the latest rev reported in [status.nixos.org](https://status.nixos.org).
+- Run `nix run .#format` to autoformat the project.
 
 ## Alternatives
 
