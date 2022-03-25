@@ -20,3 +20,7 @@ jobs:
         id: build
         run: |
           nix build -j auto
+      - name: Flake check
+        id: flake-check 
+        run: |
+          nix flake check
