@@ -61,16 +61,13 @@
 
           # Concat a list of Flake apps to produce a new app that runs all of them
           # in sequence.
-          concatApps = system: apps:
-            let
-              lists = pkgs.lib.lists;
-              joinBy = sep: lists.foldr (a: b: a + sep + b) "";
-              programs = lists.forEach apps (app: app.program);
-            in
+          concatApps = apps:
             {
               type = "app";
               program = checkedShellScript "concatApps"
-                (joinBy "\n" programs);
+                (pkgs.lib.strings.concatStringsSep
+                  "\n"
+                  (pkgs.lib.lists.forEach apps (app: app.program)));
             };
 
         in
@@ -82,7 +79,7 @@
 
           # Used by `nix run ...`
           apps = {
-            format = concatApps system [
+            format = concatApps [
               inputs.lint-utils.apps.${system}.${haskellFormatter}
               inputs.lint-utils.apps.${system}.cabal-fmt
               inputs.lint-utils.apps.${system}.nixpkgs-fmt
