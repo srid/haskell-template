@@ -89,14 +89,16 @@
             ];
           };
 
-          # To run these checks locally:
-          #   nix build .#check.x86_64-linux
-          # (Replace with your system)
           checks = {
             format-haskell = inputs.lint-utils.linters.${system}.${haskellFormatter} ./.;
             format-cabal = inputs.lint-utils.linters.${system}.cabal-fmt ./.;
             format-nix = inputs.lint-utils.linters.${system}.nixpkgs-fmt ./.;
           };
+
+          # We needs this hack because `nix flake check` won't work for Haskell
+          # projects: https://nixos.wiki/wiki/Import_From_Derivation#IFD_and_Haskell
+          #
+          # Instead, run: `nix build .#check.x86_64-linux` (replace with your system)
           check =
             pkgs.runCommand "combined-checks"
               {
