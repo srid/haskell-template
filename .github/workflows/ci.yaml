@@ -23,4 +23,4 @@ jobs:
       - name: Flake check
         id: flake-check 
         run: |
-          nix flake check
+          nix build .#check.x86_64-linux

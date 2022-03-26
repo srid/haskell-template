@@ -11,7 +11,7 @@
     lint-utils = {
       type = "git";
       url = "https://gitlab.homotopic.tech/nix/lint-utils.git";
-      ref = "lc/fourmolu";
+      ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
     }; 
   };
@@ -67,9 +67,9 @@
 
           # Used by `nix flake check`
           checks = {
-            format-haskell = inputs.lint-utils.linters.${system}.${haskellFormatter};
-            format-cabal = inputs.lint-utils.linters.${system}.cabal;
-            format-nix = inputs.lint-utils.linters.${system}.nixpkgs-fmt;
+            format-haskell = inputs.lint-utils.linters.${system}.${haskellFormatter} ./.;
+            format-cabal = inputs.lint-utils.linters.${system}.cabal-fmt ./.;
+            format-nix = inputs.lint-utils.linters.${system}.nixpkgs-fmt ./.;
           };
           check = 
             pkgs.runCommand "combined-checks"
