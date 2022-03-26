@@ -13,7 +13,7 @@
       url = "https://gitlab.homotopic.tech/nix/lint-utils.git";
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; 
+    };
   };
   outputs = inputs@{ self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem
@@ -52,6 +52,27 @@
                   pkgs.nixpkgs-fmt
                 ]);
             };
+
+          # Checks the shell script using ShellCheck
+          checkedShellScript = system: name: text:
+            (pkgs.writeShellApplication {
+              inherit name text;
+            }) + "/bin/${name}";
+
+          # Concat a list of Flake apps to produce a new app that runs all of them
+          # in sequence.
+          concatApps = system: apps:
+            let
+              lists = pkgs.lib.lists;
+              joinBy = sep: lists.foldr (a: b: a + sep + b) "";
+              programs = lists.forEach apps (app: app.program);
+            in
+            {
+              type = "app";
+              program = checkedShellScript system "concatApps"
+                (joinBy "\n" programs);
+            };
+
         in
         {
           # Used by `nix build` & `nix run` (prod exe)
@@ -61,24 +82,29 @@
 
           # Used by `nix run ...`
           apps = {
-            # TODO: do cabal and nix as well.
-            format = inputs.lint-utils.apps.${system}.${haskellFormatter};
+            format = concatApps system [
+              inputs.lint-utils.apps.${system}.${haskellFormatter}
+              inputs.lint-utils.apps.${system}.cabal-fmt
+              inputs.lint-utils.apps.${system}.nixpkgs-fmt
+            ];
           };
 
-          # Used by `nix flake check`
+          # To run these checks locally:
+          #   nix build .#check.x86_64-linux
+          # (Replace with your system)
           checks = {
             format-haskell = inputs.lint-utils.linters.${system}.${haskellFormatter} ./.;
             format-cabal = inputs.lint-utils.linters.${system}.cabal-fmt ./.;
             format-nix = inputs.lint-utils.linters.${system}.nixpkgs-fmt ./.;
           };
-          check = 
+          check =
             pkgs.runCommand "combined-checks"
               {
                 checksss = builtins.attrValues self.checks.${system};
               } ''
               echo $checksss
               touch $out
-            '' ;
+            '';
 
         }) // {
       # For hercules-CI support, 
