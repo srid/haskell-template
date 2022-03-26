@@ -65,9 +65,10 @@
             {
               type = "app";
               program = checkedShellScript "concatApps"
-                (pkgs.lib.strings.concatStringsSep
+                (pkgs.lib.strings.concatMapStringsSep
                   "\n"
-                  (pkgs.lib.lists.forEach apps (app: app.program)));
+                  (app: app.program)
+                  apps);
             };
 
         in
@@ -86,7 +87,7 @@
             ];
           };
 
-          # Used buy `nix flake check` (but see next attribute)
+          # Used by `nix flake check` (but see next attribute)
           checks = {
             format-haskell = inputs.lint-utils.linters.${system}.${haskellFormatter} ./.;
             format-cabal = inputs.lint-utils.linters.${system}.cabal-fmt ./.;
