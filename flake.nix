@@ -92,6 +92,7 @@
             format-haskell = inputs.lint-utils.linters.${system}.${haskellFormatter} ./.;
             format-cabal = inputs.lint-utils.linters.${system}.cabal-fmt ./.;
             format-nix = inputs.lint-utils.linters.${system}.nixpkgs-fmt ./.;
+            hls = checkedShellScript "hls" "${hp.haskell-language-server}/bin/haskell-language-server";
           };
 
           # We need this hack because `nix flake check` won't work for Haskell
