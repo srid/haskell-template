@@ -1,6 +1,6 @@
 module Main where
 
-import Main.Utf8 (withUtf8)
+import Main.Utf8 qualified as Utf8
 
 {- |
  Main entry point.
@@ -11,5 +11,5 @@ import Main.Utf8 (withUtf8)
 main :: IO ()
 main = do
   -- For withUtf8, see https://serokell.io/blog/haskell-with-utf8
-  withUtf8 $ do
+  Utf8.withUtf8 $ do
     putStrLn "Hello 🌎"

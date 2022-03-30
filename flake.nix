@@ -11,7 +11,7 @@
     lint-utils = {
       type = "git";
       url = "https://gitlab.homotopic.tech/nix/lint-utils.git";
-      ref = "master";
+      ref = "spec-type"; # https://gitlab.homotopic.tech/nix/lint-utils/-/merge_requests/4
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -25,7 +25,6 @@
           # Change GHC version here. To get the appropriate value, run:
           #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
           hp = pkgs.haskellPackages; # pkgs.haskell.packages.ghc921;
-          haskellFormatter = "fourmoluStandardGhc8107"; # The formatter to use from inputs.lint-utils
 
           project = returnShellEnv:
             hp.developPackage {
@@ -53,23 +52,19 @@
                 ]);
             };
 
+          lintSpec = {
+            nixpkgs-fmt = { };
+            cabal-fmt = { };
+            fourmolu = {
+              ghcOpts = "-o-XTypeApplications -o-XImportQualifiedPost";
+            };
+          };
+
           # Checks the shell script using ShellCheck
           checkedShellScript = name: text:
             (pkgs.writeShellApplication {
               inherit name text;
             }) + "/bin/${name}";
-
-          # Concat a list of Flake apps to produce a new app that runs all of them
-          # in sequence.
-          concatApps = apps:
-            {
-              type = "app";
-              program = checkedShellScript "concatApps"
-                (pkgs.lib.strings.concatMapStringsSep
-                  "\n"
-                  (app: app.program)
-                  apps);
-            };
 
         in
         {
@@ -80,20 +75,15 @@
 
           # Used by `nix run ...`
           apps = {
-            format = concatApps [
-              inputs.lint-utils.apps.${system}.${haskellFormatter}
-              inputs.lint-utils.apps.${system}.cabal-fmt
-              inputs.lint-utils.apps.${system}.nixpkgs-fmt
-            ];
+            format = inputs.lint-utils.mkApp.${system} lintSpec;
           };
 
           # Used by `nix flake check` (but see next attribute)
-          checks = {
-            format-haskell = inputs.lint-utils.linters.${system}.${haskellFormatter} ./.;
-            format-cabal = inputs.lint-utils.linters.${system}.cabal-fmt ./.;
-            format-nix = inputs.lint-utils.linters.${system}.nixpkgs-fmt ./.;
-            hls = checkedShellScript "hls" "${hp.haskell-language-server}/bin/haskell-language-server";
-          };
+          checks =
+            inputs.lint-utils.mkChecks.${system} lintSpec ./.
+            // {
+              hls = checkedShellScript "hls" "${hp.haskell-language-server}/bin/haskell-language-server";
+            };
 
           # We need this hack because `nix flake check` won't work for Haskell
           # projects: https://nixos.wiki/wiki/Import_From_Derivation#IFD_and_Haskell

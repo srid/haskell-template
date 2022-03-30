@@ -54,16 +54,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1648246591,
-        "narHash": "sha256-GDyLjj64sA65MPMlOtzs5DHPK4O5O8u6jMYKiGHgaPU=",
-        "ref": "master",
-        "rev": "3a4289e086d48b409c8c6eb51de1d9e405c7f379",
-        "revCount": 20,
+        "lastModified": 1648667273,
+        "narHash": "sha256-eQUb40xDyv0Ye3oMzGz6tcHPF9y9Xhq1QksV9h7uEDk=",
+        "ref": "spec-type",
+        "rev": "4648a98d91f754ae0f7a3d035a1aaa871eb1b4fc",
+        "revCount": 34,
         "type": "git",
         "url": "https://gitlab.homotopic.tech/nix/lint-utils.git"
       },
       "original": {
-        "ref": "master",
+        "ref": "spec-type",
         "type": "git",
         "url": "https://gitlab.homotopic.tech/nix/lint-utils.git"
       }
