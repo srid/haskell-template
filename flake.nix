@@ -11,7 +11,7 @@
     lint-utils = {
       type = "git";
       url = "https://gitlab.homotopic.tech/nix/lint-utils.git";
-      ref = "spec-type"; # https://gitlab.homotopic.tech/nix/lint-utils/-/merge_requests/4
+      ref = "spec-type-simplify"; # https://gitlab.homotopic.tech/nix/lint-utils/-/merge_requests/4
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -55,6 +55,7 @@
           lintSpec = {
             nixpkgs-fmt = { };
             cabal-fmt = { };
+            hlint = { };
             fourmolu = {
               ghcOpts = "-o-XTypeApplications -o-XImportQualifiedPost";
             };
