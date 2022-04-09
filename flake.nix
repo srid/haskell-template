@@ -55,7 +55,7 @@
           lintSpec = {
             nixpkgs-fmt = { };
             cabal-fmt = { };
-            hlint = { };
+            # hlint = { };
             fourmolu = {
               ghcOpts = "-o-XTypeApplications -o-XImportQualifiedPost";
             };
