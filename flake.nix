@@ -11,7 +11,7 @@
     lint-utils = {
       type = "git";
       url = "https://gitlab.homotopic.tech/nix/lint-utils.git";
-      ref = "spec-type-simplify"; # https://gitlab.homotopic.tech/nix/lint-utils/-/merge_requests/4
+      ref = "overengineered"; # https://gitlab.homotopic.tech/nix/lint-utils/-/merge_requests/4
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
