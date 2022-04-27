@@ -15,16 +15,31 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
+
+  outputs = inputs:
+    let
+      # Function that produces Flake outputs for the given system.
+      outputsFor = system:
         let
           # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+          inherit (pkgs.lib.trivial) pipe flip;
+          inherit (pkgs.lib.lists) optionals;
 
-          # Change GHC version here. To get the appropriate value, run:
+          # Specify GHC version here. To get the appropriate value, run:
           #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
-          hp = pkgs.haskellPackages; # pkgs.haskell.packages.ghc921;
+          hp = pkgs.haskellPackages; # Eg: pkgs.haskell.packages.ghc921;
+
+          # Specify your build/dev dependencies here.
+          shellDeps = with hp; [
+            cabal-fmt
+            cabal-install
+            ghcid
+            haskell-language-server
+            fourmolu
+            hlint
+            pkgs.nixpkgs-fmt
+          ];
 
           project = returnShellEnv:
             hp.developPackage {
@@ -40,16 +55,14 @@
                 # Assumes that you have the 'NanoID' flake input defined.
               };
               modifier = drv:
-                pkgs.haskell.lib.addBuildTools drv (with hp; pkgs.lib.lists.optionals returnShellEnv [
-                  # Specify your build/dev dependencies here. 
-                  cabal-fmt
-                  cabal-install
-                  ghcid
-                  haskell-language-server
-                  fourmolu
-                  hlint
-                  pkgs.nixpkgs-fmt
-                ]);
+                let inherit (pkgs.haskell.lib) addBuildTools;
+                in
+                pipe drv
+                  [
+                    # Transform the Haskell derivation (`drv`) here.
+                    (flip addBuildTools
+                      (optionals returnShellEnv shellDeps))
+                  ];
             };
 
           lintSpec = {
@@ -60,24 +73,29 @@
               ghcOpts = "-o-XTypeApplications -o-XImportQualifiedPost";
             };
           };
-
         in
         {
-          # Used by `nix build` & `nix run` (prod exe)
-          defaultPackage = project false;
-          # Used by `nix develop` (dev shell)
-          devShell = project true;
-
+          # Used by `nix build ...`
+          packages = {
+            default = project false;
+          };
           # Used by `nix run ...`
           apps = {
             default = {
               type = "app";
-              program = "${self.defaultPackage.${system}}/bin/haskell-template";
+              program = "${inputs.self.packages.${system}.default}/bin/haskell-template";
             };
             format = inputs.lint-utils.mkApp.${system} lintSpec;
           };
+          # Used by `nix develop ...`
+          devShells = {
+            default = project false;
+          };
 
-        }) // {
+        };
+    in
+    inputs.flake-utils.lib.eachDefaultSystem outputsFor
+    // {
       # For hercules-CI support, 
       # https://docs.hercules-ci.com/hercules-ci/guides/upgrade-to-agent-0.9/#_upgrade_your_repositories
       herculesCI.ciSystems = [ "x86_64-linux" ];
