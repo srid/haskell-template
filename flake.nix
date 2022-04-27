@@ -76,6 +76,10 @@
 
           # Used by `nix run ...`
           apps = {
+            default = {
+              type = "app";
+              program = "${self.defaultPackage.${system}}/bin/haskell-template";
+            };
             format = inputs.lint-utils.mkApp.${system} lintSpec;
           };
 
