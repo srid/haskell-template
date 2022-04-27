@@ -92,8 +92,8 @@
             default = project false;
           };
           # For compatability with older Nix (eg in CI)
-          defaultPackage = inputs.self.packages.default;
-          defaultApp = inputs.self.apps.default;
+          defaultPackage = inputs.self.packages.${system}.default;
+          defaultApp = inputs.self.apps.${system}.default;
         };
     in
     inputs.flake-utils.lib.eachDefaultSystem outputsFor
