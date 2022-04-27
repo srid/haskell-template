@@ -2,7 +2,7 @@
   description = "haskell-template's description";
   inputs = {
     # To find a suitable nixpkgs hash, pick one from https://status.nixos.org/ (these are cached)
-    nixpkgs.url = "github:nixos/nixpkgs/c48167590e3258daac6ab12a41bc2b7341e9b2ec";
+    nixpkgs.url = "github:nixos/nixpkgs/d9e593ed5889f3906dc72811c45bf684be8865cf";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat.url = "github:edolstra/flake-compat";
