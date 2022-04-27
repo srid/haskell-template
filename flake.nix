@@ -61,12 +61,6 @@
             };
           };
 
-          # Checks the shell script using ShellCheck
-          checkedShellScript = name: text:
-            (pkgs.writeShellApplication {
-              inherit name text;
-            }) + "/bin/${name}";
-
         in
         {
           # Used by `nix build` & `nix run` (prod exe)
@@ -82,26 +76,6 @@
             };
             format = inputs.lint-utils.mkApp.${system} lintSpec;
           };
-
-          # Used by `nix flake check` (but see next attribute)
-          checks =
-            inputs.lint-utils.mkChecks.${system} lintSpec ./.
-            // {
-              hls = checkedShellScript "hls" "${hp.haskell-language-server}/bin/haskell-language-server";
-            };
-
-          # We need this hack because `nix flake check` won't work for Haskell
-          # projects: https://nixos.wiki/wiki/Import_From_Derivation#IFD_and_Haskell
-          #
-          # Instead, run: `nix build .#check.x86_64-linux` (replace with your system)
-          check =
-            pkgs.runCommand "combined-checks"
-              {
-                checksss = builtins.attrValues self.checks.${system};
-              } ''
-              echo $checksss
-              touch $out
-            '';
 
         }) // {
       # For hercules-CI support, 
