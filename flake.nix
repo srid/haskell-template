@@ -91,7 +91,9 @@
           devShells = {
             default = project false;
           };
-
+          # For compatability with older Nix (eg in CI)
+          defaultPackage = inputs.self.packages.default;
+          defaultApp = inputs.self.apps.default;
         };
     in
     inputs.flake-utils.lib.eachDefaultSystem outputsFor
