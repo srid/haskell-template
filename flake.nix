@@ -26,11 +26,15 @@
           #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
           hp = pkgs.haskellPackages; # pkgs.haskell.packages.ghc921;
 
+          # Paths to ignore when building the cabal package.
+          # FIXME: Why does changing any of this this retrigger Nix builds anyway?
+          ignorePatterns = [ "*.nix" "flake.lock" "*.md" "fourmolu.yaml" "hie.yaml" "bin" ".envrc" ".ghcid" ".gitattributes" ".github" ".gitignore" ".vscode" ];
+
           project = returnShellEnv:
             hp.developPackage {
               inherit returnShellEnv;
               name = "haskell-template";
-              root = ./.;
+              root = pkgs.nix-gitignore.gitignoreSource ignorePatterns ./.;
               withHoogle = false;
               overrides = self: super: with pkgs.haskell.lib; {
                 # Use callCabal2nix to override Haskell dependencies here
