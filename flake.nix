@@ -89,9 +89,10 @@
           };
           # Used by `nix develop ...`
           devShells = {
-            default = project false;
+            default = project true;
           };
           # For compatability with older Nix (eg in CI)
+          devShell = inputs.self.devShells.${system}.default;
           defaultPackage = inputs.self.packages.${system}.default;
           defaultApp = inputs.self.apps.${system}.default;
         };
