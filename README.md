@@ -41,7 +41,7 @@ git add . && git commit -m rename
 ## Tips
 
 - Run `nix flake update` to update all flake inputs. nixpkgs is pinned to a specific a rev in `flake.nix`, which you can advance to the latest rev reported in [status.nixos.org](https://status.nixos.org).
-- Run `nix run .#format` to autoformat the project.
+- Run `treefmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt), which uses `./treefmt.toml` (where fourmolu and nixpkgs-fmt are specified).
 
 ## Alternatives
 
