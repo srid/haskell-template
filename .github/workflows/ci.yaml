@@ -16,6 +16,12 @@ jobs:
           install_options: "--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve"
           extra_nix_config: |
             experimental-features = nix-command flakes
+      - name: Cache Nix dependencies
+        run: |
+          nix develop -j 4 -c echo
+      - name: Format check
+        run: |
+          nix develop -j auto -c treefmt -- --fail-on-change
       - name: Build
         id: build
         run: |

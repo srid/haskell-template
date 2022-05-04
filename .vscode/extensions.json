@@ -5,6 +5,7 @@
     "haskell.haskell",
     "arrterian.nix-env-selector",
     "bbenoist.nix",
-    "jnoortheen.nix-ide"
+    "jnoortheen.nix-ide",
+    "tamasfe.even-better-toml"
   ]
 }

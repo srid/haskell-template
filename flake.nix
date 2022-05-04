@@ -8,12 +8,6 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
-    lint-utils = {
-      type = "git";
-      url = "https://gitlab.homotopic.tech/nix/lint-utils.git";
-      ref = "overengineered"; # https://gitlab.homotopic.tech/nix/lint-utils/-/merge_requests/4
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs:
@@ -39,6 +33,7 @@
             fourmolu
             hlint
             pkgs.nixpkgs-fmt
+            pkgs.treefmt
           ];
 
           project = returnShellEnv:
@@ -64,15 +59,6 @@
                       (optionals returnShellEnv shellDeps))
                   ];
             };
-
-          lintSpec = {
-            nixpkgs-fmt = { };
-            cabal-fmt = { };
-            # hlint = { };
-            fourmolu = {
-              ghcOpts = "-o-XTypeApplications -o-XImportQualifiedPost";
-            };
-          };
         in
         {
           # Used by `nix build ...`
@@ -85,7 +71,6 @@
               type = "app";
               program = "${inputs.self.packages.${system}.default}/bin/haskell-template";
             };
-            format = inputs.lint-utils.mkApp.${system} lintSpec;
           };
           # Used by `nix develop ...`
           devShells = {
