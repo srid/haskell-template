@@ -10,18 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action@v13
+      - uses: cachix/install-nix-action@v17
         with:
-          install_url: https://nixos-nix-install-tests.cachix.org/serve/i6laym9jw3wg9mw6ncyrk6gjx4l34vvx/install
-          install_options: "--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve"
           extra_nix_config: |
             experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - name: Cache Nix dependencies
         run: |
           nix develop -j 4 -c echo
       - name: Format check
         run: |
           nix develop -j auto -c treefmt --fail-on-change
+      - name: Hlint
+        run: |
+          nix develop -j auto -c hlint src
       - name: Build
         id: build
         run: |

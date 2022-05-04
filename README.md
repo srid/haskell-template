@@ -6,6 +6,7 @@ Haskell project template optimized for a fully reproducible and friendly develop
 - VSCode + [HLS](https://github.com/haskell/haskell-language-server)
 - [fourmolu](https://github.com/fourmolu/fourmolu) autoformatting 
 - [Relude](https://github.com/kowainik/relude#relude) as Prelude.
+  - `.hlint.yaml` is [from relude](https://github.com/kowainik/relude/blob/main/.hlint.yaml)
 
 ## Getting Started
 
