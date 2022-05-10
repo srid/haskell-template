@@ -81,6 +81,8 @@
           defaultApp = inputs.self.apps.${system}.default;
         };
     in
+    # We use eachDefaultSystem to allow other architectures
+    # See https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
     inputs.flake-utils.lib.eachDefaultSystem outputsFor
     // {
       # For hercules-CI support, 
