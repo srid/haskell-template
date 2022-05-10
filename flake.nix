@@ -12,6 +12,9 @@
   outputs = inputs:
     let
       # Function that produces Flake outputs for the given system.
+      #
+      # We use eachDefaultSystem (see below) to allow other architectures.
+      # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
       outputsFor = system:
         let
           # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
@@ -81,8 +84,6 @@
           defaultApp = inputs.self.apps.${system}.default;
         };
     in
-    # We use eachDefaultSystem to allow other architectures
-    # See https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
     inputs.flake-utils.lib.eachDefaultSystem outputsFor
     // {
       # For hercules-CI support, 
