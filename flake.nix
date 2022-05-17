@@ -19,6 +19,7 @@
         let
           # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
           pkgs = inputs.nixpkgs.legacyPackages.${system};
+          inherit (pkgs.lib.lists) optionals;
 
           # Specify GHC version here. To get the appropriate value, run:
           #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
@@ -54,7 +55,7 @@
                   # All the Cabal-specific overrides go here.
                   # For examples on what is possible, see:
                   #   https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib/compose.nix
-                  buildTools = (oa.buildTools or [ ]) ++ shellDeps;
+                  buildTools = (oa.buildTools or [ ]) ++ optionals returnShellEnv shellDeps;
                 });
             };
         in
