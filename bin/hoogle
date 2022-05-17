@@ -1,0 +1,5 @@
+#!/usr/bin/env nix-shell 
+#! nix-shell -j auto ../shell.nix -i bash
+set -xe
+echo http://127.0.0.1:8888
+hoogle serve -p 8888 --local

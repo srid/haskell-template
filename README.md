@@ -43,6 +43,7 @@ git add . && git commit -m rename
 
 - Run `nix flake update` to update all flake inputs.
 - Run `treefmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt), which uses `./treefmt.toml` (where fourmolu and nixpkgs-fmt are specified).
+- Run `bin/hoogle` to start Hoogle with packages in your cabal file.
 
 ## Alternatives
 
