@@ -19,8 +19,6 @@
         let
           # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
           pkgs = inputs.nixpkgs.legacyPackages.${system};
-          inherit (pkgs.lib.trivial) pipe flip;
-          inherit (pkgs.lib.lists) optionals;
 
           # Specify GHC version here. To get the appropriate value, run:
           #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
@@ -52,14 +50,12 @@
                 # Assumes that you have the 'NanoID' flake input defined.
               };
               modifier = drv:
-                let inherit (pkgs.haskell.lib) addBuildTools;
-                in
-                pipe drv
-                  [
-                    # Transform the Haskell derivation (`drv`) here.
-                    (flip addBuildTools
-                      (optionals returnShellEnv shellDeps))
-                  ];
+                pkgs.haskell.lib.overrideCabal drv (oa: {
+                  # All the Cabal-specific overrides go here.
+                  # For examples on what is possible, see:
+                  #   https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib/compose.nix
+                  buildTools = (oa.buildTools or [ ]) ++ shellDeps;
+                });
             };
         in
         {
