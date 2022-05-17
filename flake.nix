@@ -37,12 +37,14 @@
             pkgs.treefmt
           ];
 
-          project = returnShellEnv:
+          project =
+            { returnShellEnv ? false
+            , withHoogle ? false
+            }:
             hp.developPackage {
-              inherit returnShellEnv;
+              inherit returnShellEnv withHoogle;
               name = "haskell-template";
               root = ./.;
-              withHoogle = true;
               overrides = self: super: with pkgs.haskell.lib; {
                 # Use callCabal2nix to override Haskell dependencies here
                 # cf. https://tek.brick.do/K3VXJd8mEKO7
@@ -62,7 +64,7 @@
         {
           # Used by `nix build ...`
           packages = {
-            default = project false;
+            default = project { };
           };
           # Used by `nix run ...`
           apps = {
@@ -73,7 +75,7 @@
           };
           # Used by `nix develop ...`
           devShells = {
-            default = project true;
+            default = project { returnShellEnv = true; withHoogle = true; };
           };
           # For compatability with older Nix (eg in CI)
           devShell = inputs.self.devShells.${system}.default;
