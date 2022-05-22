@@ -21,6 +21,8 @@
     inputs.flake-utils.lib.eachDefaultSystem
       (system:
         let
+          name = "haskell-template";
+
           # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
           pkgs = inputs.nixpkgs.legacyPackages.${system};
           inherit (pkgs.lib.lists) optionals;
@@ -46,8 +48,7 @@
             , withHoogle ? false
             }:
             hp.developPackage {
-              inherit returnShellEnv withHoogle;
-              name = "haskell-template";
+              inherit returnShellEnv withHoogle name;
               root = ./.;
               overrides = self: super: with pkgs.haskell.lib; {
                 # Use callCabal2nix to override Haskell dependencies here
@@ -74,7 +75,7 @@
           apps = {
             default = {
               type = "app";
-              program = "${inputs.self.packages.${system}.default}/bin/haskell-template";
+              program = "${inputs.self.packages.${system}.default}/bin/${name}";
             };
           };
           # Used by `nix develop ...`
