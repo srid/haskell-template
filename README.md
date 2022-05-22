@@ -47,6 +47,4 @@ git add . && git commit -m rename
 
 ## Alternatives
 
-- haskell.nix: [Getting started with Flakes](https://input-output-hk.github.io/haskell.nix/tutorials/getting-started-flakes.html)
 - [Serokell's Flake template](https://github.com/serokell/templates/tree/master/haskell-cabal2nix)
-  - [Same, but using haskell.nix](https://github.com/serokell/templates/pull/2)
