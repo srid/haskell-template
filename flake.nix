@@ -9,13 +9,17 @@
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  # Consider this to be a function producing Flake outputs for the given system
+  # and inputs; viz.:
+  # 
+  #   mkOutputsFrom :: Set Inputs -> System -> Set Outputs
+  #   mkOutputsFrom inputs system = { ... }
+  #
+  # We use eachDefaultSystem to allow other architectures.
+  # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
   outputs = inputs:
-    let
-      # Function that produces Flake outputs for the given system.
-      #
-      # We use eachDefaultSystem (see below) to allow other architectures.
-      # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
-      outputsFor = system:
+    inputs.flake-utils.lib.eachDefaultSystem
+      (system:
         let
           # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
           pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -81,12 +85,6 @@
           devShell = inputs.self.devShells.${system}.default;
           defaultPackage = inputs.self.packages.${system}.default;
           defaultApp = inputs.self.apps.${system}.default;
-        };
-    in
-    inputs.flake-utils.lib.eachDefaultSystem outputsFor
-    // {
-      # For hercules-CI support, 
-      # https://docs.hercules-ci.com/hercules-ci/guides/upgrade-to-agent-0.9/#_upgrade_your_repositories
-      herculesCI.ciSystems = [ "x86_64-linux" ];
-    };
+        }
+      );
 }
