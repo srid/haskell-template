@@ -10,13 +10,7 @@
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  # Consider this to be a function producing Flake outputs for the given system
-  # and inputs; viz.:
-  # 
-  #   mkOutputsFrom :: Set Inputs -> System -> Set Outputs
-  #   mkOutputsFrom inputs system = { ... }
-  #
-  # We use eachDefaultSystem to allow other architectures.
+  # We use flake-parts as a way to make flakes 'system-aware'
   # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
   outputs = { self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
@@ -82,10 +76,6 @@
           devShells = {
             default = project { returnShellEnv = true; withHoogle = true; };
           };
-          # For compatability with older Nix (eg in CI)
-          #devShell = self'.devShells.${system}.default;
-          #defaultPackage = self'.packages.${system}.default;
-          #defaultApp = self'.apps.${system}.default;
         };
     };
 
