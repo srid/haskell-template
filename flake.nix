@@ -18,9 +18,9 @@
   #
   # We use eachDefaultSystem to allow other architectures.
   # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
-  outputs = { self, flake-parts, ... }:
+  outputs = { self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
-      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      systems = nixpkgs.lib.systems.supported.hydra;
       perSystem = { self', inputs', pkgs, system, ... }:
         let
           name = "haskell-template";
