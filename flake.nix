@@ -2,29 +2,24 @@
   description = "haskell-template's description";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils/v1.0.0";
-    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  # Consider this to be a function producing Flake outputs for the given system
-  # and inputs; viz.:
-  # 
-  #   mkOutputsFrom :: Set Inputs -> System -> Set Outputs
-  #   mkOutputsFrom inputs system = { ... }
-  #
-  # We use eachDefaultSystem to allow other architectures.
+  # We use flake-parts as a way to make flakes 'system-aware'
   # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
-  outputs = inputs:
-    inputs.flake-utils.lib.eachDefaultSystem
-      (system:
+  outputs = { self, nixpkgs, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit self; } {
+      systems = nixpkgs.lib.systems.supported.hydra;
+      # The primed versions (self', inputs') are same as the non-primed
+      # versions, but with 'system' already applied.
+      perSystem = { self', inputs', pkgs, system, ... }:
         let
           name = "haskell-template";
 
-          # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
           inherit (pkgs.lib.lists) optionals;
 
           # Specify GHC version here. To get the appropriate value, run:
@@ -54,7 +49,7 @@
                 # Use callCabal2nix to override Haskell dependencies here
                 # cf. https://tek.brick.do/K3VXJd8mEKO7
                 # Example: 
-                # > NanoID = self.callCabal2nix "NanoID" inputs.NanoID { };
+                # > NanoID = self.callCabal2nix "NanoID" inputs'.NanoID { };
                 # Assumes that you have the 'NanoID' flake input defined.
               };
               modifier = drv:
@@ -75,17 +70,13 @@
           apps = {
             default = {
               type = "app";
-              program = "${inputs.self.packages.${system}.default}/bin/${name}";
+              program = "${self'.packages.default}/bin/${name}";
             };
           };
           # Used by `nix develop ...`
           devShells = {
             default = project { returnShellEnv = true; withHoogle = true; };
           };
-          # For compatability with older Nix (eg in CI)
-          devShell = inputs.self.devShells.${system}.default;
-          defaultPackage = inputs.self.packages.${system}.default;
-          defaultApp = inputs.self.apps.${system}.default;
-        }
-      );
+        };
+    };
 }

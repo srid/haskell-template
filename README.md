@@ -12,7 +12,7 @@ Haskell project template optimized for a fully reproducible and friendly develop
 
 First-time setup:
 
-- [Install Nix](https://nixos.org/download.html) & [enable Flakes](https://nixos.wiki/wiki/Flakes)
+- [Install Nix](https://nixos.org/download.html) (>= 2.8) & [enable Flakes](https://nixos.wiki/wiki/Flakes)
 - Run `nix develop -c haskell-language-server` to sanity check your environment 
 - [Open as single-folder workspace](https://code.visualstudio.com/docs/editor/workspaces#_singlefolder-workspaces) in Visual Studio Code
     - When prompted by VSCode, install the [workspace recommended](https://code.visualstudio.com/docs/editor/extension-marketplace#_workspace-recommended-extensions) extensions
@@ -30,6 +30,7 @@ Open `Main.hs`, and expect all HLS IDE features like hover-over tooltip to work 
 Renaming the project:
 
 ```sh
+# First, click the green "Use this template" button on GitHub to create your copy.
 git clone <your-clone-url>
 cd your-project
 NAME=myproject
