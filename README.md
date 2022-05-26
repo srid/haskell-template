@@ -30,6 +30,7 @@ Open `Main.hs`, and expect all HLS IDE features like hover-over tooltip to work 
 Renaming the project:
 
 ```sh
+# First, click the green "Use this template" button on GitHub to create your copy.
 git clone <your-clone-url>
 cd your-project
 NAME=myproject

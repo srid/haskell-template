@@ -2,8 +2,9 @@
   description = "haskell-template's description";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils/v1.0.0";
-    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
+
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
@@ -17,14 +18,13 @@
   #
   # We use eachDefaultSystem to allow other architectures.
   # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
-  outputs = inputs:
-    inputs.flake-utils.lib.eachDefaultSystem
-      (system:
+  outputs = { self, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit self; } {
+      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      perSystem = { self', inputs', pkgs, system, ... }:
         let
           name = "haskell-template";
 
-          # Because: https://zimbatm.com/notes/1000-instances-of-nixpkgs
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
           inherit (pkgs.lib.lists) optionals;
 
           # Specify GHC version here. To get the appropriate value, run:
@@ -75,7 +75,7 @@
           apps = {
             default = {
               type = "app";
-              program = "${inputs.self.packages.${system}.default}/bin/${name}";
+              program = "${self'.packages.default}/bin/${name}";
             };
           };
           # Used by `nix develop ...`
@@ -83,9 +83,10 @@
             default = project { returnShellEnv = true; withHoogle = true; };
           };
           # For compatability with older Nix (eg in CI)
-          devShell = inputs.self.devShells.${system}.default;
-          defaultPackage = inputs.self.packages.${system}.default;
-          defaultApp = inputs.self.apps.${system}.default;
-        }
-      );
+          #devShell = self'.devShells.${system}.default;
+          #defaultPackage = self'.packages.${system}.default;
+          #defaultApp = self'.apps.${system}.default;
+        };
+    };
+
 }
