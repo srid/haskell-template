@@ -4,7 +4,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
-
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +14,8 @@
   outputs = { self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
       systems = nixpkgs.lib.systems.supported.hydra;
+      # The primed versions (self', inputs') are same as the non-primed
+      # versions, but with 'system' already applied.
       perSystem = { self', inputs', pkgs, system, ... }:
         let
           name = "haskell-template";
@@ -48,7 +49,7 @@
                 # Use callCabal2nix to override Haskell dependencies here
                 # cf. https://tek.brick.do/K3VXJd8mEKO7
                 # Example: 
-                # > NanoID = self.callCabal2nix "NanoID" inputs.NanoID { };
+                # > NanoID = self.callCabal2nix "NanoID" inputs'.NanoID { };
                 # Assumes that you have the 'NanoID' flake input defined.
               };
               modifier = drv:
@@ -78,5 +79,4 @@
           };
         };
     };
-
 }
