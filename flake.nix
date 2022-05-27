@@ -18,8 +18,6 @@
       # versions, but with 'system' already applied.
       perSystem = { self', inputs', pkgs, system, ... }:
         let
-          name = "haskell-template";
-
           inherit (pkgs.lib.lists) optionals;
 
           # Specify GHC version here. To get the appropriate value, run:
@@ -43,7 +41,8 @@
             , withHoogle ? false
             }:
             hp.developPackage {
-              inherit returnShellEnv withHoogle name;
+              inherit returnShellEnv withHoogle;
+              name = "haskell-template";
               root = ./.;
               overrides = self: super: with pkgs.haskell.lib; {
                 # Use callCabal2nix to override Haskell dependencies here
@@ -70,7 +69,7 @@
           apps = {
             default = {
               type = "app";
-              program = "${self'.packages.default}/bin/${name}";
+              program = pkgs.lib.getExe self'.packages.default;
             };
           };
           # Used by `nix develop ...`
