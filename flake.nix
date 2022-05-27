@@ -13,7 +13,7 @@
   # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
   outputs = { self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
-      systems = nixpkgs.lib.systems.supported.hydra;
+      systems = nixpkgs.lib.systems.flakeExposed;
       # The primed versions (self', inputs') are same as the non-primed
       # versions, but with 'system' already applied.
       perSystem = { self', inputs', pkgs, system, ... }:
