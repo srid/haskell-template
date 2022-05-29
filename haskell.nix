@@ -9,6 +9,9 @@ let
     mkOption
     mkDefault
     types;
+  inherit (types)
+    functionTo
+    raw;
 in
 {
   options = {
@@ -16,7 +19,7 @@ in
       ({ config, self', inputs', pkgs, system, ... }: {
         options.haskellProject = {
           haskellPackages = mkOption {
-            type = types.anything;
+            type = types.attrsOf raw;
             description = ''Which Haskell package set to use'';
             default = pkgs.haskellPackages;
           };
@@ -30,17 +33,17 @@ in
             default = ./.;
           };
           overrides = mkOption {
-            type = types.anything;
+            type = functionTo (functionTo (types.attrsOf raw));
             description = ''Overrides for the Cabal project'';
             default = self: super: { };
           };
           modifier = mkOption {
-            type = types.anything;
+            type = functionTo types.package;
             description = ''Modifier for the Cabal project'';
             default = drv: drv;
           };
           baseBuildTools = mkOption {
-            type = types.anything;
+            type = functionTo types.package;
             description = ''Common build tools for Haskell develop; you don't need to set this.'';
             default = hp: with hp; [
               cabal-install
@@ -51,7 +54,7 @@ in
             ];
           };
           extraBuildTools = mkOption {
-            type = types.anything;
+            type = functionTo types.package;
             description = ''Extra tools to add to nix-shell'';
             default = hp: [ ];
           };
