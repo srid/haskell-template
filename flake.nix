@@ -15,9 +15,15 @@
       imports = [
         ./haskell.nix
       ];
-      perSystem = { ... }: {
+      perSystem = { pkgs, ... }: {
         haskellProject = {
           name = "haskell-template";
+          extraBuildTools = hp: [
+            # TODO: Use https://github.com/numtide/treefmt/pull/169
+            hp.fourmolu
+            pkgs.nixpkgs-fmt
+            pkgs.treefmt
+          ];
         };
       };
     };

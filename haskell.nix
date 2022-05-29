@@ -68,12 +68,7 @@ in
         #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
         hp = cfg.haskellPackages; # pkgs.haskellPackages; # Eg: pkgs.haskell.packages.ghc921;
 
-        buildTools = with hp; [
-          # TODO: Don't hardcode these
-          fourmolu
-          pkgs.nixpkgs-fmt
-          pkgs.treefmt
-        ] ++ cfg.baseBuildTools hp ++ cfg.extraBuildTools hp;
+        buildTools = cfg.baseBuildTools hp ++ cfg.extraBuildTools hp;
 
         project =
           { returnShellEnv ? false
