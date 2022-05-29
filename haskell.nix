@@ -39,6 +39,17 @@ in
             description = ''Modifier for the Cabal project'';
             default = drv: drv;
           };
+          baseBuildTools = mkOption {
+            type = types.anything;
+            description = ''Common build tools for Haskell develop; you don't need to set this.'';
+            default = hp: with hp; [
+              cabal-install
+              haskell-language-server
+              ghcid
+              hlint
+              cabal-fmt
+            ];
+          };
           extraBuildTools = mkOption {
             type = types.anything;
             description = ''Extra tools to add to nix-shell'';
@@ -58,15 +69,11 @@ in
         hp = cfg.haskellPackages; # pkgs.haskellPackages; # Eg: pkgs.haskell.packages.ghc921;
 
         buildTools = with hp; [
-          cabal-fmt
-          cabal-install
-          ghcid
-          haskell-language-server
+          # TODO: Don't hardcode these
           fourmolu
-          hlint
           pkgs.nixpkgs-fmt
           pkgs.treefmt
-        ] ++ (cfg.extraBuildTools hp);
+        ] ++ cfg.baseBuildTools hp ++ cfg.extraBuildTools hp;
 
         project =
           { returnShellEnv ? false

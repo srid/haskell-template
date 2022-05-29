@@ -1,5 +1,5 @@
 {
-  description = "haskell-template's description";
+  description = "srid/haskell-template: Nix template for Haskell projects";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -9,8 +9,6 @@
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  # We use flake-parts as a way to make flakes 'system-aware'
-  # cf. https://github.com/NixOS/nix/issues/3843#issuecomment-661720562
   outputs = { self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
       systems = nixpkgs.lib.systems.flakeExposed;
