@@ -15,9 +15,8 @@
       imports = [
         ./haskell.nix
       ];
-      perSystem = { pkgs, ... }: {
-        haskellProject = {
-          name = "haskell-template";
+      perSystem = { system, self', pkgs, ... }: {
+        haskellProjects.haskell-template = {
           buildTools = hp: {
             # TODO: Use https://github.com/numtide/treefmt/pull/169
             inherit (pkgs)
@@ -28,6 +27,9 @@
               fourmolu;
           };
         };
+        packages.default = self'.packages.haskell-template;
+        apps.default = self'.apps.haskell-template;
+        devShells.default = self'.devShells.haskell-template;
       };
     };
 }
