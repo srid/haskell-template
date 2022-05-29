@@ -17,5 +17,10 @@
       imports = [
         ./haskell.nix
       ];
+      perSystem = { ... }: {
+        haskellProject = {
+          name = "haskell-template";
+        };
+      };
     };
 }
