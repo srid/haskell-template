@@ -20,7 +20,12 @@ in
         options.haskellProject = {
           haskellPackages = mkOption {
             type = types.attrsOf raw;
-            description = ''Which Haskell package set to use'';
+            description = ''
+              Which Haskell package set to use
+
+              You can effectively select the GHC version here. To get the appropriate value, run:
+                nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
+            '';
             default = pkgs.haskellPackages;
           };
           name = mkOption {
@@ -39,7 +44,15 @@ in
           };
           modifier = mkOption {
             type = functionTo types.package;
-            description = ''Modifier for the Cabal project'';
+            description = ''
+              Modifier for the Cabal project
+
+              Typically you want to use `overrideCabal` to override various
+              attributes of Cabal project.
+              
+              For examples on what is possible, see:
+              https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib/compose.nix
+            '';
             default = drv: drv;
           };
           buildTools = mkOption {
@@ -57,9 +70,7 @@ in
         cfg = config.haskellProject;
         inherit (pkgs.lib.lists) optionals;
 
-        # Specify GHC version here. To get the appropriate value, run:
-        #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
-        hp = cfg.haskellPackages; # pkgs.haskellPackages; # Eg: pkgs.haskell.packages.ghc921;
+        hp = cfg.haskellPackages;
 
         defaultBuildTools = with hp; {
           inherit
@@ -80,9 +91,6 @@ in
             inherit (cfg) root name overrides;
             modifier = drv:
               cfg.modifier (pkgs.haskell.lib.overrideCabal drv (oa: {
-                # All the Cabal-specific overrides go here.
-                # For examples on what is possible, see:
-                #   https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/haskell-modules/lib/compose.nix
                 buildTools = (oa.buildTools or [ ]) ++ optionals returnShellEnv buildTools;
               }));
           };
