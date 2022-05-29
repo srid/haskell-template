@@ -7,6 +7,7 @@ let
     mkPerSystemOption;
   inherit (lib)
     mkOption
+    mkDefault
     types;
 in
 {
@@ -86,18 +87,21 @@ in
       {
         # Used by `nix build ...`
         packages = {
-          default = project { };
+          ${cfg.name} = project { };
+          default = mkDefault self'.packages.${cfg.name};
         };
         # Used by `nix run ...`
         apps = {
-          default = {
+          ${cfg.name} = {
             type = "app";
             program = pkgs.lib.getExe self'.packages.default;
           };
+          default = mkDefault self'.apps.${cfg.name};
         };
         # Used by `nix develop ...`
         devShells = {
-          default = project { returnShellEnv = true; withHoogle = true; };
+          ${cfg.name} = project { returnShellEnv = true; withHoogle = true; };
+          default = mkDefault self'.devShells.${cfg.name};
         };
       };
   };
