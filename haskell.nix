@@ -1,5 +1,5 @@
 # A flake-parts module for Haskell cabal projects.
-{ config, lib, flake-parts-lib, ... }:
+{ self, config, lib, flake-parts-lib, ... }:
 
 let
   inherit (flake-parts-lib)
@@ -35,7 +35,7 @@ in
           root = mkOption {
             type = types.path;
             description = ''Path to the Cabal project root'';
-            default = ./.;
+            default = "${self}";
           };
           overrides = mkOption {
             type = functionTo (functionTo (types.attrsOf raw));
