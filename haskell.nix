@@ -96,8 +96,7 @@ in
         # Used by `nix run ...`
         apps = {
           ${cfg.name} = {
-            type = "app";
-            program = pkgs.lib.getExe self'.packages.default;
+            program = self'.packages.default;
           };
           default = mkDefault self'.apps.${cfg.name};
         };
