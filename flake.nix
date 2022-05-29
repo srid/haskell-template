@@ -18,12 +18,15 @@
       perSystem = { pkgs, ... }: {
         haskellProject = {
           name = "haskell-template";
-          extraBuildTools = hp: [
+          buildTools = hp: {
             # TODO: Use https://github.com/numtide/treefmt/pull/169
-            hp.fourmolu
-            pkgs.nixpkgs-fmt
-            pkgs.treefmt
-          ];
+            inherit (pkgs)
+              treefmt
+              nixpkgs-fmt;
+            inherit (hp)
+              cabal-fmt
+              fourmolu;
+          };
         };
       };
     };

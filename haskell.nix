@@ -42,21 +42,11 @@ in
             description = ''Modifier for the Cabal project'';
             default = drv: drv;
           };
-          baseBuildTools = mkOption {
-            type = functionTo types.package;
-            description = ''Common build tools for Haskell develop; you don't need to set this.'';
-            default = hp: with hp; [
-              cabal-install
-              haskell-language-server
-              ghcid
-              hlint
-              cabal-fmt
-            ];
-          };
-          extraBuildTools = mkOption {
-            type = functionTo types.package;
-            description = ''Extra tools to add to nix-shell'';
-            default = hp: [ ];
+          buildTools = mkOption {
+            type = functionTo (types.attrsOf (types.nullOr types.package));
+            description = ''Build tools for your Haskell package (available only in nix shell).'';
+            default = hp: { };
+            defaultText = ''Build tools useful for Haskell development are included by default.'';
           };
         };
       });
@@ -71,7 +61,15 @@ in
         #   nix-env -f "<nixpkgs>" -qaP -A haskell.compiler
         hp = cfg.haskellPackages; # pkgs.haskellPackages; # Eg: pkgs.haskell.packages.ghc921;
 
-        buildTools = cfg.baseBuildTools hp ++ cfg.extraBuildTools hp;
+        defaultBuildTools = with hp; {
+          inherit
+            cabal-install
+            haskell-language-server
+            ghcid
+            hlint;
+        };
+
+        buildTools = lib.attrValues (defaultBuildTools // cfg.buildTools hp);
 
         project =
           { returnShellEnv ? false
