@@ -99,20 +99,26 @@ in
               }
             )
             config.haskellProjects;
+        # Inject a 'default' attr if the attrset is a singleton set.
+        withDefault = attrs:
+          let xs = lib.attrValues attrs; in
+          if builtins.length xs == 1
+          then attrs // { default = mkDefault (builtins.head xs); }
+          else attrs;
       in
       {
         packages =
-          lib.mapAttrs
+          withDefault (lib.mapAttrs
             (_: project: project.package)
-            projects;
+            projects);
         apps =
-          lib.mapAttrs
+          withDefault (lib.mapAttrs
             (_: project: project.app)
-            projects;
+            projects);
         devShells =
-          lib.mapAttrs
+          withDefault (lib.mapAttrs
             (_: project: project.devShell)
-            projects;
+            projects);
       };
   };
 }
