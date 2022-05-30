@@ -7,13 +7,14 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat.inputs.nixpkgs.follows = "nixpkgs";
+    haskell-flake.url = "github:srid/haskell-flake";
   };
 
-  outputs = { self, nixpkgs, flake-parts, ... }:
+  outputs = { self, nixpkgs, flake-parts, haskell-flake, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [
-        ./haskell.nix
+        haskell-flake.flakeModule
       ];
       perSystem = { self', pkgs, ... }: {
         haskellProjects.haskell-template = {
