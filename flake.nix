@@ -15,6 +15,7 @@
       ];
       perSystem = { self', pkgs, ... }: {
         haskellProjects.default = {
+          root = ./.;
           buildTools = hp: {
             # TODO: Use https://github.com/numtide/treefmt/pull/169
             inherit (pkgs)
