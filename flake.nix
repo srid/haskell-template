@@ -14,7 +14,7 @@
         haskell-flake.flakeModule
       ];
       perSystem = { self', pkgs, ... }: {
-        haskellProjects.haskell-template = {
+        haskellProjects.default = {
           buildTools = hp: {
             # TODO: Use https://github.com/numtide/treefmt/pull/169
             inherit (pkgs)
