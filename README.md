@@ -1,8 +1,10 @@
 # haskell-template
 
-Haskell project template optimized for a fully reproducible and friendly development environment. Based on:
+Get a Haskell development environment up and running quickly, as long as Nix is installed.
 
-- [Nix](http://www.srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) + GHC 9
+This repository is a Haskell project template that is optimized for a fully reproducible and friendly development environment. It is based on:
+
+- [Nix](http://www.srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) (via [`github:srid/haskell-flake`](https://github.com/srid/haskell-flake)) + GHC 9
 - VSCode + [HLS](https://github.com/haskell/haskell-language-server)
 - [fourmolu](https://github.com/fourmolu/fourmolu) autoformatting 
 - [Relude](https://github.com/kowainik/relude#relude) as Prelude.
