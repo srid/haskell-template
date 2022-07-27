@@ -1,6 +1,8 @@
 # haskell-template
 
-Get a Haskell development environment up and running quickly, as long as Nix is installed.
+Get a Haskell development environment up and running quickly, as long as Nix is available on your system[^windows].
+
+[^windows]: On Windows, you may install Nix [under WSL2](https://nixos.wiki/wiki/Nix_Installation_Guide#Windows_Subsystem_for_Linux_.28WSL.29) and use the [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) to connect from the native VSCode. This runs your project under Linux while providing a near-native development experience on Windows.
 
 This repository is a Haskell project template that is optimized for a fully reproducible and friendly development environment. It is based on:
 
@@ -14,7 +16,7 @@ This repository is a Haskell project template that is optimized for a fully repr
 
 First-time setup:
 
-- [Install Nix](https://nixos.org/download.html) (>= 2.8) & [enable Flakes](https://nixos.wiki/wiki/Flakes)
+- [Install Nix](https://nixos.org/download.html) (>= 2.8) & [enable Flakes](https://nixos.wiki/wiki/Flakes) (Using Windows? See footnote[^windows])
 - Run `nix develop -c haskell-language-server` to sanity check your environment 
 - [Open as single-folder workspace](https://code.visualstudio.com/docs/editor/workspaces#_singlefolder-workspaces) in Visual Studio Code
     - When prompted by VSCode, install the [workspace recommended](https://code.visualstudio.com/docs/editor/extension-marketplace#_workspace-recommended-extensions) extensions
