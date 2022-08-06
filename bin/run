@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
 set -xe
 
-# This will run ghcid, which uses `./.ghcid` to invoke your program main entry
-# point, with the specified args.
-#
-# If you change ./.ghcid, ghcid will automatically reload.
-exec nix develop -c ghcid
+exec nix develop -c ghcid -c "cabal repl exe:haskell-template" --warnings -T :main

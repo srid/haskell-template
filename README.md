@@ -6,7 +6,7 @@ Get a Haskell development environment up and running quickly, as long as Nix is 
 
 This repository is a Haskell project template that is optimized for a fully reproducible and friendly development environment. It is based on:
 
-- [Nix](http://www.srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) (via [`github:srid/haskell-flake`](https://github.com/srid/haskell-flake)) + GHC 9
+- [Nix](https://srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) (via [`github:srid/haskell-flake`](https://github.com/srid/haskell-flake)) + GHC 9
 - VSCode + [HLS](https://github.com/haskell/haskell-language-server)
 - [fourmolu](https://github.com/fourmolu/fourmolu) autoformatting 
 - [Relude](https://github.com/kowainik/relude#relude) as Prelude.
@@ -49,6 +49,7 @@ git add . && git commit -m rename
 - Run `nix flake update` to update all flake inputs.
 - Run `treefmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt), which uses `./treefmt.toml` (where fourmolu and nixpkgs-fmt are specified).
 - Run `bin/hoogle` to start Hoogle with packages in your cabal file.
+- Run `bin/test` to run the test suite.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 
 ## Alternatives
