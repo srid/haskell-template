@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -xe
+
+exec nix develop -c ghcid -c "cabal repl test:tests"
