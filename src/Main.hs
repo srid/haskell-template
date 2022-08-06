@@ -6,8 +6,7 @@ import Main.Utf8 qualified as Utf8
 {- |
  Main entry point.
 
- The `bin/run` script will invoke this function. See `.ghcid` file to change
- that.
+ The `bin/run` script will invoke this function.
 -}
 main :: IO ()
 main = do
