@@ -1,4 +1,4 @@
 module Lib (hello) where
 
-hello :: String
+hello :: Text
 hello = "Hello 🌎"

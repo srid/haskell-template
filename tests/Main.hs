@@ -7,4 +7,4 @@ main :: IO ()
 main = hspec $ do
   describe "Lib.hello" $ do
     it "contains the world emoji" $ do
-      Lib.hello `shouldContain` "🌎"
+      toString Lib.hello `shouldContain` "🌎"
