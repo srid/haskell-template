@@ -21,34 +21,16 @@ extra-source-files:
   LICENSE
   README.md
 
-executable haskell-template
-  build-depends:
-    , aeson
-    , async
-    , base          >=4.13.0.0 && <=4.18.0.0
-    , bytestring
-    , containers
-    , data-default
-    , directory
-    , filepath
-    , mtl
-    , optics-core
-    , profunctors
-    , relude
-    , shower
-    , text
-    , time
-    , with-utf8
+common shared
+  ghc-options:
+    -Wall -Wincomplete-record-updates -Wincomplete-uni-patterns
+    -Wmissing-deriving-strategies -Wunused-foralls -Wunused-foralls
+    -fprint-explicit-foralls -fprint-explicit-kinds
 
   mixins:
     base hiding (Prelude),
     relude (Relude as Prelude, Relude.Container.One),
     relude
-
-  ghc-options:
-    -Wall -Wincomplete-record-updates -Wincomplete-uni-patterns
-    -Wmissing-deriving-strategies -Wunused-foralls -Wunused-foralls
-    -fprint-explicit-foralls -fprint-explicit-kinds
 
   default-extensions:
     NoStarIsType
@@ -91,6 +73,41 @@ executable haskell-template
     TypeOperators
     ViewPatterns
 
-  main-is:            Main.hs
-  hs-source-dirs:     src
-  default-language:   Haskell2010
+  build-depends:
+    , aeson
+    , async
+    , base          >=4.13.0.0 && <=4.18.0.0
+    , bytestring
+    , containers
+    , data-default
+    , directory
+    , filepath
+    , mtl
+    , optics-core
+    , profunctors
+    , relude
+    , shower
+    , text
+    , time
+    , with-utf8
+
+executable haskell-template
+  import:           shared
+  main-is:          Main.hs
+  hs-source-dirs:   src
+  default-language: Haskell2010
+  other-modules:    Lib
+
+library
+  import:          shared
+  exposed-modules: Lib
+  hs-source-dirs:  src
+
+test-suite tests
+  import:         shared
+  main-is:        Main.hs
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: tests
+  build-depends:
+    , haskell-template
+    , hspec
