@@ -92,12 +92,12 @@ common shared
     , with-utf8
 
   hs-source-dirs:     src
+  other-modules:      Lib
 
 executable haskell-template
   import:           shared
   main-is:          Main.hs
   default-language: Haskell2010
-  other-modules:    Lib
 
 test-suite tests
   import:         shared
@@ -105,4 +105,3 @@ test-suite tests
   type:           exitcode-stdio-1.0
   hs-source-dirs: tests
   build-depends:  hspec
-  other-modules:  Lib
