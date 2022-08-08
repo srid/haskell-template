@@ -108,5 +108,4 @@ test-suite tests
   main-is:        Main.hs
   type:           exitcode-stdio-1.0
   hs-source-dirs: tests src
-  build-depends:
-    , hspec
+  build-depends:  hspec
