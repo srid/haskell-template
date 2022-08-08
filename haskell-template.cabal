@@ -91,23 +91,17 @@ common shared
     , time
     , with-utf8
 
+  hs-source-dirs:     src
+  other-modules:      Lib
+
 executable haskell-template
   import:           shared
   main-is:          Main.hs
-  hs-source-dirs:   src
   default-language: Haskell2010
-  other-modules:    Lib
-
-library
-  import:          shared
-  exposed-modules: Lib
-  hs-source-dirs:  src
 
 test-suite tests
   import:         shared
-  main-is:        Main.hs
+  main-is:        Spec.hs
   type:           exitcode-stdio-1.0
   hs-source-dirs: tests
-  build-depends:
-    , haskell-template
-    , hspec
+  build-depends:  hspec
