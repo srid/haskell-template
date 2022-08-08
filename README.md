@@ -17,7 +17,7 @@ This repository is a Haskell project template that is optimized for a fully repr
 First-time setup:
 
 - [Install Nix](https://nixos.org/download.html) (>= 2.8) & [enable Flakes](https://nixos.wiki/wiki/Flakes) (Using Windows? See footnote[^windows])
-- Run `nix develop -c haskell-language-server` to sanity check your environment 
+- Run `nix develop -i -c haskell-language-server` to sanity check your environment 
 - [Open as single-folder workspace](https://code.visualstudio.com/docs/editor/workspaces#_singlefolder-workspaces) in Visual Studio Code
     - When prompted by VSCode, install the [workspace recommended](https://code.visualstudio.com/docs/editor/extension-marketplace#_workspace-recommended-extensions) extensions
     - <kbd>Ctrl+Shift+P</kbd> to run command "Nix-Env: Select Environment" and then select `shell.nix`. 
@@ -51,7 +51,3 @@ git add . && git commit -m rename
 - Run `bin/hoogle` to start Hoogle with packages in your cabal file.
 - Run `bin/test` to run the test suite.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
-
-## Alternatives
-
-- [Serokell's Flake template](https://github.com/serokell/templates/tree/master/haskell-cabal2nix)
