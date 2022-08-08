@@ -109,5 +109,4 @@ test-suite tests
   type:           exitcode-stdio-1.0
   hs-source-dirs: tests src
   build-depends:
-    , haskell-template
     , hspec
