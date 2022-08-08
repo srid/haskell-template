@@ -105,3 +105,4 @@ test-suite tests
   type:           exitcode-stdio-1.0
   hs-source-dirs: tests
   build-depends:  hspec
+  other-modules:  Lib
