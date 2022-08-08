@@ -98,11 +98,6 @@ executable haskell-template
   default-language: Haskell2010
   other-modules:    Lib
 
-library
-  import:          shared
-  exposed-modules: Lib
-  hs-source-dirs:  src
-
 test-suite tests
   import:         shared
   main-is:        Main.hs
