@@ -5,13 +5,15 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
     haskell-flake.url = "github:srid/haskell-flake";
+    treefmt-flake.url = "github:srid/treefmt-flake";
   };
 
-  outputs = { self, nixpkgs, flake-parts, haskell-flake, ... }:
+  outputs = { self, nixpkgs, flake-parts, haskell-flake, treefmt-flake, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [
         haskell-flake.flakeModule
+        treefmt-flake.flakeModule
       ];
       perSystem = { self', pkgs, ... }: {
         haskellProjects.default = {
@@ -24,6 +26,14 @@
               cabal-fmt
               fourmolu;
           };
+          modifier = drv: with pkgs.haskell.lib; overrideCabal (addBuildTool drv pkgs.buildPackages.makeWrapper ) (oa: { postInstall = oa.postInstall or "" + ''wrapProgram $out/bin/haskell-template --add-flags "--help"''; }) ;
+        };
+        treefmt.formatters = {
+          inherit (pkgs)
+            nixpkgs-fmt;
+          inherit (pkgs.haskellPackages)
+            cabal-fmt
+            fourmolu;
         };
       };
     };

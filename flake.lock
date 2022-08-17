@@ -55,7 +55,23 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "haskell-flake": "haskell-flake",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "treefmt-flake": "treefmt-flake"
+      }
+    },
+    "treefmt-flake": {
+      "locked": {
+        "lastModified": 1660758521,
+        "narHash": "sha256-IL4I3PwTs9m5xeGQBIvgVpbYUWM6Rdx/fYH4XAMD1as=",
+        "owner": "srid",
+        "repo": "treefmt-flake",
+        "rev": "cd3739a9c1d468c6a58634ac869209bef8250083",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "treefmt-flake",
+        "type": "github"
       }
     }
   },
