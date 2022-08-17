@@ -5,25 +5,30 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
     haskell-flake.url = "github:srid/haskell-flake";
+    treefmt-flake.url = "github:srid/treefmt-flake";
   };
 
-  outputs = { self, nixpkgs, flake-parts, haskell-flake, ... }:
+  outputs = { self, nixpkgs, flake-parts, haskell-flake, treefmt-flake, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [
         haskell-flake.flakeModule
+        treefmt-flake.flakeModule
       ];
-      perSystem = { self', pkgs, ... }: {
+      perSystem = { self', config, pkgs, ... }: {
         haskellProjects.default = {
           root = ./.;
           buildTools = hp: {
             inherit (pkgs)
-              treefmt
-              nixpkgs-fmt;
-            inherit (hp)
-              cabal-fmt
-              fourmolu;
-          };
+              treefmt;
+          } // config.treefmt.formatters;
+        };
+        treefmt.formatters = {
+          inherit (pkgs)
+            nixpkgs-fmt;
+          inherit (pkgs.haskellPackages)
+            cabal-fmt
+            fourmolu;
         };
       };
     };
