@@ -26,7 +26,7 @@
               cabal-fmt
               fourmolu;
           };
-          modifier = drv: with pkgs.haskell.lib; overrideCabal (addBuildTool drv pkgs.buildPackages.makeWrapper ) (oa: { postInstall = oa.postInstall or "" + ''wrapProgram $out/bin/haskell-template --add-flags "--help"''; }) ;
+          modifier = drv: with pkgs.haskell.lib; overrideCabal (addBuildTool drv pkgs.buildPackages.makeWrapper) (oa: { postInstall = oa.postInstall or "" + ''wrapProgram $out/bin/haskell-template --add-flags "--help"''; });
         };
         treefmt.formatters = {
           inherit (pkgs)
