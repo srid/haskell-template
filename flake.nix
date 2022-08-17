@@ -15,17 +15,13 @@
         haskell-flake.flakeModule
         treefmt-flake.flakeModule
       ];
-      perSystem = { self', pkgs, ... }: {
+      perSystem = { self', config, pkgs, ... }: {
         haskellProjects.default = {
           root = ./.;
           buildTools = hp: {
             inherit (pkgs)
-              treefmt
-              nixpkgs-fmt;
-            inherit (hp)
-              cabal-fmt
-              fourmolu;
-          };
+              treefmt;
+          } // config.treefmt.formatters;
         };
         treefmt.formatters = {
           inherit (pkgs)

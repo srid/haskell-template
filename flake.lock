@@ -61,11 +61,11 @@
     },
     "treefmt-flake": {
       "locked": {
-        "lastModified": 1660758521,
-        "narHash": "sha256-IL4I3PwTs9m5xeGQBIvgVpbYUWM6Rdx/fYH4XAMD1as=",
+        "lastModified": 1660759207,
+        "narHash": "sha256-qr2OrIS6jDpUkc91rmaMoZ+m4RWSDQ/odve9/DLtSsY=",
         "owner": "srid",
         "repo": "treefmt-flake",
-        "rev": "cd3739a9c1d468c6a58634ac869209bef8250083",
+        "rev": "7b2e2975513a5a4a87f9b87926de3f00722ec67c",
         "type": "github"
       },
       "original": {
