@@ -51,3 +51,7 @@ git add . && git commit -m rename
 - Run `bin/hoogle` to start Hoogle with packages in your cabal file.
 - Run `bin/test` to run the test suite.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
+
+## Discussions
+
+Got questions? Ideas? Suggestions? Post them here: https://github.com/srid/haskell-template/discussions
