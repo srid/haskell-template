@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "check-flake": {
+      "locked": {
+        "lastModified": 1661723725,
+        "narHash": "sha256-zbt1vEDQ5Uxdqz4AlW/xOvoUs9tK4ayg8q4+2EtrMEQ=",
+        "owner": "srid",
+        "repo": "check-flake",
+        "rev": "e48e6b5c86f6fb67f0e565a6862fa8b3e7a53446",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "check-flake",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs": [
@@ -22,11 +37,11 @@
     },
     "haskell-flake": {
       "locked": {
-        "lastModified": 1660319056,
-        "narHash": "sha256-MX6PLEtXVyXXUEk3t1e0c20XRL4m4u9TFET2X0TpTdE=",
+        "lastModified": 1661723243,
+        "narHash": "sha256-xXbmZgekEcFQ2iSyZWHgCa384SYyontkVnfXIcfQavs=",
         "owner": "srid",
         "repo": "haskell-flake",
-        "rev": "1ca2be3c354ef2a3296cac7e54ae21e1d6ead6d7",
+        "rev": "ec8e55a25ca6bd727093b610f80adf8d70ae4b50",
         "type": "github"
       },
       "original": {
@@ -53,6 +68,7 @@
     },
     "root": {
       "inputs": {
+        "check-flake": "check-flake",
         "flake-parts": "flake-parts",
         "haskell-flake": "haskell-flake",
         "nixpkgs": "nixpkgs",
