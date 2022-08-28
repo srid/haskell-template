@@ -17,7 +17,7 @@
         inputs.treefmt-flake.flakeModule
         inputs.check-flake.flakeModule
       ];
-      perSystem = { self', system, config, pkgs, ... }: {
+      perSystem = { self', config, pkgs, ... }: {
         haskellProjects.default = {
           root = ./.;
           buildTools = hp: {
