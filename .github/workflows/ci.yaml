@@ -21,7 +21,7 @@ jobs:
           nix develop -j 4 -c echo
       - name: Flake checks
         run: |
-          nix build .#check --no-link -L
+          nix --option sandbox false build .#check --no-link -L
       # TODO: Remove after https://github.com/srid/haskell-flake/issues/19
       - name: Hlint
         run: |
