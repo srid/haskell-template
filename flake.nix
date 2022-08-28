@@ -24,6 +24,7 @@
             inherit (pkgs)
               treefmt;
           } // config.treefmt.formatters;
+          enableHLSCheck = true;
         };
         treefmt.formatters = {
           inherit (pkgs)
