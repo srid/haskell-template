@@ -6,14 +6,16 @@
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-flake.url = "github:srid/treefmt-flake";
+    check-flake.url = "github:srid/check-flake";
   };
 
-  outputs = { self, nixpkgs, flake-parts, haskell-flake, treefmt-flake, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [
-        haskell-flake.flakeModule
-        treefmt-flake.flakeModule
+        inputs.haskell-flake.flakeModule
+        inputs.treefmt-flake.flakeModule
+        inputs.check-flake.flakeModule
       ];
       perSystem = { self', config, pkgs, ... }: {
         haskellProjects.default = {
@@ -22,6 +24,7 @@
             inherit (pkgs)
               treefmt;
           } // config.treefmt.formatters;
+          enableHLSCheck = true;
         };
         treefmt.formatters = {
           inherit (pkgs)

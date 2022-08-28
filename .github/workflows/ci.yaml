@@ -18,13 +18,16 @@ jobs:
       - name: Cache Nix dependencies
         run: |
           nix develop -j 4 -c echo
-      - name: Format check
+      - name: Flake checks
         run: |
-          nix develop -j auto -c treefmt --fail-on-change
+          # Sandbox must be disabled due to HLS,
+          # https://github.com/haskell/haskell-language-server/issues/3128
+          nix --option sandbox false build .#check --no-link -L
+      # TODO: Remove after https://github.com/srid/haskell-flake/issues/19
       - name: Hlint
         run: |
           nix develop -j auto -c hlint src
       - name: Build
         id: build
         run: |
-          nix build -j auto
+          nix build -j auto -L
