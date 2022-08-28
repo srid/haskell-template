@@ -18,13 +18,13 @@ jobs:
       - name: Cache Nix dependencies
         run: |
           nix develop -j 4 -c echo
-      - name: Format check
+      - name: Flake checks
         run: |
-          nix develop -j auto -c treefmt --fail-on-change
+          nix build .#check --no-link -L
       - name: Hlint
         run: |
           nix develop -j auto -c hlint src
       - name: Build
         id: build
         run: |
-          nix build -j auto
+          nix build -j auto -L
