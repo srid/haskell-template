@@ -22,6 +22,7 @@ jobs:
       - name: Flake checks
         run: |
           nix build .#check --no-link -L
+      # TODO: Remove after https://github.com/srid/haskell-flake/issues/19
       - name: Hlint
         run: |
           nix develop -j auto -c hlint src
