@@ -53,6 +53,43 @@ git add . && git commit -m rename
 - Run `bin/test` to run the test suite.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 
+## Common workflows
+
+### Adding tests 
+
+1. Split any logic code out of `Main.hs` into, say, a `Lib.hs`.
+1. Correspondingly, add `other-modules: Lib` to the "shared" section of your cabal file.
+1. Add `tests/Spec.hs` (example below):
+    ```haskell
+    module Main where
+
+    import Lib qualified
+    import Test.Hspec (describe, hspec, it, shouldContain)
+
+    main :: IO ()
+    main = hspec $ do
+      describe "Lib.hello" $ do
+        it "contains the world emoji" $ do
+          toString Lib.hello `shouldContain` "🌎"
+    ```
+1. Add the tests stanza to the cabal file:
+    ```cabal
+    test-suite tests
+    import:         shared
+    main-is:        Spec.hs
+    type:           exitcode-stdio-1.0
+    hs-source-dirs: tests
+    build-depends:  hspec
+    ```
+1. Add `bin/test` and `chmod a+x` it:
+    ```sh
+    #!/usr/bin/env bash
+    set -xe
+
+    exec nix develop -i -c ghcid -c "cabal repl test:tests" -T :main
+    ```
+1. Commit your changes to Git, and test it out by running `bin/test`.
+
 ## Discussions
 
 Got questions? Ideas? Suggestions? Post them here: https://github.com/srid/haskell-template/discussions
