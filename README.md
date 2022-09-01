@@ -81,14 +81,19 @@ git add . && git commit -m rename
     hs-source-dirs: tests
     build-depends:  hspec
     ```
-1. Add `bin/test` and `chmod a+x` it:
+1. Update `hie.yaml` accordingly; for example by adding,
+    ```yaml
+      - path: "tests"
+        component: "test:tests"
+    ```
+2. Add `bin/test` and `chmod a+x` it:
     ```sh
     #!/usr/bin/env bash
     set -xe
 
     exec nix develop -i -c ghcid -c "cabal repl test:tests" -T :main
     ```
-1. Commit your changes to Git, and test it out by running `bin/test`.
+3. Commit your changes to Git, and test it out by running `bin/test`.
 
 ## Discussions
 
