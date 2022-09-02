@@ -77,17 +77,14 @@ common shared
     , aeson
     , async
     , base          >=4.13.0.0 && <=4.18.0.0
-    , bytestring
-    , containers
     , data-default
     , directory
     , filepath
     , mtl
     , optics-core
     , profunctors
-    , relude
+    , relude        >=1.0
     , shower
-    , text
     , time
     , with-utf8
 
