@@ -1,3 +1,6 @@
+# Repo-specific hlint rules go here:
+- ignore: { name: Use camelCase }
+
 # Relude's .hlint.yaml goes here:
 # https://github.com/kowainik/relude/blob/main/.hlint.yaml
 - arguments:
