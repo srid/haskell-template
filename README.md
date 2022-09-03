@@ -95,6 +95,25 @@ git add . && git commit -m rename
     ```
 1. Commit your changes to Git, and test it out by running `bin/test`.
 
+### Adding Garnix CI
+
+To use [Garnix](https://garnix.io/) instead of Github Actions, you may provide a `garnix.yaml` like the below:
+
+```yaml
+builds:
+  include:
+    - "packages.x86_64-linux.*"
+    - "packages.aarch64-darwin.*"
+    - "checks.x86_64-linux.*"
+    - "checks.aarch64-darwin.*"
+    - "devShells.x86_64-linux.default"
+    - "devShells.aarch64-darwin.default"
+  exclude:
+    # https://github.com/srid/haskell-flake/issues/21
+    - "checks.*.default-hls"
+    - "packages.*.check"
+```
+
 ## Discussions
 
 Got questions? Ideas? Suggestions? Post them here: https://github.com/srid/haskell-template/discussions
