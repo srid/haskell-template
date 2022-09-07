@@ -42,6 +42,9 @@
           haskellPackages = pkgs.haskell.packages.ghc942;
           overrides = inputs.horizon-platform.overrides.${system}.ghc942;
           buildTools = hp: {
+            haskell-language-server = null; # TODO(horizon-platform): unported.
+            hlint = null; # TODO(horizon-platform): unported.
+            ghcid = null; # TODO(horizon-platform): unported.
             inherit (pkgs)
               treefmt;
           } // config.treefmt.formatters;
