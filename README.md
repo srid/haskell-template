@@ -10,7 +10,7 @@ Get a Haskell development environment up and running quickly. Thanks to Nix, thi
 
 ## Getting Started
 
-*tldr: Install Nix, enable Flakes, open in VSCode.*
+*tldr: Install Nix, enable Flakes, open in VSCode and run `bin/run`.*
 
 For details, see: https://srid.ca/haskell-template/start
 
