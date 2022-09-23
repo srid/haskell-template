@@ -44,14 +44,15 @@
             /* ormolu = {
               enable = true;
               package = pkgs.haskellPackages.fourmolu;
-            }; */
+            };*/
           };
-          /* settings.formatter.ormolu = {
+          /*settings.formatter.ormolu = {
             # command = pkgs.haskellPackages.fourmolu;
             options = [
               "--ghc-opt"
               "-XImportQualifiedPost"
-            ]; */
+            ];
+          };*/
         };
       };
     };
