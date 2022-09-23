@@ -66,27 +66,59 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 0,
+        "narHash": "sha256-bDLXl2BVq7eIQz/8CduZI1SLyhG9u/CrckHd6f7bwPE=",
+        "path": "/nix/store/lbf0kbc67zpm6xw6lia2fj1qskikaffz-source",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
         "check-flake": "check-flake",
         "flake-parts": "flake-parts",
         "haskell-flake": "haskell-flake",
         "nixpkgs": "nixpkgs",
-        "treefmt-flake": "treefmt-flake"
+        "treefmt-flake": "treefmt-flake",
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "treefmt-flake": {
       "locked": {
-        "lastModified": 1660850981,
-        "narHash": "sha256-Y2rt0W0ZnfVgH5mnuAkU/5gJGSbjk5NbAwcuLDONHgI=",
+        "lastModified": 1663953590,
+        "narHash": "sha256-XFVKV/ezO499sGydvMrqwIgT8R7K9FxkReX5ofbRG7k=",
         "owner": "srid",
         "repo": "treefmt-flake",
-        "rev": "49306df9084ffbd73102e6002241e1f14812f0fe",
+        "rev": "24f1022ad417f610acea5107b856bd72c26cbb34",
         "type": "github"
       },
       "original": {
         "owner": "srid",
+        "ref": "treefmt-nix",
         "repo": "treefmt-flake",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1663931154,
+        "narHash": "sha256-EgkFPOczv9ylyKBMJPHf+yWBfebTWmtKTIRdUIoyhiA=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "d20a9a3cb12ad6bbea129b7cf7abd05a8d4f96fc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     }
