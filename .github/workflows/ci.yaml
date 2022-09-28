@@ -20,9 +20,11 @@ jobs:
           nix develop -j 4 -c echo
       - name: Flake checks
         run: |
+          # Because 'nix flake check' is not system-aware
+          sd 'systems = nixpkgs.lib.systems.flakeExposed' 'systems = ["x86_64-linux"]' flake.nix
           # Sandbox must be disabled due to HLS,
           # https://github.com/haskell/haskell-language-server/issues/3128
-          nix --option sandbox false build .#check --no-link -L
+          nix --option sandbox false flake check -L
       # TODO: Remove after https://github.com/srid/haskell-flake/issues/19
       - name: Hlint
         run: |

@@ -6,7 +6,6 @@
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-flake.url = "github:srid/treefmt-flake";
-    check-flake.url = "github:srid/check-flake";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
@@ -15,7 +14,6 @@
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-flake.flakeModule
-        inputs.check-flake.flakeModule
       ];
       perSystem = { self', config, pkgs, ... }: {
         haskellProjects.default = {
