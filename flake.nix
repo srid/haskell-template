@@ -4,7 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
-    haskell-flake.url = "github:srid/haskell-flake";
+    haskell-flake.url = "github:HariAmoor-professional/haskell-flake/issue-19";
     treefmt-flake.url = "github:srid/treefmt-flake";
     check-flake.url = "github:srid/check-flake";
   };
@@ -26,6 +26,7 @@
           } // config.treefmt.formatters;
           # overrides = self: super: {}
           enableHLSCheck = true;
+          hlintCheck.enable = true;
         };
         treefmt.formatters = {
           inherit (pkgs)

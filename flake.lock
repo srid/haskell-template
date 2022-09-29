@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1663686189,
-        "narHash": "sha256-cgWGo0SLM4RX0DqodeFHsU0PRGlmz6AOSF1lmX21bvg=",
+        "lastModified": 1664385320,
+        "narHash": "sha256-uSCHb9RUqHRjTpI8OzyaUuHckFnnxwZqlXEuo+yUpYQ=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "f17e9dba098c0a7bca10029bec5384fd6425c157",
+        "rev": "45298bd207b26e1bcd030a0bb075aa2da29f8e30",
         "type": "github"
       },
       "original": {
@@ -37,26 +37,27 @@
     },
     "haskell-flake": {
       "locked": {
-        "lastModified": 1663188216,
-        "narHash": "sha256-/ZuI4EUxiMge3mb1alFebLsXqqWrfgsAzeM4VfP+uAs=",
-        "owner": "srid",
+        "lastModified": 1664415174,
+        "narHash": "sha256-TduOg0FMUlSwrR5Hbj/mp3U5aL+oak+Go0MSRjwfxhE=",
+        "owner": "HariAmoor-professional",
         "repo": "haskell-flake",
-        "rev": "4c6394586f7f9f0596f4822bfe14222fcc07f813",
+        "rev": "4481ed8547bbf57ddf243c8d34fd14c187b2d690",
         "type": "github"
       },
       "original": {
-        "owner": "srid",
+        "owner": "HariAmoor-professional",
+        "ref": "issue-19",
         "repo": "haskell-flake",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1663905476,
-        "narHash": "sha256-0CSwRKaYravh9v6qSlBpM0gNg0UhKT2lL7Yn6Zbx7UM=",
+        "lastModified": 1664370076,
+        "narHash": "sha256-NDnIo0nxJozLwEw0VPM+RApMA90uTfbvaNNtC5eB7Os=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e14f9fb57315f0d4abde222364f19f88c77d2b79",
+        "rev": "854fdc68881791812eddd33b2fed94b954979a8e",
         "type": "github"
       },
       "original": {
