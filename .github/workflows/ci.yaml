@@ -18,7 +18,11 @@ jobs:
       - name: Cache Nix dependencies
         run: |
           nix develop -j 4 -c echo
-      - name: Flake checks
+      - name: Build 🔨
+        id: build
+        run: |
+          nix build -j auto -L
+      - name: Flake checks 🧪
         run: |
           # Because 'nix flake check' is not system-aware
           # See https://srid.ca/haskell-template/checks
@@ -27,11 +31,3 @@ jobs:
           # Sandbox must be disabled due to HLS,
           # https://github.com/haskell/haskell-language-server/issues/3128
           nix --option sandbox false flake check -L
-      # TODO: Remove after https://github.com/srid/haskell-flake/issues/19
-      - name: Hlint
-        run: |
-          nix develop -j auto -c hlint src
-      - name: Build
-        id: build
-        run: |
-          nix build -j auto -L
