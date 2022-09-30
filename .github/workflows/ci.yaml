@@ -21,7 +21,7 @@ jobs:
       - name: Flake checks
         run: |
           # Because 'nix flake check' is not system-aware
-          # Ref: https://nixos.wiki/wiki/Haskell#IFD_and_Haskell and https://github.com/NixOS/nix/issues/3843
+          # See https://srid.ca/haskell-template/checks
           nix run nixpkgs#sd 'systems = nixpkgs.lib.systems.flakeExposed' 'systems = [ "x86_64-linux" ]' flake.nix
 
           # Sandbox must be disabled due to HLS,
