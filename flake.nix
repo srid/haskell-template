@@ -17,6 +17,7 @@
       ];
       perSystem = { self', config, pkgs, ... }: {
         haskellProjects.default = {
+          name = "haskell-template";
           root = ./.;
           buildTools = hp: {
             inherit (pkgs)
