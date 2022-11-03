@@ -28,4 +28,4 @@ For details, see: https://srid.ca/haskell-template/start
 
 ## Discussions
 
-Got questions? Ideas? Suggestions? Post them here: https://github.com/srid/haskell-template/discussions
+Questions? Ideas? Suggestions? You may post them here: https://github.com/srid/haskell-template/discussions
