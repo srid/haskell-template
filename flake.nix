@@ -3,13 +3,13 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake/bug-fixes";
+    haskell-flake.url = "github:srid/haskell-flake";
     treefmt-flake.url = "github:srid/treefmt-flake";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
-      systems = nixpkgs.lib.systems.flakeExposed;
+      systems = [ "aarch64-darwin" ]; #nixpkgs.lib.systems.flakeExposed;
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-flake.flakeModule
