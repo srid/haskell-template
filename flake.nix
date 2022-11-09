@@ -16,8 +16,9 @@
       ];
       perSystem = { self', config, pkgs, ... }: {
         haskellProjects.default = {
-          name = "haskell-template";
-          root = ./.;
+          packages = {
+            haskell-template.root = ./.;
+          };
           buildTools = hp: {
             inherit (pkgs)
               treefmt;
@@ -33,6 +34,7 @@
             cabal-fmt
             fourmolu;
         };
+        packages.default = self'.packages.haskell-template;
       };
     };
 }
