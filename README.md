@@ -8,6 +8,8 @@ Get a Haskell development environment up and running quickly. Thanks to Nix, thi
 - [Relude](https://github.com/kowainik/relude#relude) as Prelude.
   - `.hlint.yaml` is [from relude](https://github.com/kowainik/relude/blob/main/.hlint.yaml)
 
+If you have an *existing* Haskell project, you should probably use https://github.com/srid/haskell-flake instead.
+
 ## Getting Started
 
 *tldr: Install Nix, enable Flakes, open in VSCode and run `bin/run`.*
