@@ -68,7 +68,7 @@ in
                         commandsGrouped = lib.groupBy (a: a.meta.category) commands;
                       in
                       pkgs.writeShellApplication {
-                        name = ",";
+                        name = config.script.wrapperName;
                         runtimeInputs = commands;
                         text = ''
                           showHelp () {
