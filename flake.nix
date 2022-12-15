@@ -38,17 +38,13 @@
         devShells.default =
           let
             mkCommand = name: v:
-              if builtins.typeOf v == "string" then
-                pkgs.writeShellApplication { inherit name; text = v; }
-              else
-                v;
+              v.package or pkgs.writeShellApplication { inherit name; text = v.command; };
             wrapCommands = spec:
               let commands = lib.mapAttrsToList mkCommand spec;
               in
               pkgs.writeShellApplication {
                 name = "dev";
                 runtimeInputs = commands;
-                # TODO: bash and zsh completion
                 text = ''
                   showHelp () {
                     echo "Available commands:"
@@ -75,19 +71,26 @@
               (
                 (wrapCommands {
                   # TODO: banner-grouping and meta.description
-                  hoog = ''
-                    echo http://127.0.0.1:8888
-                    hoogle serve -p 8888 --local
-                  '';
-                  repl = ''
-                    cabal repl
-                  '';
-                  run = ''
-                    ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
-                  '';
+                  hoog = {
+                    command = ''
+                      echo http://127.0.0.1:8888
+                      hoogle serve -p 8888 --local
+                    '';
+                  };
+                  repl = {
+                    command = ''
+                      cabal repl
+                    '';
+                  };
+                  run = {
+                    command = ''
+                      ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
+                    '';
+                  };
                 }).overrideAttrs (_oa: {
                   meta.description = "Development scripts command";
                   nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [ pkgs.installShellFiles ];
+                  # TODO: bash and zsh completion
                   postInstall = (oa.postInstall or "") + ''
 
                   '';
