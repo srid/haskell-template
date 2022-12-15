@@ -54,19 +54,19 @@
                 text = ''
                   showHelp () {
                     echo -e "Available commands:\n"
-                    echo -e "${
-                        lib.concatStringsSep "\n\n"
-                          (lib.mapAttrsToList (cat: commands: 
-                            "## " + cat + "\n  " + 
-                              lib.concatStringsSep "\n  " 
-                                (map (drv: 
-                                  let name = builtins.baseNameOf (lib.getExe drv);
-                                      desc = drv.meta.description;
-                                  in name + "\t: " + desc
-                                ) commands)
-                          ) commandsGrouped)
-                            
-                    }" # | ${pkgs.util-linux}/bin/column -t -s $'\t'
+                    ${
+                      lib.concatStringsSep "echo;"
+                        (lib.mapAttrsToList (cat: commands: 
+                          "echo -e '## " + cat + "';echo;" + 
+                            "echo '" + lib.concatStringsSep "\n" 
+                              (map (drv: 
+                                let name = builtins.baseNameOf (lib.getExe drv);
+                                    desc = drv.meta.description;
+                                in "  " + name + "\t: " + desc
+                              ) commands 
+                              ) + "' | ${pkgs.util-linux}/bin/column -t -s ''$'\t'; "
+                        ) commandsGrouped)
+                    }
                   }
                   if [ "$*" == "" ] || [ "$*" == "-h" ] || [ "$*" == "--help" ]; then
                     showHelp
