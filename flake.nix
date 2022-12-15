@@ -95,6 +95,8 @@
                 ];
               });
             scriptSpec = {
+              # TODO: Use lib.getExe to substitute the key, so we can call this
+              # "hoogle" without conflicting with existing build tools.
               hoog = {
                 description = "Start Hoogle server for project dependencies";
                 command = ''
@@ -106,7 +108,7 @@
               repl = {
                 description = "Start the cabal repl";
                 command = ''
-                  cabal repl
+                  cabal repl "$@"
                 '';
                 category = "Dev Tools";
               };
