@@ -16,6 +16,7 @@ in
               description = mkOption {
                 type = types.nullOr types.str;
                 description = "The description of this script";
+                default = null;
               };
               category = mkOption {
                 type = types.str;
