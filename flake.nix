@@ -39,10 +39,14 @@
           let
             mkCommand = name: v:
               (v.package or pkgs.writeShellApplication { inherit name; text = v.command; }).overrideAttrs (oa: {
-                meta.description = if v ? description then v.description else oa.meta.description or "No description";
+                meta.description =
+                  if v ? description then v.description else oa.meta.description or "No description";
+                meta.category = v.category or null;
               });
             wrapCommands = spec:
-              let commands = lib.mapAttrsToList mkCommand spec;
+              let
+                commands = lib.mapAttrsToList mkCommand spec;
+                commandsGrouped = lib.groupBy (a: a.meta.category) commands;
               in
               pkgs.writeShellApplication {
                 name = "dev";
@@ -50,15 +54,19 @@
                 text = ''
                   showHelp () {
                     echo "Available commands:"
-                    echo
-                    echo "  ${
-                        lib.concatStringsSep "\n  " 
-                          (map (drv: 
-                            let name = builtins.baseNameOf (lib.getExe drv);
-                                desc = drv.meta.description;
-                            in name + " : " + desc
-                          ) commands)
-                    }"
+                    echo "${
+                        lib.concatStringsSep "\n\n"
+                          (lib.mapAttrsToList (cat: commands: 
+                            "\n## " + cat + "\n  " + 
+                              lib.concatStringsSep "\n  " 
+                                (map (drv: 
+                                  let name = builtins.baseNameOf (lib.getExe drv);
+                                      desc = drv.meta.description;
+                                  in name + "\t: " + desc
+                                ) commands)
+                          ) commandsGrouped)
+                        + "\n"    
+                    }" # | ${pkgs.util-linux}/bin/column -t -s $'\t'
                   }
                   if [ "$*" == "" ] || [ "$*" == "-h" ] || [ "$*" == "--help" ]; then
                     showHelp
