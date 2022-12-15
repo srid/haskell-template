@@ -77,46 +77,49 @@
                   fi
                 '';
               };
+            installScriptSpec = shell: spec:
+              shell.overrideAttrs (oa: {
+                # TODO: Banner?
+                shellHook = (oa.shellHook or "") + ''
+                '';
+                nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [
+                  (
+                    (wrapCommands spec).overrideAttrs (_oa: {
+                      meta.description = "Development scripts command";
+                      nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [ pkgs.installShellFiles ];
+                      # TODO: bash and zsh completion
+                      postInstall = (oa.postInstall or "") + ''
+                      '';
+                    })
+                  )
+                ];
+              });
+            scriptSpec = {
+              hoog = {
+                description = "Start Hoogle server for project dependencies";
+                command = ''
+                  echo http://127.0.0.1:8888
+                  hoogle serve -p 8888 --local
+                '';
+                category = "Dev Tools";
+              };
+              repl = {
+                description = "Start the cabal repl";
+                command = ''
+                  cabal repl
+                '';
+                category = "Dev Tools";
+              };
+              run = {
+                description = "Run the project with ghcid auto-recompile";
+                command = ''
+                  ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
+                '';
+                category = "Primary";
+              };
+            };
           in
-          config.devShells.project.overrideAttrs (oa: {
-            shellHook = (oa.shellHook or "") + ''
-          '';
-            nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [
-              (
-                (wrapCommands {
-                  hoog = {
-                    description = "Start Hoogle server for project dependencies";
-                    command = ''
-                      echo http://127.0.0.1:8888
-                      hoogle serve -p 8888 --local
-                    '';
-                    category = "Dev Tools";
-                  };
-                  repl = {
-                    description = "Start the cabal repl";
-                    command = ''
-                      cabal repl
-                    '';
-                    category = "Dev Tools";
-                  };
-                  run = {
-                    description = "Run the project with ghcid auto-recompile";
-                    command = ''
-                      ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
-                    '';
-                    category = "Primary";
-                  };
-                }).overrideAttrs (_oa: {
-                  meta.description = "Development scripts command";
-                  nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [ pkgs.installShellFiles ];
-                  # TODO: bash and zsh completion
-                  postInstall = (oa.postInstall or "") + ''
-
-                  '';
-                })
-              )
-            ];
-          });
+          installScriptSpec config.devShells.project scriptSpec;
       };
     };
 }
