@@ -99,23 +99,30 @@ in
                           fi
                         '';
                       };
+                    wrapper =
+                      (wrapCommands config.script.scripts).overrideAttrs (oa: {
+                        meta.description = "Development scripts command";
+                        nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [ pkgs.installShellFiles ];
+                        # TODO: bash and zsh completion
+                        postInstall = (oa.postInstall or "") + ''
+                      '';
+                      });
+                    banner = ''
+                      function menu () {
+                        echo
+                        echo -e "\033[1;31m### ️🔨 Welcome to Nix devshell ###\n\033[0m"
+                        ${wrapper}/bin/${config.script.wrapperName}
+                        echo
+                        echo "(Run '${config.script.wrapperName}' to display this menu again)"
+                        echo
+                      }
+                      menu
+                    '';
                   in
                   shell:
                   shell.overrideAttrs (oa: {
-                    # TODO: Banner?
-                    shellHook = (oa.shellHook or "") + ''
-                '';
-                    nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [
-                      (
-                        (wrapCommands config.script.scripts).overrideAttrs (_oa: {
-                          meta.description = "Development scripts command";
-                          nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [ pkgs.installShellFiles ];
-                          # TODO: bash and zsh completion
-                          postInstall = (oa.postInstall or "") + ''
-                      '';
-                        })
-                      )
-                    ];
+                    nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [ wrapper ];
+                    shellHook = (oa.shellHook or "") + banner;
                   });
               };
             };
