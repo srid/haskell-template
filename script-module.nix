@@ -14,7 +14,7 @@ in
           scriptSubmodule = types.submodule {
             options = {
               description = mkOption {
-                type = types.str;
+                type = types.nullOr types.str;
                 description = "The description of this script";
               };
               category = mkOption {
@@ -59,7 +59,7 @@ in
                     mkCommand = name: v:
                       (if v.package == null then pkgs.writeShellApplication { inherit name; text = v.command; } else v.package).overrideAttrs (oa: {
                         meta.description =
-                          if v ? description then v.description else oa.meta.description or "No description";
+                          if v.description == null then oa.meta.description or "No description" else v.description;
                         meta.category = v.category or "Commands";
                       });
                     wrapCommands = spec:
