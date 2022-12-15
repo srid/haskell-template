@@ -21,6 +21,7 @@ in
               category = mkOption {
                 type = types.str;
                 description = "The category of the command";
+                default = "Commands";
               };
               # The following are enum options
               command = mkOption {
@@ -61,7 +62,7 @@ in
                       (if v.package == null then pkgs.writeShellApplication { inherit name; text = v.command; } else v.package).overrideAttrs (oa: {
                         meta.description =
                           if v.description == null then oa.meta.description or "No description" else v.description;
-                        meta.category = v.category or "Commands";
+                        meta.category = v.category;
                       });
                     wrapCommands = spec:
                       let
