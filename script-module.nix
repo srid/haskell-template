@@ -94,7 +94,6 @@ in
                             showHelp
                             exit 1
                           else 
-                            echo "Running command: $*"
                             exec "$@"
                           fi
                         '';
