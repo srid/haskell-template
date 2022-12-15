@@ -49,7 +49,7 @@
                 commandsGrouped = lib.groupBy (a: a.meta.category) commands;
               in
               pkgs.writeShellApplication {
-                name = "dev";
+                name = ",";
                 runtimeInputs = commands;
                 text = ''
                   showHelp () {
