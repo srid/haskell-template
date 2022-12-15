@@ -41,7 +41,7 @@
               (v.package or pkgs.writeShellApplication { inherit name; text = v.command; }).overrideAttrs (oa: {
                 meta.description =
                   if v ? description then v.description else oa.meta.description or "No description";
-                meta.category = v.category or null;
+                meta.category = v.category or "Commands";
               });
             wrapCommands = spec:
               let
@@ -53,11 +53,11 @@
                 runtimeInputs = commands;
                 text = ''
                   showHelp () {
-                    echo "Available commands:"
-                    echo "${
+                    echo -e "Available commands:\n"
+                    echo -e "${
                         lib.concatStringsSep "\n\n"
                           (lib.mapAttrsToList (cat: commands: 
-                            "\n## " + cat + "\n  " + 
+                            "## " + cat + "\n  " + 
                               lib.concatStringsSep "\n  " 
                                 (map (drv: 
                                   let name = builtins.baseNameOf (lib.getExe drv);
@@ -65,7 +65,7 @@
                                   in name + "\t: " + desc
                                 ) commands)
                           ) commandsGrouped)
-                        + "\n"    
+                            
                     }" # | ${pkgs.util-linux}/bin/column -t -s $'\t'
                   }
                   if [ "$*" == "" ] || [ "$*" == "-h" ] || [ "$*" == "--help" ]; then
@@ -84,7 +84,6 @@
             nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [
               (
                 (wrapCommands {
-                  # TODO: banner-grouping 
                   hoog = {
                     description = "Start Hoogle server for project dependencies";
                     command = ''
