@@ -72,6 +72,7 @@ in
                       pkgs.writeShellApplication {
                         name = config.script.wrapperName;
                         runtimeInputs = commands;
+                        # TODO: find_up!
                         text = ''
                           showHelp () {
                             echo -e "Available commands:\n"
@@ -83,7 +84,7 @@ in
                                       (map (drv: 
                                         let name = builtins.baseNameOf (lib.getExe drv);
                                             desc = drv.meta.description;
-                                        in "  " + name + "\t: " + desc
+                                        in "  ${config.script.wrapperName} " + name + "\t: " + desc
                                       ) commands 
                                       ) + "' | ${pkgs.util-linux}/bin/column -t -s ''$'\t'; "
                                 ) commandsGrouped)
@@ -129,9 +130,6 @@ in
             '';
           };
         });
-  };
-  config = {
-    perSystem = { config, self', inputs', pkgs, ... }: { };
   };
 }
 
