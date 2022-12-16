@@ -47,7 +47,7 @@ let
       nativeBuildInputs = (oa.nativeBuildInputs or [ ]) ++ [ pkgs.installShellFiles ];
       # TODO: bash and zsh completion
       postInstall = (oa.postInstall or "") + ''
-                      '';
+      '';
     });
 in
 wrapper
