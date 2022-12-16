@@ -13,7 +13,7 @@
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-flake.flakeModule
-        ./script-module.nix
+        ./nix/script-module.nix
       ];
       perSystem = { self', lib, config, pkgs, ... }: {
         haskellProjects.project = {
