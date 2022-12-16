@@ -29,7 +29,7 @@ let
                           desc = drv.meta.description;
                       in "  ${script.wrapperName} " + name + "\t: " + desc
                     ) commands 
-                    ) + "' | ${pkgs.util-linux}/bin/column -t -s ''$'\t'; "
+                    ) + "' | ${lib.getExe pkgs.unixtools.column} -t -s ''$'\t'; "
               ) commandsGrouped)
           }
         }
