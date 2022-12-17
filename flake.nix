@@ -5,6 +5,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-flake.url = "github:srid/treefmt-flake";
+    mission-control.url = "github:Platonic-Systems/mission-control";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
@@ -13,7 +14,7 @@
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-flake.flakeModule
-        ./nix/script-module.nix
+        inputs.mission-control.flakeModule
       ];
       perSystem = { self', lib, config, pkgs, ... }: {
         haskellProjects.project = {
@@ -35,7 +36,7 @@
             cabal-fmt
             fourmolu;
         };
-        script.scripts = {
+        mission-control.scripts = {
           # TODO: Use lib.getExe to substitute the key, so we can call this
           # "hoogle" without conflicting with existing build tools.
           hoog = {
@@ -63,7 +64,7 @@
         };
         packages.default = self'.packages.project-haskell-template;
         devShells.default =
-          config.script.installToDevShell config.devShells.project;
+          config.mission-control.installToDevShell config.devShells.project;
       };
     };
 }
