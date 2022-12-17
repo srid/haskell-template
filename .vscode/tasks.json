@@ -6,10 +6,11 @@
         {
             "label": "Ghcid",
             "type": "shell",
-            // You may also use bin/run-via-tmux if you have tmux
             // This is useful if you often see ghost ghcid left behind by VSCode reloads.
-            "command": "bin/run",
-            "args": [],
+            "command": ",",
+            "args": [
+                "run"
+            ],
             "problemMatcher": [],
             "group": {
                 "kind": "build",

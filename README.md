@@ -12,7 +12,7 @@ If you have an *existing* Haskell project, you should probably use https://githu
 
 ## Getting Started
 
-*tldr: Install Nix, enable Flakes, open in VSCode and run `bin/run`.*
+*tldr: Install Nix, enable Flakes, open in VSCode and run `, run`.*
 
 For details, see: https://srid.ca/haskell-template/start
 
@@ -21,7 +21,7 @@ For details, see: https://srid.ca/haskell-template/start
 - Run `nix flake update` to update all flake inputs.
 - Run `nix --option sandbox false build .#check -L` to run the flake checks.
 - Run `treefmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt), which uses `./treefmt.toml` (where fourmolu and nixpkgs-fmt are specified).
-- Run `bin/hoogle` to start Hoogle with packages in your cabal file.
+- Run `, hoog` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 - Common workflows
   - Adding library dependencies in Nix: https://srid.ca/haskell-template/dependency
