@@ -5,6 +5,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-flake.url = "github:srid/treefmt-flake";
+    mission-control.url = "github:Platonic-Systems/mission-control";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
@@ -13,9 +14,11 @@
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-flake.flakeModule
+        inputs.mission-control.flakeModule
       ];
-      perSystem = { self', config, pkgs, ... }: {
-        haskellProjects.default = {
+      perSystem = { self', lib, config, pkgs, ... }: {
+        # The "main" project. You can have multiple projects, but this template has only one.
+        haskellProjects.main = {
           packages = {
             haskell-template.root = ./.;
           };
@@ -34,7 +37,40 @@
             cabal-fmt
             fourmolu;
         };
-        packages.default = self'.packages.haskell-template;
+        mission-control.scripts = {
+          docs = {
+            description = "Start Hoogle server for project dependencies";
+            command = ''
+              echo http://127.0.0.1:8888
+              hoogle serve -p 8888 --local
+            '';
+            category = "Dev Tools";
+          };
+          repl = {
+            description = "Start the cabal repl";
+            command = ''
+              cabal repl "$@"
+            '';
+            category = "Dev Tools";
+          };
+          fmt = {
+            description = "Auto-format the source tree";
+            command = "treefmt";
+            category = "Dev Tools";
+          };
+          run = {
+            description = "Run the project with ghcid auto-recompile";
+            command = ''
+              ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
+            '';
+            category = "Primary";
+          };
+        };
+        packages.default = self'.packages.main-haskell-template;
+        devShells.default =
+          config.mission-control.installToDevShell config.devShells.main;
       };
     };
 }
+
+
