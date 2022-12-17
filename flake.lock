@@ -53,11 +53,11 @@
         "flake-root": "flake-root"
       },
       "locked": {
-        "lastModified": 1671295734,
-        "narHash": "sha256-CBHVuVGKkuMaW8DgaO9CbvfZwI5e/uEm6tFtGgJB6TA=",
+        "lastModified": 1671297603,
+        "narHash": "sha256-0fotrPbgV4WyJwh9RZ/eSWALMeAKr+n3JCQZU130BLI=",
         "owner": "Platonic-Systems",
         "repo": "mission-control",
-        "rev": "750e67d1b553c7922862153ba1f4cb15684c2079",
+        "rev": "ede1ce90f17223f32ae21f2b12b8c26fd95a707e",
         "type": "github"
       },
       "original": {
