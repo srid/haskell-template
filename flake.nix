@@ -17,7 +17,8 @@
         inputs.mission-control.flakeModule
       ];
       perSystem = { self', lib, config, pkgs, ... }: {
-        haskellProjects.project = {
+        # The "main" project. You can have multiple projects, but this template has only one.
+        haskellProjects.main = {
           packages = {
             haskell-template.root = ./.;
           };
@@ -67,9 +68,9 @@
             category = "Primary";
           };
         };
-        packages.default = self'.packages.project-haskell-template;
+        packages.default = self'.packages.main-haskell-template;
         devShells.default =
-          config.mission-control.installToDevShell config.devShells.project;
+          config.mission-control.installToDevShell config.devShells.main;
       };
     };
 }
