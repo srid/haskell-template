@@ -54,6 +54,11 @@
             '';
             category = "Dev Tools";
           };
+          fmt = {
+            description = "Auto-format the source tree";
+            command = "treefmt";
+            category = "Dev Tools";
+          };
           run = {
             description = "Run the project with ghcid auto-recompile";
             command = ''
