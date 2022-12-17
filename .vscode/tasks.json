@@ -7,8 +7,11 @@
             "label": "Ghcid",
             "type": "shell",
             // This is useful if you often see ghost ghcid left behind by VSCode reloads.
-            "command": ",",
+            "command": "nix",
             "args": [
+                "develop",
+                "-c",
+                ",",
                 "run"
             ],
             "problemMatcher": [],
