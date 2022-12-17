@@ -38,9 +38,7 @@
             fourmolu;
         };
         mission-control.scripts = {
-          # TODO: Use lib.getExe to substitute the key, so we can call this
-          # "hoogle" without conflicting with existing build tools.
-          hoog = {
+          docs = {
             description = "Start Hoogle server for project dependencies";
             command = ''
               echo http://127.0.0.1:8888
