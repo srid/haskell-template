@@ -22,10 +22,7 @@
           packages = {
             haskell-template.root = ./.;
           };
-          buildTools = hp: {
-            inherit (pkgs)
-              treefmt;
-          } // config.treefmt.formatters;
+          buildTools = hp: { } // config.treefmt.formatters;
           # overrides = self: super: {}
           hlsCheck.enable = true;
           hlintCheck.enable = true;
@@ -54,9 +51,9 @@
             category = "Dev Tools";
           };
           fmt = {
-            description = "Auto-format the source tree";
-            command = "treefmt";
-            category = "Dev Tools";
+            description = "Format the source tree";
+            command = "${lib.getExe pkgs.treefmt}";
+            category = "Dev Tools ";
           };
           run = {
             description = "Run the project with ghcid auto-recompile";
@@ -72,5 +69,3 @@
       };
     };
 }
-
-
