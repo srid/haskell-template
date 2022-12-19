@@ -20,11 +20,11 @@
     },
     "flake-root": {
       "locked": {
-        "lastModified": 1671295174,
-        "narHash": "sha256-5K+wdsB5TYSmI6HeexOMvJTZTBdXb9RbiFwXRtQkE3M=",
+        "lastModified": 1671378805,
+        "narHash": "sha256-yqGxyzMN2GuppwG3dTWD1oiKxi+jGYP7D1qUSc5vKhI=",
         "owner": "srid",
         "repo": "flake-root",
-        "rev": "bb96b89f65d7c47457303f2385798a09f4a1dd5a",
+        "rev": "dc7ba6166e478804a9da6881aa48c45d300075cf",
         "type": "github"
       },
       "original": {
@@ -50,14 +50,14 @@
     },
     "mission-control": {
       "inputs": {
-        "flake-root": "flake-root"
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1671297603,
-        "narHash": "sha256-0fotrPbgV4WyJwh9RZ/eSWALMeAKr+n3JCQZU130BLI=",
+        "lastModified": 1671388575,
+        "narHash": "sha256-UgWIv5iXW9xh1L20G4eh4wocLSGzjsdz5U/jJZhb60A=",
         "owner": "Platonic-Systems",
         "repo": "mission-control",
-        "rev": "ede1ce90f17223f32ae21f2b12b8c26fd95a707e",
+        "rev": "4b4370280cca1070eb6c2571df645aa36e3abdaf",
         "type": "github"
       },
       "original": {
@@ -68,11 +68,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1670148586,
-        "narHash": "sha256-EcDfOiTHs0UBAtyGc0wxJJdhcMjrJEgWXjJutxZGA3E=",
+        "lastModified": 1671249438,
+        "narHash": "sha256-5e+CcnbZA3/i2BRXbnzRS52Ly67MUNdZR+Zpbb2C65k=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a2d2f70b82ada0eadbcb1df2bca32d841a3c1bf1",
+        "rev": "067bfc6c90a301572cec7da48f09c447a9a8eae0",
         "type": "github"
       },
       "original": {
@@ -100,12 +100,29 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1670148586,
+        "narHash": "sha256-EcDfOiTHs0UBAtyGc0wxJJdhcMjrJEgWXjJutxZGA3E=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "a2d2f70b82ada0eadbcb1df2bca32d841a3c1bf1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "flake-root": "flake-root",
         "haskell-flake": "haskell-flake",
         "mission-control": "mission-control",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "treefmt-flake": "treefmt-flake"
       }
     },
