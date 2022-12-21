@@ -128,15 +128,16 @@
     },
     "treefmt-nix": {
       "locked": {
-        "lastModified": 1671542447,
-        "narHash": "sha256-0cmLK/g4O8RKLoPnMdEWNWi0AA0O/xUlfNWjK2rvo2Q=",
-        "owner": "numtide",
+        "lastModified": 1671645120,
+        "narHash": "sha256-0HGiH/vx0sa7GyqAJgiYef25uc3uUVy1i9VOG8zWhns=",
+        "owner": "Platonic-Systems",
         "repo": "treefmt-nix",
-        "rev": "4230552f8a71c510d222f1804e42184e106aafd7",
+        "rev": "3672f5d0d5e0ed405f7cc05c97c0015f08ab41b9",
         "type": "github"
       },
       "original": {
-        "owner": "numtide",
+        "owner": "Platonic-Systems",
+        "ref": "flake-module",
         "repo": "treefmt-nix",
         "type": "github"
       }

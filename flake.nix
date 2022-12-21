@@ -4,7 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.url = "github:Platonic-Systems/treefmt-nix/flake-module";
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
   };
@@ -16,7 +16,7 @@
         inputs.haskell-flake.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
-        ./nix/treefmt-flake/flake-module.nix
+        inputs.treefmt-nix.flakeModule
       ];
       perSystem = { self', lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
