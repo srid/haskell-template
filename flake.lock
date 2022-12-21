@@ -128,11 +128,11 @@
     },
     "treefmt-nix": {
       "locked": {
-        "lastModified": 1671645275,
-        "narHash": "sha256-aHpd0f/WBO4a3kK7wy8tsp4iGTOGEAY3sL/ujOLkqw0=",
+        "lastModified": 1671656594,
+        "narHash": "sha256-FsXG+GgpiBBt+w8gx3K6xuhiFBpUrBshzgGUXdVB7b8=",
         "owner": "Platonic-Systems",
         "repo": "treefmt-nix",
-        "rev": "8280dec5403061434de195b81854d65e6613b5ca",
+        "rev": "05c06a8a606c88f94c09a7b768484d92869ea906",
         "type": "github"
       },
       "original": {
