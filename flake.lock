@@ -123,21 +123,22 @@
         "haskell-flake": "haskell-flake",
         "mission-control": "mission-control",
         "nixpkgs": "nixpkgs_2",
-        "treefmt-flake": "treefmt-flake"
+        "treefmt-nix": "treefmt-nix"
       }
     },
-    "treefmt-flake": {
+    "treefmt-nix": {
       "locked": {
-        "lastModified": 1669929251,
-        "narHash": "sha256-+qgCD89JyZhBNF4m/HuuVrpoRoXMTl5F60mJzr3QPNM=",
-        "owner": "srid",
-        "repo": "treefmt-flake",
-        "rev": "86341cd4a0ce21556a348fd27a4797997d27be00",
+        "lastModified": 1671645275,
+        "narHash": "sha256-aHpd0f/WBO4a3kK7wy8tsp4iGTOGEAY3sL/ujOLkqw0=",
+        "owner": "Platonic-Systems",
+        "repo": "treefmt-nix",
+        "rev": "8280dec5403061434de195b81854d65e6613b5ca",
         "type": "github"
       },
       "original": {
-        "owner": "srid",
-        "repo": "treefmt-flake",
+        "owner": "Platonic-Systems",
+        "ref": "flake-module",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     }

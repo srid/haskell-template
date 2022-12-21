@@ -4,7 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
-    treefmt-flake.url = "github:srid/treefmt-flake";
+    treefmt-nix.url = "github:Platonic-Systems/treefmt-nix/flake-module"; # https://github.com/numtide/treefmt-nix/pull/14
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
   };
@@ -14,7 +14,7 @@
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [
         inputs.haskell-flake.flakeModule
-        inputs.treefmt-flake.flakeModule
+        inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
       ];
@@ -25,7 +25,9 @@
           packages = {
             haskell-template.root = ./.;
           };
-          buildTools = hp: { } // config.treefmt.formatters;
+          buildTools = hp: {
+            treefmt = config.treefmt.wrapper;
+          } // config.treefmt.programs;
           # overrides = self: super: {}
           hlsCheck.enable = true;
           hlintCheck.enable = true;
@@ -33,12 +35,22 @@
 
         # Auto formatters. This also adds a flake check to ensure that the
         # source tree was auto formatted.
-        treefmt.formatters = {
-          inherit (pkgs)
-            nixpkgs-fmt;
-          inherit (pkgs.haskellPackages)
-            cabal-fmt
-            fourmolu;
+        treefmt.config = {
+          package = pkgs.treefmt;
+          projectRootFile = "flake.nix";
+
+          programs.ormolu.enable = true;
+          programs.ormolu.package = pkgs.haskellPackages.fourmolu;
+          settings.formatter.ormolu = {
+            options = [
+              "--ghc-opt"
+              "-XImportQualifiedPost"
+            ];
+          };
+
+          programs.nixpkgs-fmt.enable = true;
+
+          programs.cabal-fmt.enable = true;
         };
 
         # Dev shell scripts.
@@ -60,7 +72,7 @@
           };
           fmt = {
             description = "Format the source tree";
-            exec = "${lib.getExe pkgs.treefmt}";
+            exec = "${lib.getExe config.treefmt.wrapper}";
             category = "Dev Tools ";
           };
           run = {
