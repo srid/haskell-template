@@ -14,9 +14,9 @@
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [
         inputs.haskell-flake.flakeModule
+        inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
-        inputs.treefmt-nix.flakeModule
       ];
       perSystem = { self', lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
@@ -33,6 +33,8 @@
           hlintCheck.enable = true;
         };
 
+        # Auto formatters. This also adds a flake check to ensure that the
+        # source tree was auto formatted.
         treefmt.config = {
           package = pkgs.treefmt;
           projectRootFile = "flake.nix";
