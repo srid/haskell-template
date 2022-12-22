@@ -26,8 +26,8 @@
             haskell-template.root = ./.;
           };
           buildTools = hp: {
-            treefmt = config.treefmt.wrapper;
-          } // config.treefmt.programs;
+            treefmt = config.treefmt.build.wrapper;
+          } // config.treefmt.build.programs;
           # overrides = self: super: {}
           hlsCheck.enable = true;
           hlintCheck.enable = true;
@@ -72,7 +72,7 @@
           };
           fmt = {
             description = "Format the source tree";
-            exec = "${lib.getExe config.treefmt.wrapper}";
+            exec = "${lib.getExe config.treefmt.build.wrapper}";
             category = "Dev Tools ";
           };
           run = {
