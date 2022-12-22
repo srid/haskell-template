@@ -36,10 +36,14 @@
         # Auto formatters. This also adds a flake check to ensure that the
         # source tree was auto formatted.
         treefmt.config = {
+          inherit (config.flake-root) projectRootFile;
           package = pkgs.treefmt;
-          projectRootFile = "flake.nix";
 
           programs.ormolu.enable = true;
+          programs.nixpkgs-fmt.enable = true;
+          programs.cabal-fmt.enable = true;
+
+          # We use fourmolu
           programs.ormolu.package = pkgs.haskellPackages.fourmolu;
           settings.formatter.ormolu = {
             options = [
@@ -47,10 +51,6 @@
               "-XImportQualifiedPost"
             ];
           };
-
-          programs.nixpkgs-fmt.enable = true;
-
-          programs.cabal-fmt.enable = true;
         };
 
         # Dev shell scripts.
