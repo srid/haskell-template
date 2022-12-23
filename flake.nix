@@ -91,5 +91,6 @@
         devShells.default =
           config.mission-control.installToDevShell self'.devShells.main;
       };
+      flake.herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
     };
 }
