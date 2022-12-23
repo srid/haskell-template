@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake";
+    haskell-flake.url = "github:srid/haskell-flake/checks-as-drv";
     treefmt-nix.url = "github:Platonic-Systems/treefmt-nix/flake-module"; # https://github.com/numtide/treefmt-nix/pull/14
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
@@ -29,7 +29,7 @@
             treefmt = config.treefmt.build.wrapper;
           } // config.treefmt.build.programs;
           # overrides = self: super: {}
-          hlsCheck.enable = true;
+          hlsCheck.enable = false;
           hlintCheck.enable = true;
         };
 
@@ -90,6 +90,8 @@
         # Default shell.
         devShells.default =
           config.mission-control.installToDevShell self'.devShells.main;
+
+        # checks.hlsCheck = config.haskellProjects.main.hlsCheck.drv;
       };
       flake.herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
     };
