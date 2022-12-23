@@ -7,16 +7,22 @@
     treefmt-nix.url = "github:Platonic-Systems/treefmt-nix/flake-module"; # https://github.com/numtide/treefmt-nix/pull/14
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
+
+    # CI
+    hercules-ci-effects.url = "github:hercules-ci/hercules-ci-effects";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, ... }: {
       systems = nixpkgs.lib.systems.flakeExposed;
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
+
+        # CI
+        inputs.hercules-ci-effects.flakeModule
       ];
       perSystem = { self', lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
@@ -93,6 +99,17 @@
 
         # checks.hlsCheck = config.haskellProjects.main.hlsCheck.drv;
       };
-      flake.herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
-    };
+
+      # CI configuration
+      flake = {
+        herculesCI = {
+          ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
+          onPush.default.outputs.effects.hlsCheck =
+            withSystem "x86_64-linux" (
+              { config, effects, pkgs, ... }:
+              config.haskellProjects.main.hlsCheck.drv
+            );
+        };
+      };
+    });
 }
