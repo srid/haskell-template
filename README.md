@@ -17,7 +17,6 @@ If you have an *existing* Haskell project, you should probably use https://githu
 
 For details, see: https://srid.ca/haskell-template/start
 
-
 ## Tips
 
 - Run `nix flake update` to update all flake inputs.
