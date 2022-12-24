@@ -110,17 +110,12 @@
               # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
               hlsCheck = hci-effects.mkEffect {
                 effectScript = ''
-                  ${hci-effects.nix-shell
-                    { shell = self.devShells.x86_64-linux.default; }
-                    ''
-                    cp -R ${self} $HOME/project
-                    chmod -R a+w $HOME/project
-                    pushd $HOME/project
-                    pwd
-                    ls -l
-                    haskell-language-server
-                    ''
-                  }
+                  cp -R ${self} $HOME/project
+                  chmod -R a+w $HOME/project
+                  pushd $HOME/project
+                  pwd
+                  ls -l
+                  haskell-language-server
                 '';
               };
             }
