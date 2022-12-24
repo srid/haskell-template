@@ -27,7 +27,6 @@ For details, see: https://srid.ca/haskell-template/start
 - Common workflows
   - Adding library dependencies in Nix: https://srid.ca/haskell-template/dependency
   - Adding tests: https://srid.ca/haskell-template/tests
-  - Adding Garnix CI: https://srid.ca/haskell-template/garnix
 
 ## Discussions
 
