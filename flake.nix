@@ -115,7 +115,7 @@
                   pushd $HOME/project
                   pwd
                   ls -l
-                  haskell-language-server
+                  nix develop -c haskell-language-server
                 '';
               };
             }
