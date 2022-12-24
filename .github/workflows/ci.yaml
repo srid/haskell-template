@@ -31,6 +31,4 @@ jobs:
           # See https://srid.ca/haskell-template/checks
           nix run nixpkgs#sd 'systems = nixpkgs.lib.systems.flakeExposed' 'systems = [ "x86_64-linux" ]' flake.nix
 
-          # Sandbox must be disabled due to HLS,
-          # https://github.com/haskell/haskell-language-server/issues/3128
-          nix --option sandbox false flake check -L
+          nix flake check -L
