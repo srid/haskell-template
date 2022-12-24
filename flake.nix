@@ -102,7 +102,7 @@
 
       # CI configuration
       flake = {
-        ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
+        herculesCI = { ciSystems = [ "x86_64-linux" "aarch64-darwin" ]; };
         effects =
           withSystem "x86_64-linux" (
             { config, effects, pkgs, ... }:
