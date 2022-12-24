@@ -7,9 +7,6 @@
     treefmt-nix.url = "github:Platonic-Systems/treefmt-nix/flake-module"; # https://github.com/numtide/treefmt-nix/pull/14
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
-
-    # CI
-    hercules-ci-effects.url = "github:hercules-ci/hercules-ci-effects";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
@@ -20,9 +17,6 @@
         inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
-
-        # CI
-        inputs.hercules-ci-effects.flakeModule
       ];
       perSystem = { self', lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
@@ -96,35 +90,9 @@
         # Default shell.
         devShells.default =
           config.mission-control.installToDevShell self'.devShells.main;
-
-        # checks.hlsCheck = config.haskellProjects.main.hlsCheck.drv;
       };
 
       # CI configuration
-      herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
-      flake.effects =
-        withSystem "x86_64-linux" (
-          { config, hci-effects, pkgs, ... }:
-          {
-            # Test that HLS IDE configuration works.
-            hlsCheck = hci-effects.mkEffect {
-              effectScript = ''
-                # Copy project root to a mutable area
-                # We expect "command" to mutate it.
-                export HOME=$TMP
-                echo $HOME
-
-                cp -R ${self} $HOME/project
-                chmod -R a+w $HOME/project
-                pushd $HOME/project
-                pwd
-                ls -l
-                ${pkgs.lib.getExe pkgs.nix} \
-                  --extra-experimental-features "nix-command flakes" \
-                  develop -c bash -- -c "cabal build && haskell-language-server"
-              '';
-            };
-          }
-        );
+      flake.herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
     });
 }
