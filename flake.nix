@@ -114,7 +114,7 @@
                 pushd $HOME/project
                 pwd
                 ls -l
-                ${pkgs.lib.getExe pkgs.nix} develop -c haskell-language-server
+                ${pkgs.lib.getExe pkgs.nix} --extra-experimental-features "nix-command flakes" develop -c haskell-language-server
               '';
             };
           }
