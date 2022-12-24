@@ -108,12 +108,16 @@
             { config, hci-effects, pkgs, ... }:
             {
               # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
-              foo = hci-effects.mkEffect {
+              hlsCheck = hci-effects.mkEffect {
                 effectScript = ''
-                  echo Hello
-                  ${hci-effects.nix-shell { shell = self.devShells.x86_64-linux.default; } ''
-                  haskell-language-server
-                  ''}
+                  ${hci-effects.nix-shell
+                    { shell = self.devShells.x86_64-linux.default; }
+                    ''
+                    pwd
+                    ls -l
+                    haskell-language-server
+                    ''
+                  }
                 '';
               };
             }
