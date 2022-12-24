@@ -100,26 +100,24 @@
         # checks.hlsCheck = config.haskellProjects.main.hlsCheck.drv;
       };
 
-      herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
       # CI configuration
-      flake = {
-        effects =
-          withSystem "x86_64-linux" (
-            { config, hci-effects, pkgs, ... }:
-            {
-              # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
-              hlsCheck = hci-effects.mkEffect {
-                effectScript = ''
-                  cp -R ${self} $HOME/project
-                  chmod -R a+w $HOME/project
-                  pushd $HOME/project
-                  pwd
-                  ls -l
-                  nix develop -c haskell-language-server
-                '';
-              };
-            }
-          );
-      };
+      herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
+      flake.effects =
+        withSystem "x86_64-linux" (
+          { config, hci-effects, pkgs, lib, ... }:
+          {
+            # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
+            hlsCheck = hci-effects.mkEffect {
+              effectScript = ''
+                cp -R ${self} $HOME/project
+                chmod -R a+w $HOME/project
+                pushd $HOME/project
+                pwd
+                ls -l
+                ${lib.getExe pkgs.nix} develop -c haskell-language-server
+              '';
+            };
+          }
+        );
     });
 }
