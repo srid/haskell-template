@@ -15,9 +15,9 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            # If you are not Srid, you may want to replace or remove this cache.
-            trusted-public-keys = cache.srid.ca:8sQkbPrOIoXktIwI0OucQBXod2e9fDjjoEZWn8OXbdo=
-            substituters = https://cache.srid.ca
+            # Srid's cache; leaving disabled for template use.
+            # trusted-public-keys = cache.srid.ca:8sQkbPrOIoXktIwI0OucQBXod2e9fDjjoEZWn8OXbdo=
+            # substituters = https://cache.srid.ca
       - name: Cache Nix dependencies
         run: |
           nix develop -j 4 -c echo
