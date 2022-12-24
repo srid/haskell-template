@@ -106,15 +106,21 @@
         withSystem "x86_64-linux" (
           { config, hci-effects, pkgs, ... }:
           {
-            # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
+            # Test that HLS IDE configuration works.
             hlsCheck = hci-effects.mkEffect {
               effectScript = ''
+                # Copy project root to a mutable area
+                # We expect "command" to mutate it.
+                export HOME=$TMP
+
                 cp -R ${self} $HOME/project
                 chmod -R a+w $HOME/project
                 pushd $HOME/project
                 pwd
                 ls -l
-                ${pkgs.lib.getExe pkgs.nix} --extra-experimental-features "nix-command flakes" develop -c haskell-language-server
+                ${pkgs.lib.getExe pkgs.nix} \
+                  --extra-experimental-features "nix-command flakes" \
+                  develop -c haskell-language-server
               '';
             };
           }
