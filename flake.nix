@@ -107,7 +107,12 @@
           withSystem "x86_64-linux" (
             { config, effects, pkgs, ... }:
             {
-              hlsCheck = config.haskellProjects.main.hlsCheck.drv;
+              # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
+              foo = effects.mkEffect {
+                effectScript = ''
+                  echo Hello
+                '';
+              };
             }
           );
       };
