@@ -121,7 +121,7 @@
                 ls -l
                 ${pkgs.lib.getExe pkgs.nix} \
                   --extra-experimental-features "nix-command flakes" \
-                  develop -c sh -- -c "cabal build && haskell-language-server"
+                  develop -c bash -- -c "cabal build && haskell-language-server"
               '';
             };
           }
