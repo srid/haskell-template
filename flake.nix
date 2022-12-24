@@ -111,6 +111,9 @@
               foo = effects.mkEffect {
                 effectScript = ''
                   echo Hello
+                  ${effects.nix-shell { shell = self.devShells.x86_64-linux.default; } ''
+                  haskell-language-server
+                  ''}
                 '';
               };
             }
