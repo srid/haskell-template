@@ -102,14 +102,14 @@
 
       # CI configuration
       flake = {
-        herculesCI = {
-          ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
-          onPush.default.outputs.effects.hlsCheck =
-            withSystem "x86_64-linux" (
-              { config, effects, pkgs, ... }:
-              config.haskellProjects.main.hlsCheck.drv
-            );
-        };
+        herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
+        effects =
+          withSystem "x86_64-linux" (
+            { config, effects, pkgs, ... }:
+            {
+              hlsCheck = config.haskellProjects.main.hlsCheck.drv;
+            }
+          );
       };
     });
 }
