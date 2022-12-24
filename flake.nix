@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake/checks-as-drv";
+    haskell-flake.url = "github:srid/haskell-flake";
     treefmt-nix.url = "github:Platonic-Systems/treefmt-nix/flake-module"; # https://github.com/numtide/treefmt-nix/pull/14
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
@@ -112,6 +112,7 @@
                 # Copy project root to a mutable area
                 # We expect "command" to mutate it.
                 export HOME=$TMP
+                echo $HOME
 
                 cp -R ${self} $HOME/project
                 chmod -R a+w $HOME/project
