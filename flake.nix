@@ -119,6 +119,7 @@
                 pushd $HOME/project
                 pwd
                 ls -l
+                cabal build
                 ${pkgs.lib.getExe pkgs.nix} \
                   --extra-experimental-features "nix-command flakes" \
                   develop -c haskell-language-server
