@@ -104,7 +104,7 @@
       herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
       flake.effects =
         withSystem "x86_64-linux" (
-          { config, hci-effects, pkgs, lib, ... }:
+          { config, hci-effects, pkgs, ... }:
           {
             # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
             hlsCheck = hci-effects.mkEffect {
@@ -114,7 +114,7 @@
                 pushd $HOME/project
                 pwd
                 ls -l
-                ${lib.getExe pkgs.nix} develop -c haskell-language-server
+                ${pkgs.lib.getExe pkgs.nix} develop -c haskell-language-server
               '';
             };
           }
