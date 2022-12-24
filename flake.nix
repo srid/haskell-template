@@ -29,7 +29,7 @@
             treefmt = config.treefmt.build.wrapper;
           } // config.treefmt.build.programs;
           # overrides = self: super: {}
-          hlsCheck.enable = true;
+          hlsCheck.enable = false;
           hlintCheck.enable = true;
         };
 
@@ -91,6 +91,8 @@
         devShells.default =
           config.mission-control.installToDevShell self'.devShells.main;
       };
+
+      # CI configuration
       flake.herculesCI.ciSystems = [ "x86_64-linux" "aarch64-darwin" ];
     };
 }
