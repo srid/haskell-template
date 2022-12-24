@@ -105,13 +105,13 @@
       flake = {
         effects =
           withSystem "x86_64-linux" (
-            { config, effects, pkgs, ... }:
+            { config, hci-effects, pkgs, ... }:
             {
               # hlsCheck = config.haskellProjects.main.hlsCheck.drv;
-              foo = effects.mkEffect {
+              foo = hci-effects.mkEffect {
                 effectScript = ''
                   echo Hello
-                  ${effects.nix-shell { shell = self.devShells.x86_64-linux.default; } ''
+                  ${hci-effects.nix-shell { shell = self.devShells.x86_64-linux.default; } ''
                   haskell-language-server
                   ''}
                 '';
