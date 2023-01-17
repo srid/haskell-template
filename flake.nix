@@ -28,7 +28,7 @@
           buildTools = hp: {
             treefmt = config.treefmt.build.wrapper;
           } // config.treefmt.build.programs;
-          # overrides = self: super: {}
+          # overrides = self: super: with pkgs.haskell.lib; {};
           hlsCheck.enable = false;
           hlintCheck.enable = true;
         };
