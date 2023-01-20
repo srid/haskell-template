@@ -40,7 +40,7 @@
                 ormolu = fixCyclicReference hp.ormolu;
               });
             } // config.treefmt.build.programs;
-          # overrides = self: super: {}
+          # overrides = self: super: with pkgs.haskell.lib; {};
           hlsCheck.enable = false;
           hlintCheck.enable = true;
         };
