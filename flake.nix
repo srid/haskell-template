@@ -30,18 +30,24 @@
           } // config.treefmt.build.programs;
           overrides =
             let
-              # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
-              fixCyclicReference = drv:
-                pkgs.haskell.lib.overrideCabal drv (_: {
-                  enableSeparateBinOutput = false;
-                });
+              nixpkgsWorkaround =
+                let
+                  # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
+                  fixCyclicReference = drv:
+                    pkgs.haskell.lib.overrideCabal drv (_: {
+                      enableSeparateBinOutput = false;
+                    });
+                in
+                self: super: lib.optionalAttrs (system == "aarch64-darwin") {
+                  ghcid = fixCyclicReference super.ghcid;
+                  haskell-language-server = super.haskell-language-server.overrideScope (lself: lsuper: {
+                    ormolu = fixCyclicReference super.ormolu;
+                  });
+                };
             in
-            self: super: lib.optionalAttrs (system == "aarch64-darwin") {
-              ghcid = fixCyclicReference super.ghcid;
-              haskell-language-server = super.haskell-language-server.overrideScope (lself: lsuper: {
-                ormolu = fixCyclicReference super.ormolu;
-              });
-            };
+            lib.composeExtensions nixpkgsWorkaround (self: super: {
+              # Add your own overrides here.
+            });
           hlsCheck.enable = false;
           hlintCheck.enable = true;
         };
