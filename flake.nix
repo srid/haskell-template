@@ -18,7 +18,7 @@
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
       ];
-      perSystem = { self', lib, config, pkgs, ... }: {
+      perSystem = { self', system, lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
         # has only one.
         haskellProjects.main = {
@@ -36,7 +36,7 @@
                   enableSeparateBinOutput = false;
                 });
             in
-            self: super: {
+            self: super: lib.optionalAttrs (system == "aarch64-darwin") {
               ghcid = fixCyclicReference super.ghcid;
               haskell-language-server = super.haskell-language-server.overrideScope (lself: lsuper: {
                 ormolu = fixCyclicReference super.ormolu;
