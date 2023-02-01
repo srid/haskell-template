@@ -25,7 +25,10 @@
           packages = {
             haskell-template.root = ./.;
           };
-          buildTools = hp:
+          buildTools = hp: {
+            treefmt = config.treefmt.build.wrapper;
+          } // config.treefmt.build.programs;
+          overrides =
             let
               # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
               fixCyclicReference = drv:
@@ -33,14 +36,12 @@
                   enableSeparateBinOutput = false;
                 });
             in
-            {
-              treefmt = config.treefmt.build.wrapper;
-              ghcid = fixCyclicReference hp.ghcid;
-              haskell-language-server = hp.haskell-language-server.overrideScope (lself: lsuper: {
-                ormolu = fixCyclicReference hp.ormolu;
+            self: super: {
+              ghcid = fixCyclicReference super.ghcid;
+              haskell-language-server = super.haskell-language-server.overrideScope (lself: lsuper: {
+                ormolu = fixCyclicReference super.ormolu;
               });
-            } // config.treefmt.build.programs;
-          # overrides = self: super: with pkgs.haskell.lib; {};
+            };
           hlsCheck.enable = false;
           hlintCheck.enable = true;
         };
