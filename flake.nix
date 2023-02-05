@@ -18,31 +18,40 @@
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
       ];
-      perSystem = { self', lib, config, pkgs, ... }: {
+      perSystem = { self', system, lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
         # has only one.
         haskellProjects.main = {
           packages = {
             haskell-template.root = ./.;
           };
-          buildTools = hp:
+          overrides =
             let
               # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
-              fixCyclicReference = drv:
-                pkgs.haskell.lib.overrideCabal drv (_: {
-                  enableSeparateBinOutput = false;
-                });
+              nixpkgsWorkaround =
+                let
+                  disableSeparateBinOutput =
+                    pkgs.haskell.lib.compose.overrideCabal (_: { enableSeparateBinOutput = false; });
+                in
+                self: super: lib.optionalAttrs (system == "aarch64-darwin") {
+                  ghcid = disableSeparateBinOutput super.ghcid;
+                  ormolu = disableSeparateBinOutput super.ormolu;
+                };
+              projectOverrides = self: super: {
+                # Add your own overrides here.
+              };
             in
-            {
+            lib.composeManyExtensions [
+              nixpkgsWorkaround
+              projectOverrides
+            ];
+          devShell = {
+            tools = hp: {
               treefmt = config.treefmt.build.wrapper;
-              ghcid = fixCyclicReference hp.ghcid;
-              haskell-language-server = hp.haskell-language-server.overrideScope (lself: lsuper: {
-                ormolu = fixCyclicReference hp.ormolu;
-              });
             } // config.treefmt.build.programs;
-          # overrides = self: super: with pkgs.haskell.lib; {};
-          hlsCheck.enable = false;
-          hlintCheck.enable = true;
+            hlsCheck.enable = false;
+            hlintCheck.enable = true;
+          };
         };
 
         # Auto formatters. This also adds a flake check to ensure that the
