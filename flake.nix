@@ -27,9 +27,9 @@
           };
           overrides =
             let
+              # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
               nixpkgsWorkaround =
                 let
-                  # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
                   fixCyclicReference = drv:
                     pkgs.haskell.lib.overrideCabal drv (_: {
                       enableSeparateBinOutput = false;
@@ -41,10 +41,11 @@
                     ormolu = fixCyclicReference super.ormolu;
                   });
                 };
+              projectOverrides = self: super: {
+                # Add your own overrides here.
+              };
             in
-            lib.composeExtensions nixpkgsWorkaround (self: super: {
-              # Add your own overrides here.
-            });
+            lib.composeExtensions nixpkgsWorkaround projectOverrides;
           devShell = {
             tools = hp: {
               treefmt = config.treefmt.build.wrapper;
