@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake";
+    haskell-flake.url = "github:srid/haskell-flake/devShellSubmodule";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
@@ -25,9 +25,6 @@
           packages = {
             haskell-template.root = ./.;
           };
-          buildTools = hp: {
-            treefmt = config.treefmt.build.wrapper;
-          } // config.treefmt.build.programs;
           overrides =
             let
               nixpkgsWorkaround =
@@ -48,8 +45,13 @@
             lib.composeExtensions nixpkgsWorkaround (self: super: {
               # Add your own overrides here.
             });
-          hlsCheck.enable = false;
-          hlintCheck.enable = true;
+          devShell = {
+            tools = hp: {
+              treefmt = config.treefmt.build.wrapper;
+            } // config.treefmt.build.programs;
+            hlsCheck.enable = false;
+            hlintCheck.enable = true;
+          };
         };
 
         # Auto formatters. This also adds a flake check to ensure that the
