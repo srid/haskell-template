@@ -30,22 +30,21 @@
               # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
               nixpkgsWorkaround =
                 let
-                  fixCyclicReference = drv:
-                    pkgs.haskell.lib.overrideCabal drv (_: {
-                      enableSeparateBinOutput = false;
-                    });
+                  disableSeparateBinOutput =
+                    pkgs.haskell.lib.compose.overrideCabal (_: { enableSeparateBinOutput = false; });
                 in
                 self: super: lib.optionalAttrs (system == "aarch64-darwin") {
-                  ghcid = fixCyclicReference super.ghcid;
-                  haskell-language-server = super.haskell-language-server.overrideScope (lself: lsuper: {
-                    ormolu = fixCyclicReference super.ormolu;
-                  });
+                  ghcid = disableSeparateBinOutput super.ghcid;
+                  ormolu = disableSeparateBinOutput super.ormolu;
                 };
               projectOverrides = self: super: {
                 # Add your own overrides here.
               };
             in
-            lib.composeExtensions nixpkgsWorkaround projectOverrides;
+            lib.composeManyExtensions [
+              nixpkgsWorkaround
+              projectOverrides
+            ];
           devShell = {
             tools = hp: {
               treefmt = config.treefmt.build.wrapper;
