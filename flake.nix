@@ -49,7 +49,7 @@
             tools = hp: {
               treefmt = config.treefmt.build.wrapper;
             } // config.treefmt.build.programs;
-            hlsCheck.enable = false;
+            hlsCheck.enable = true;
             hlintCheck.enable = true;
           };
         };
