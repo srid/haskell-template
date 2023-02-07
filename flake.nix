@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake";
+    haskell-flake.url = "github:srid/haskell-flake/project-imports-simple";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
@@ -17,34 +17,19 @@
         inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
+        ./nixpkgs-140774.nix
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
         # has only one.
         haskellProjects.main = {
+          imports = [
+            config.haskellFlakeNixpkgs140774Workaround
+          ];
           packages = {
             haskell-template.root = ./.;
           };
-          overrides =
-            let
-              # Workaround for https://github.com/NixOS/nixpkgs/issues/140774
-              nixpkgsWorkaround =
-                let
-                  disableSeparateBinOutput =
-                    pkgs.haskell.lib.compose.overrideCabal (_: { enableSeparateBinOutput = false; });
-                in
-                self: super: lib.optionalAttrs (system == "aarch64-darwin") {
-                  ghcid = disableSeparateBinOutput super.ghcid;
-                  ormolu = disableSeparateBinOutput super.ormolu;
-                };
-              projectOverrides = self: super: {
-                # Add your own overrides here.
-              };
-            in
-            lib.composeManyExtensions [
-              nixpkgsWorkaround
-              projectOverrides
-            ];
+          overrides = self: super: { };
           devShell = {
             tools = hp: {
               treefmt = config.treefmt.build.wrapper;
