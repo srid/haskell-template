@@ -26,9 +26,7 @@
           imports = [
             config.haskellFlakeNixpkgs140774Workaround
           ];
-          packages = {
-            haskell-template.root = ./.;
-          };
+          # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
           overrides = self: super: { };
           devShell = {
             tools = hp: {
