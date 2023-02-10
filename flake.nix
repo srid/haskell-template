@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake/project-imports-simple";
+    haskell-flake.url = "github:srid/haskell-flake/project-modules-output";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
@@ -24,7 +24,7 @@
         # has only one.
         haskellProjects.main = {
           imports = [
-            config.haskellFlakeNixpkgs140774Workaround
+            self'.haskellFlakeProjectModules.fixNixpkgs140774
           ];
           # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
           overrides = self: super: { };
