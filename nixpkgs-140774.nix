@@ -8,9 +8,7 @@ let
     mkOption
     types;
   inherit (types)
-    functionTo
-    deferredModule
-    raw;
+    deferredModule;
 in
 {
   options = {
