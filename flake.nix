@@ -9,6 +9,7 @@
     mission-control.url = "github:Platonic-Systems/mission-control";
 
     nixpkgs-140774-workaround.url = "github:srid/nixpkgs-140774-workaround";
+    nixpkgs-140774-workaround.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-140774-workaround.inputs.flake-parts.follows = "flake-parts";
     nixpkgs-140774-workaround.inputs.haskell-flake.follows = "haskell-flake";
   };
