@@ -24,7 +24,7 @@
         # has only one.
         haskellProjects.main = {
           imports = [
-            self'.haskellFlakeProjectModules.fixNixpkgs140774
+            self.haskellFlakeProjectModules.fixNixpkgs140774
           ];
           # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
           overrides = self: super: { };
