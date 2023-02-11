@@ -3,10 +3,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake/project-modules-output";
+    haskell-flake.url = "github:srid/haskell-flake";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
+    nixpkgs-140774-workaround.url = "github:srid/nixpkgs-140774-workaround";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
@@ -17,14 +18,13 @@
         inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
-        ./nixpkgs-140774.nix
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
         # has only one.
         haskellProjects.main = {
           imports = [
-            self.haskellFlakeProjectModules.fixNixpkgs140774
+            inputs.nixpkgs-140774-workaround.haskellFlakeProjectModules.default
           ];
           # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
           overrides = self: super: { };
