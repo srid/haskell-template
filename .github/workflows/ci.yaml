@@ -28,7 +28,7 @@ jobs:
       - name: Flake checks 🧪
         run: |
           # Because 'nix flake check' is not system-aware
-          # See https://srid.ca/haskell-flake/checks
+          # See https://srid.ca/haskell-template/checks
           nix run nixpkgs#sd \
             'systems = nixpkgs.lib.systems.flakeExposed' \
             'systems = [ "x86_64-linux" ]' \
