@@ -25,7 +25,7 @@ For details, see: https://srid.ca/haskell-template/start
 - Run `, docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 - Common workflows
-  - Adding library dependencies in Nix: https://srid.ca/haskell-template/dependency
+  - Adding library dependencies in Nix: https://haskell.flake.page/dependency
   - Adding tests: https://srid.ca/haskell-template/tests
 
 ## Discussions
