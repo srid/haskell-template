@@ -79,7 +79,7 @@
           fmt = {
             description = "Format the source tree";
             exec = "${lib.getExe config.treefmt.build.wrapper}";
-            category = "Dev Tools ";
+            category = "Dev Tools";
           };
           run = {
             description = "Run the project with ghcid auto-recompile";
