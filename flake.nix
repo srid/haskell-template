@@ -8,8 +8,6 @@
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
-
-    nixpkgs-140774-workaround.url = "github:srid/nixpkgs-140774-workaround";
   };
 
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
@@ -25,9 +23,6 @@
         # The "main" project. You can have multiple projects, but this template
         # has only one.
         haskellProjects.main = {
-          imports = [
-            inputs.nixpkgs-140774-workaround.haskellFlakeProjectModules.default
-          ];
           # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
           overrides = self: super: { };
           devShell = {

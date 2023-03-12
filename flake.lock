@@ -65,32 +65,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1678418513,
-        "narHash": "sha256-HLLR2Fmkn3TgD0F+u5gMcTKx5YzAU1rbS4cLfm6ugiU=",
+        "lastModified": 1678594102,
+        "narHash": "sha256-OHAHYiMWJFPNxuW/PcOMlSD2tvXnEYC1jxREBADHwwQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5496585eb876f2ce97654bc8f96838c6f8642563",
+        "rev": "796b4a3c1d903c4b9270cd2548fe46f524eeb886",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-140774-workaround": {
-      "locked": {
-        "lastModified": 1677708284,
-        "narHash": "sha256-syAhlmvVlVDwgoKS6b3EfrQKfaeCY3zjT2q7VBk/yx8=",
-        "owner": "srid",
-        "repo": "nixpkgs-140774-workaround",
-        "rev": "5fe054e8560cf474b3c89622c1ea7688023425c1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srid",
-        "repo": "nixpkgs-140774-workaround",
         "type": "github"
       }
     },
@@ -119,7 +104,6 @@
         "haskell-flake": "haskell-flake",
         "mission-control": "mission-control",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-140774-workaround": "nixpkgs-140774-workaround",
         "treefmt-nix": "treefmt-nix"
       }
     },
