@@ -38,6 +38,7 @@
         treefmt.config = {
           inherit (config.flake-root) projectRootFile;
           package = pkgs.treefmt;
+          flakeFormatter = false; # For https://github.com/numtide/treefmt-nix/issues/55
 
           programs.ormolu.enable = true;
           programs.nixpkgs-fmt.enable = true;
