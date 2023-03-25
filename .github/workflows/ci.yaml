@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action@v17
+      - uses: nixbuild/nix-quick-install-action@v22
         with:
-          extra_nix_config: |
+          nix_conf: |
             experimental-features = nix-command flakes
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            # Srid's cache; leaving disabled for template use.
-            # trusted-public-keys = cache.srid.ca:8sQkbPrOIoXktIwI0OucQBXod2e9fDjjoEZWn8OXbdo=
-            # substituters = https://cache.srid.ca
       - name: Cache Nix dependencies
         run: |
           nix develop -j 4 -c echo
