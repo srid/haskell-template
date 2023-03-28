@@ -74,7 +74,7 @@
           };
           fmt = {
             description = "Format the source tree";
-            exec = "${lib.getExe config.treefmt.build.wrapper}";
+            exec = config.treefmt.build.wrapper;
             category = "Dev Tools";
           };
           run = {
