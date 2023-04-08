@@ -88,7 +88,7 @@
         };
 
         # Default package.
-        packages.default = config.haskellProjects.default.outputs.packages.haskell-template;
+        packages.default = config.haskellProjects.default.outputs.localPackages.haskell-template;
 
         checks = config.haskellProjects.default.outputs.checks;
 
