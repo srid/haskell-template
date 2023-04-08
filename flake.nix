@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     systems.url = "github:numtide/flake-systems";
-    systems.flake = false;  # cf. https://github.com/numtide/flake-systems/issues/1#issuecomment-1500878657
+    systems.flake = false; # cf. https://github.com/numtide/flake-systems/issues/1#issuecomment-1500878657
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-nix.url = "github:numtide/treefmt-nix";
