@@ -92,9 +92,11 @@
         # Default shell.
         devShells.default =
           config.mission-control.installToDevShell self'.devShells.main;
-        
+      };
+
+      flake = {
         # Default template
-        templates.default = {
+        defaultTemplate = {
           path = ./.;
           description = ''
             Create a Haskell template with the Nix CLI instead of through Github    
@@ -103,7 +105,7 @@
             You just created an instance of Sridhar Ratnakumar's Haskell template!
             The core maintainer, who goes by Srid, is an afficionado of Haskell, Nix,
             and all things functional programming!
-            
+              
             Read more about Srid on his publicly-available personal website: https://srid.ca
           '';
         };
