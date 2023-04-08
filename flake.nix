@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    haskell-flake.url = "github:srid/haskell-flake";
+    haskell-flake.url = "github:srid/haskell-flake/outputs-checks";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     flake-root.url = "github:srid/flake-root";
@@ -20,8 +20,9 @@
         inputs.mission-control.flakeModule
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
-        # The "main" project. You can have multiple projects, but this template
+        # Our only Haskell project. You can have multiple projects, but this template
         # has only one.
+        # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
         haskellProjects.default = {
           # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
           overrides = self: super: { };
@@ -31,7 +32,7 @@
             } // config.treefmt.build.programs;
             hlsCheck.enable = true;
           };
-          autoWire = false;
+          autoWire = false; # Enables us to wire flake outputs manually.
         };
 
         # Auto formatters. This also adds a flake check to ensure that the
