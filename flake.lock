@@ -113,13 +113,13 @@
         "lastModified": 1680979402,
         "narHash": "sha256-zPzRTl/mwSEoZpu7pe8Lu3pvPV44IHUVDDkf/u1azaA=",
         "owner": "nix-systems",
-        "repo": "default",
+        "repo": "nix-systems",
         "rev": "6d621084d086099bd161062fd30e00a2cfeca890",
         "type": "github"
       },
       "original": {
         "owner": "nix-systems",
-        "repo": "default",
+        "repo": "nix-systems",
         "type": "github"
       }
     },
