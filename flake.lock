@@ -104,7 +104,23 @@
         "haskell-flake": "haskell-flake",
         "mission-control": "mission-control",
         "nixpkgs": "nixpkgs",
+        "systems": "systems",
         "treefmt-nix": "treefmt-nix"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1680949730,
+        "narHash": "sha256-GLEm7UgOwjcMI37Y6+SCVBPcx0CgU5d5kpIluNewkEo=",
+        "owner": "numtide",
+        "repo": "flake-systems",
+        "rev": "28500c3ba5c5684c489e2584a4d407b58d47625c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-systems",
+        "type": "github"
       }
     },
     "treefmt-nix": {
