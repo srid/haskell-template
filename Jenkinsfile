@@ -21,7 +21,7 @@ pipeline {
                     nix \
                         --option sandbox false \
                         flake check -L \
-                        --override-input systems path:.git/systems.nix
+                        --override-input systems path:$PWD/.git/systems.nix
                    '''
             }
         }
