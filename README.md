@@ -15,7 +15,9 @@ If you have an *existing* Haskell project, you should probably use https://githu
 
 *tldr: Install Nix, enable Flakes, open in VSCode and run `, run`.*
 
-For details, see: https://srid.ca/haskell-template/start
+Full instructions: https://srid.ca/haskell-template/start
+
+Recommended dev environment setup: https://haskell.flake.page/direnv
 
 ## Tips
 
