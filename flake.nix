@@ -22,7 +22,7 @@
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # The "main" project. You can have multiple projects, but this template
         # has only one.
-        haskellProjects.main = {
+        haskellProjects.default = {
           # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
           overrides = self: super: { };
           devShell = {
@@ -31,6 +31,7 @@
             } // config.treefmt.build.programs;
             hlsCheck.enable = true;
           };
+          autoWire = false;
         };
 
         # Auto formatters. This also adds a flake check to ensure that the
@@ -87,11 +88,18 @@
         };
 
         # Default package.
-        packages.default = self'.packages.main-haskell-template;
+        packages.default = config.haskellProjects.default.outputs.packages.haskell-template;
+
+        checks = config.haskellProjects.default.outputs.checks;
 
         # Default shell.
-        devShells.default =
-          config.mission-control.installToDevShell self'.devShells.main;
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [
+            config.haskellProjects.default.outputs.devShell
+            config.flake-root.devShell
+            config.mission-control.devShell
+          ];
+        };
       };
     };
 }
