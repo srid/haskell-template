@@ -14,14 +14,12 @@ pipeline {
         stage ('Flake checks') {
             steps {
                 sh '''
-                    # Because 'nix flake check' is not system-aware
-                    echo '["x86_64-linux"]' > .git/systems.nix
                     # Sandbox must be disabed for:
                     # https://github.com/srid/haskell-flake/issues/21
                     nix \
                         --option sandbox false \
                         flake check -L \
-                        --override-input systems path:$PWD/.git/systems.nix
+                        --override-input systems github:nix-systems/x86_64-linux
                    '''
             }
         }

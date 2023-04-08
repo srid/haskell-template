@@ -2,8 +2,7 @@
   description = "srid/haskell-template: Nix template for Haskell projects";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    systems.url = "github:numtide/flake-systems";
-    systems.flake = false; # cf. https://github.com/numtide/flake-systems/issues/1#issuecomment-1500878657
+    systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-nix.url = "github:numtide/treefmt-nix";

@@ -24,13 +24,9 @@ jobs:
           nix build -j auto -L
       - name: Flake checks 🧪
         run: |
-          # Because 'nix flake check' is not system-aware
-          # See https://srid.ca/haskell-template/checks
-          echo '["x86_64-linux"]' > .git/systems.nix
-
           # Sandbox must be disabed for:
           # https://github.com/srid/haskell-flake/issues/21
           nix \
             --option sandbox false \
             flake check -L \
-            --override-input systems path:$PWD/.git/systems.nix
+            --override-input systems github:nix-systems/x86_64-linux
