@@ -33,7 +33,7 @@
             } // config.treefmt.build.programs;
             hlsCheck.enable = true;
           };
-          autoWire = false; # Enables us to wire flake outputs manually.
+          autoWire = [ "packages" "apps" "checks" ]; # Wire all but the devShell
         };
 
         # Auto formatters. This also adds a flake check to ensure that the
@@ -90,9 +90,7 @@
         };
 
         # Default package.
-        packages.default = config.haskellProjects.default.outputs.localPackages.haskell-template;
-
-        checks = config.haskellProjects.default.outputs.checks;
+        packages.default = self'.packages.haskell-template;
 
         # Default shell.
         devShells.default = pkgs.mkShell {
