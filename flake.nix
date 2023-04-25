@@ -90,7 +90,7 @@
         };
 
         # Default package.
-        packages.default = self'.packages.haskell-template;
+        packages.default = pkgs.haskell.lib.justStaticExecutables self'.packages.haskell-template;
 
         # Default shell.
         devShells.default = pkgs.mkShell {
