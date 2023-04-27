@@ -91,7 +91,7 @@
 
         # Default package & app.
         packages.default = self'.packages.haskell-template;
-        packages.apps = self'.apps.haskell-template;
+        apps.default = self'.apps.haskell-template;
 
         # Default shell.
         devShells.default = pkgs.mkShell {
