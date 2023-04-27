@@ -89,8 +89,9 @@
           };
         };
 
-        # Default package.
-        packages.default = pkgs.haskell.lib.justStaticExecutables self'.packages.haskell-template;
+        # Default package & app.
+        packages.default = self'.packages.haskell-template;
+        packages.app = self'.apps.haskell-template;
 
         # Default shell.
         devShells.default = pkgs.mkShell {
