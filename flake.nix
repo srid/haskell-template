@@ -31,7 +31,7 @@
             tools = hp: {
               treefmt = config.treefmt.build.wrapper;
             } // config.treefmt.build.programs;
-            hlsCheck.enable = true;
+            hlsCheck.enable = false;
           };
           autoWire = [ "packages" "apps" "checks" ]; # Wire all but the devShell
         };
