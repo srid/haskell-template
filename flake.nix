@@ -25,14 +25,40 @@
         # has only one.
         # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
         haskellProjects.default = {
-          # packages.haskell-template.root = ./.;  # Auto-discovered by haskell-flake
-          overrides = self: super: { };
+          # The base package set (this value is the default)
+          # basePackages = pkgs.haskellPackages;
+
+          # Packages to add on top of `basePackages`
+          packages = {
+            # Add source or Hackage overrides here
+            # (Local packages are added automatically)
+            /*
+            aeson.source = "1.5.0.0" # Hackage version
+            shower.source = inputs.shower; # Flake input
+            */
+          };
+
+          # Add your package overrides here
+          settings = {
+            /*
+            haskell-template = {
+              haddock = false;
+            };
+            aeson = {
+              check = false;
+            };
+            */
+          };
+
+          # Development shell configuration
           devShell = {
             tools = hp: {
               treefmt = config.treefmt.build.wrapper;
             } // config.treefmt.build.programs;
             hlsCheck.enable = false;
           };
+
+          # What should haskell-flake add to flake outputs?
           autoWire = [ "packages" "apps" "checks" ]; # Wire all but the devShell
         };
 
