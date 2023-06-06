@@ -121,6 +121,7 @@
 
         # Default shell.
         devShells.default = pkgs.mkShell {
+          name = "haskell-template";
           inputsFrom = [
             config.haskellProjects.default.outputs.devShell
             config.flake-root.devShell
