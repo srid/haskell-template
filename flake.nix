@@ -52,10 +52,6 @@
 
           # Development shell configuration
           devShell = {
-            # TODO: Remove this after https://github.com/numtide/treefmt-nix/issues/65
-            tools = hp: {
-              treefmt = config.treefmt.build.wrapper;
-            } // config.treefmt.build.programs;
             hlsCheck.enable = false;
           };
 
@@ -126,6 +122,7 @@
             config.haskellProjects.default.outputs.devShell
             config.flake-root.devShell
             config.mission-control.devShell
+            config.treefmt.build.devShell
           ];
         };
       };
