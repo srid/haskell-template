@@ -1,11 +1,16 @@
 // We use https://github.com/juspay/jenkins-nix-ci
 
 pipeline {
-    agent any
+    agent { label 'nixos' }
     stages {
-        stage ('Build') {
+        stage ('Build (native)') {
             steps {
-                nixBuildAll ()
+                nixCI ()
+            }
+        }
+        stage ('Build (arm)') {
+            steps {
+                nixCI system: 'aarch64-linux'
             }
         }
     }
