@@ -16,6 +16,4 @@ jobs:
         with:
           name: srid
       - name: Build 🔨
-        id: build
-        run: |
-          nix run github:srid/nixci
+        run: nix run github:srid/nixci
