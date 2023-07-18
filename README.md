@@ -27,7 +27,7 @@ Recommended dev environment setup: https://haskell.flake.page/direnv
 - Run `, docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 - Common workflows
-  - Adding library dependencies in Nix: https://haskell.flake.page/dependency
+  - Adding library dependencies in Nix: https://zero-to-flakes.com/haskell-flake/dependency
   - Adding tests: https://srid.ca/haskell-template/tests
 
 ## Discussions
