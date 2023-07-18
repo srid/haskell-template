@@ -22,7 +22,7 @@ Recommended dev environment setup: https://haskell.flake.page/direnv
 ## Tips
 
 - Run `nix flake update` to update all flake inputs.
-- Run `nix build .#check -L` to run the flake checks.
+- Run `nix run github:srid/nixci` to build _all_ outputs.
 - Run `, fmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt).
 - Run `, docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
