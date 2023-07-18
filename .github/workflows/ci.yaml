@@ -9,24 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: nixbuild/nix-quick-install-action@v22
+      - uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - uses: cachix/cachix-action@v12
         with:
-          nix_conf: |
-            experimental-features = nix-command flakes
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-      - name: Cache Nix dependencies
-        run: |
-          nix develop -j 4 -c echo
+          name: srid
       - name: Build 🔨
         id: build
         run: |
-          nix build -j auto -L
-      - name: Flake checks 🧪
-        run: |
-          # Sandbox must be disabed for:
-          # https://github.com/srid/haskell-flake/issues/21
-          nix \
-            --option sandbox false \
-            flake check -L \
-            --override-input systems github:nix-systems/x86_64-linux
+          nix run github:srid/nixci
