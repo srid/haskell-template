@@ -17,7 +17,7 @@ If you have an *existing* Haskell project, you should probably use https://githu
 
 Full instructions: https://srid.ca/haskell-template/start
 
-Recommended dev environment setup: https://haskell.flake.page/direnv
+Recommended dev environment setup: https://zero-to-flakes.com/direnv
 
 ## Tips
 
