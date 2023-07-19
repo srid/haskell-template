@@ -7,13 +7,13 @@ Get a Haskell development environment up and running quickly. Thanks to Nix, thi
 - [fourmolu](https://github.com/fourmolu/fourmolu) autoformatting 
 - [Relude](https://github.com/kowainik/relude#relude) as Prelude.
   - `.hlint.yaml` is [from relude](https://github.com/kowainik/relude/blob/main/.hlint.yaml)
-- Devshell scripts (`,` prefixed) are provided via [mission-control](https://github.com/Platonic-Systems/mission-control)
+- Devshell commands are provided via [just](https://just.systems/); run `just` in devshell.
 
 If you have an *existing* Haskell project, you should probably use https://github.com/srid/haskell-flake instead.
 
 ## Getting Started
 
-*tldr: Install Nix, enable Flakes, open in VSCode and run `, run`.*
+*tldr: Install Nix, enable Flakes, open in VSCode and run `just run`.*
 
 Full instructions: https://srid.ca/haskell-template/start
 
@@ -23,8 +23,8 @@ Recommended dev environment setup: https://zero-to-flakes.com/direnv
 
 - Run `nix flake update` to update all flake inputs.
 - Run `nix run github:srid/nixci` to build _all_ outputs.
-- Run `, fmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt).
-- Run `, docs` to start Hoogle with packages in your cabal file.
+- Run `just fmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt).
+- Run `just docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 - Common workflows
   - Adding library dependencies in Nix: https://zero-to-flakes.com/haskell-flake/dependency

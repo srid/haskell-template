@@ -8,7 +8,6 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     flake-root.url = "github:srid/flake-root";
-    mission-control.url = "github:Platonic-Systems/mission-control";
   };
 
   outputs = inputs:
@@ -18,7 +17,6 @@
         inputs.haskell-flake.flakeModule
         inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
-        inputs.mission-control.flakeModule
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
@@ -80,37 +78,6 @@
           };
         };
 
-        # Dev shell scripts.
-        mission-control.scripts = {
-          docs = {
-            description = "Start Hoogle server for project dependencies";
-            exec = ''
-              echo http://127.0.0.1:8888
-              hoogle serve -p 8888 --local
-            '';
-            category = "Dev Tools";
-          };
-          repl = {
-            description = "Start the cabal repl";
-            exec = ''
-              cabal repl "$@"
-            '';
-            category = "Dev Tools";
-          };
-          fmt = {
-            description = "Format the source tree";
-            exec = config.treefmt.build.wrapper;
-            category = "Dev Tools";
-          };
-          run = {
-            description = "Run the project with ghcid auto-recompile";
-            exec = ''
-              ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
-            '';
-            category = "Primary";
-          };
-        };
-
         # Default package & app.
         packages.default = self'.packages.haskell-template;
         apps.default = self'.apps.haskell-template;
@@ -118,11 +85,14 @@
         # Default shell.
         devShells.default = pkgs.mkShell {
           name = "haskell-template";
+          nativeBuildInputs = with pkgs; [
+            just
+            config.treefmt.build.wrapper
+          ];
           # See https://zero-to-flakes.com/haskell-flake/devshell#composing-devshells
           inputsFrom = [
             config.haskellProjects.default.outputs.devShell
             config.flake-root.devShell
-            config.mission-control.devShell
             config.treefmt.build.devShell
           ];
         };
