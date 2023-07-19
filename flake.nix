@@ -118,7 +118,7 @@
         # Default shell.
         devShells.default = pkgs.mkShell {
           name = "haskell-template";
-          # See https://haskell.flake.page/devshell#composing-devshells
+          # See https://zero-to-flakes.com/haskell-flake/devshell#composing-devshells
           inputsFrom = [
             config.haskellProjects.default.outputs.devShell
             config.flake-root.devShell
