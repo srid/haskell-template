@@ -7,7 +7,6 @@
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
-    flake-root.url = "github:srid/flake-root";
   };
 
   outputs = inputs:
@@ -16,7 +15,6 @@
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-nix.flakeModule
-        inputs.flake-root.flakeModule
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
@@ -60,8 +58,7 @@
         # Auto formatters. This also adds a flake check to ensure that the
         # source tree was auto formatted.
         treefmt.config = {
-          inherit (config.flake-root) projectRootFile;
-          package = pkgs.treefmt;
+          projectRootFile = "flake.nix";
 
           programs.ormolu.enable = true;
           programs.nixpkgs-fmt.enable = true;
@@ -85,15 +82,13 @@
         # Default shell.
         devShells.default = pkgs.mkShell {
           name = "haskell-template";
-          nativeBuildInputs = with pkgs; [
-            just
-            config.treefmt.build.wrapper
-          ];
           # See https://zero-to-flakes.com/haskell-flake/devshell#composing-devshells
           inputsFrom = [
             config.haskellProjects.default.outputs.devShell
-            config.flake-root.devShell
             config.treefmt.build.devShell
+          ];
+          nativeBuildInputs = with pkgs; [
+            just
           ];
         };
       };
