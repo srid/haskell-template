@@ -9,7 +9,7 @@ category:           Web
 
 -- TODO: Before hackage release.
 -- A short (one-line) description of the package.
-synopsis: A template for Haskell projects using Nix
+synopsis:           A template for Haskell projects using Nix
 
 -- A longer description of the package.
 -- description:
