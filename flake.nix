@@ -82,6 +82,7 @@
         # Default shell.
         devShells.default = pkgs.mkShell {
           name = "haskell-template";
+          meta.description = "Haskell development environment";
           # See https://zero-to-flakes.com/haskell-flake/devshell#composing-devshells
           inputsFrom = [
             config.haskellProjects.default.outputs.devShell
