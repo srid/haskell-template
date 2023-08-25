@@ -6,6 +6,7 @@ copyright:          2022 Sridhar Ratnakumar
 maintainer:         srid@srid.ca
 author:             Sridhar Ratnakumar
 category:           Web
+homepage:           https://srid.ca/haskell-template
 
 -- TODO: Before hackage release.
 -- A short (one-line) description of the package.
