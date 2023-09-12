@@ -15,5 +15,8 @@ jobs:
       - uses: cachix/cachix-action@v12
         with:
           name: srid
+      - uses: yaxitech/nix-install-pkgs-action@v3
+        with:
+          packages: "nixpkgs#nixci"
       - name: Build 🔨
-        run: nix run github:srid/nixci
+        run: nixci
