@@ -32,4 +32,4 @@ Recommended dev environment setup: https://zero-to-flakes.com/direnv
 
 ## Discussions
 
-Questions? Ideas? Suggestions? You may post them here: https://github.com/srid/haskell-template/discussions
+Questions? Ideas? Suggestions? Join our [NixOS Zulip](https://nixos.zulipchat.com/#narrow/stream/413949-haskell-flake) or post in [Github Discussions](https://github.com/srid/haskell-template/discussions).
