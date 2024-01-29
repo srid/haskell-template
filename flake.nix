@@ -51,7 +51,6 @@
           # Development shell configuration
           devShell = {
             hlsCheck.enable = false;
-            tools = hp: { fourmolu = config.fourmolu.wrapper; };
           };
 
           # What should haskell-flake add to flake outputs?
