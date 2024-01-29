@@ -62,12 +62,13 @@
         treefmt.config = {
           projectRootFile = "flake.nix";
 
-          programs.fourmolu.enable = true;
+          programs.fourmolu = {
+            enable = true;
+            package = config.fourmolu.wrapper;
+          };
           programs.nixpkgs-fmt.enable = true;
           programs.cabal-fmt.enable = true;
           programs.hlint.enable = true;
-
-          programs.fourmolu.package = config.fourmolu.wrapper;
         };
 
         fourmolu.settings = {
