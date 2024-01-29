@@ -7,6 +7,7 @@
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+    fourmolu-nix.url = "github:jedimahdi/fourmolu-nix";
   };
 
   outputs = inputs:
@@ -15,6 +16,7 @@
       imports = [
         inputs.haskell-flake.flakeModule
         inputs.treefmt-nix.flakeModule
+        inputs.fourmolu-nix.flakeModule
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
@@ -60,19 +62,25 @@
         treefmt.config = {
           projectRootFile = "flake.nix";
 
-          programs.ormolu.enable = true;
+          programs.fourmolu = {
+            enable = true;
+            package = config.fourmolu.wrapper;
+          };
           programs.nixpkgs-fmt.enable = true;
           programs.cabal-fmt.enable = true;
           programs.hlint.enable = true;
+        };
 
-          # We use fourmolu
-          programs.ormolu.package = pkgs.haskellPackages.fourmolu;
-          settings.formatter.ormolu = {
-            options = [
-              "--ghc-opt"
-              "-XImportQualifiedPost"
-            ];
-          };
+        fourmolu.settings = {
+          indentation = 2;
+          comma-style = "leading";
+          record-brace-space = true;
+          indent-wheres = true;
+          import-export-style = "diff-friendly";
+          respectful = true;
+          haddock-style = "multi-line";
+          newlines-between-decls = 1;
+          extensions = [ "ImportQualifiedPost" ];
         };
 
         # Default package & app.
