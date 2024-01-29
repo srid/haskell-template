@@ -18,6 +18,21 @@
         "type": "github"
       }
     },
+    "fourmolu-nix": {
+      "locked": {
+        "lastModified": 1706479307,
+        "narHash": "sha256-xJPk6TC73P12A02dhE4FVZY7XHDjEHgqCHrlbRq5sFc=",
+        "owner": "jedimahdi",
+        "repo": "fourmolu-nix",
+        "rev": "be009215c8adfd42e5d4d986814be36ab9f9bbb8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jedimahdi",
+        "repo": "fourmolu-nix",
+        "type": "github"
+      }
+    },
     "haskell-flake": {
       "locked": {
         "lastModified": 1704328105,
@@ -70,6 +85,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "fourmolu-nix": "fourmolu-nix",
         "haskell-flake": "haskell-flake",
         "nixpkgs": "nixpkgs",
         "systems": "systems",
@@ -98,11 +114,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1704649711,
-        "narHash": "sha256-+qxqJrZwvZGilGiLQj3QbYssPdYCwl7ejwMImgH7VBQ=",
+        "lastModified": 1706462057,
+        "narHash": "sha256-7dG1D4iqqt0bEbBqUWk6lZiSqqwwAO0Hd1L5opVyhNM=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "04f25d7bec9fb29d2c3bacaa48a3304840000d36",
+        "rev": "c6153c2a3ff4c38d231e3ae99af29b87f1df5901",
         "type": "github"
       },
       "original": {
