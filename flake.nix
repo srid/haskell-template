@@ -2,6 +2,8 @@
   description = "srid/haskell-template: Nix template for Haskell projects";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    horizon-devtools.url = "git+https://gitlab.horizon-haskell.net/package-sets/horizon-devtools?ref=lts/ghc-9.6.x";
+    horizon-platform.url = "git+https://gitlab.horizon-haskell.net/package-sets/horizon-platform?ref=lts/ghc-9.6.x";
     systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
@@ -24,7 +26,13 @@
         # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
         haskellProjects.default = {
           # The base package set (this value is the default)
-          # basePackages = pkgs.haskellPackages;
+          basePackages = inputs.horizon-platform.legacyPackages.${system};
+
+          defaults.devShell.tools = _:
+            let devtools = inputs.horizon-devtools.legacyPackages.${system};
+            in {
+              inherit (devtools) ghcid haskell-language-server;
+            };
 
           # Packages to add on top of `basePackages`
           packages = {
@@ -51,6 +59,7 @@
           # Development shell configuration
           devShell = {
             hlsCheck.enable = false;
+
           };
 
           # What should haskell-flake add to flake outputs?
