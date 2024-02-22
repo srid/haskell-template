@@ -26,7 +26,7 @@
           ));
         in
         {
-          include = lib.concatLists [
+          outs = lib.concatLists [
             (perSystem "packages")
             #(perSystem "devShells")
             #(perSystem "checks")
