@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
     steps:
-      # - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - run: echo "${{ matrix.out }}"
       # - run: nixci
       # - run: nix build -L .#${{matrix.name}}
