@@ -14,9 +14,4 @@ jobs:
         system: [aarch64-linux, x86_64-linux, aarch64-darwin]
     steps:
       - uses: actions/checkout@v4
-      - run: echo "${{ matrix.system }}"
-      # - run: nixci
-      # - run: nix build -L .#${{matrix.name}}
-      # - run: echo .#${{matrix.x.name}}
-      #- run: nix build -L .#packages.aarch64-linux.default
-      #- run: nix build -L .#packages.x86_64-linux.default
+      - run: nix build -L .#packages."${{ matrix.system }}".default
