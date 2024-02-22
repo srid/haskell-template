@@ -22,17 +22,14 @@
         let
           inherit (inputs.nixpkgs) lib;
           perSystem = k: lib.concatLists (lib.flip lib.mapAttrsToList inputs.self.${k} (system: s:
-            builtins.map (name: { out = "${k}.${system}.${name}"; }) (lib.attrNames s)
+            builtins.map (name: "${k}.${system}.${name}") (lib.attrNames s)
           ));
         in
-        rec {
-          out = builtins.map (x: x.out) include;
-          include = lib.concatLists [
-            (perSystem "packages")
-            #(perSystem "devShells")
-            #(perSystem "checks")
-          ];
-        };
+        lib.concatLists [
+          (perSystem "packages")
+          #(perSystem "devShells")
+          #(perSystem "checks")
+        ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
         # has only one.
