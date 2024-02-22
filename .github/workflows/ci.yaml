@@ -20,8 +20,7 @@ jobs:
     needs: configure
     runs-on: self-hosted
     strategy:
-      matrix:
-        out: ${{ fromJson(needs.configure.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
       - run: echo ${{ matrix.out }}
