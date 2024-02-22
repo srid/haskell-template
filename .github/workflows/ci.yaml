@@ -7,11 +7,12 @@ on:
   pull_request:
 
 jobs:
-  run-matrix:
+  nix:
     runs-on: self-hosted
     strategy:
       matrix:
         system: [aarch64-linux, x86_64-linux, aarch64-darwin]
     steps:
       - uses: actions/checkout@v4
+      # TODO: use nixci to build all outputs
       - run: nix build -L .#packages."${{ matrix.system }}".default
