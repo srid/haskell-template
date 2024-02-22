@@ -23,8 +23,8 @@ jobs:
       matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
-      - run: echo ${{matrix.output}}
+      - run: echo ${{matrix.name}}
       # - run: nixci
-      - run: nix build -L .#${{matrix.output}}
+      - run: nix build -L .#${{matrix.name}}
       #- run: nix build -L .#packages.aarch64-linux.default
       #- run: nix build -L .#packages.x86_64-linux.default
