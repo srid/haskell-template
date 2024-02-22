@@ -25,7 +25,8 @@
             builtins.map (name: { out = "${k}.${system}.${name}"; }) (lib.attrNames s)
           ));
         in
-        {
+        rec {
+          out = builtins.map (x: x.out) include;
           include = lib.concatLists [
             (perSystem "packages")
             #(perSystem "devShells")
