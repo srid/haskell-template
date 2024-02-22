@@ -1,26 +1,16 @@
 name: "CI"
+
 on:
-  # Run only when pushing to master branch, and making PRs
   push:
     branches:
-      - master
-      - test
+      - "*"
   pull_request:
+
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, macos-14]
+    runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
-      - uses: DeterminateSystems/nix-installer-action@main
-        with:
-          extra-conf: |
-            trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-            substituters = https://cache.garnix.io?priority=41 https://cache.nixos.org/
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: yaxitech/nix-install-pkgs-action@v3
-        with:
-          packages: "github:srid/nixci"
-      - run: nixci
+      - uses: actions/checkout@v4
+      - name: Build Nix
+        run: |
+          nixci
