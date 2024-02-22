@@ -11,6 +11,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Build Nix
-        run: |
-          nixci
+      - run: nixci
+      - run: nix build -L .#packages.aarch64-linux.default
+      - run: nix build -L .#packages.x86_64-linux.default
