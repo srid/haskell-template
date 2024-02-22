@@ -14,8 +14,8 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          nix eval --json .#data > config.json
-          echo "matrix=$(cat config.json)" >> $GITHUB_OUTPUT
+          OUT=$(nix eval --json .#data)
+          echo "matrix=$OUT" >> $GITHUB_OUTPUT
   run-matrix:
     needs: configure
     runs-on: self-hosted
