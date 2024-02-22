@@ -20,10 +20,11 @@ jobs:
     needs: configure
     runs-on: self-hosted
     strategy:
-      matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
+      matrix:
+        x: ${{ fromJson(needs.configure.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
-      - run: echo ${{matrix.include}}
+      - run: echo ${{matrix.x}}
       # - run: nixci
       # - run: nix build -L .#${{matrix.name}}
       # - run: echo .#${{matrix.x.name}}
