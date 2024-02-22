@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  setup:
+  configure:
     runs-on: self-hosted
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -17,7 +17,7 @@ jobs:
           nix eval --json .#data > config.json
           echo "matrix=$(jq -c . < ./config.json)" >> $GITHUB_OUTPUT
   run-matrix:
-    needs: setup
+    needs: configure
     runs-on: self-hosted
     strategy:
       matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
