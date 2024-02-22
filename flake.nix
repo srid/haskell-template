@@ -22,7 +22,7 @@
         let
           inherit (inputs.nixpkgs) lib;
           perSystem = k: lib.concatLists (lib.flip lib.mapAttrsToList inputs.self.${k} (system: s:
-            builtins.map (name: { name = "${k}.${system}.${name}"; }) (lib.attrNames s)
+            builtins.map (name: "${k}.${system}.${name}") (lib.attrNames s)
           ));
         in
         {
