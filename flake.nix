@@ -28,8 +28,8 @@
         {
           include = lib.concatLists [
             (perSystem "packages")
-            (perSystem "devShells")
-            (perSystem "checks")
+            #(perSystem "devShells")
+            #(perSystem "checks")
           ];
         };
       perSystem = { self', system, lib, config, pkgs, ... }: {

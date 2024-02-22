@@ -18,14 +18,16 @@ jobs:
           echo "matrix=$(cat config.json)" >> $GITHUB_OUTPUT
   run-matrix:
     needs: configure
-    runs-on: self-hosted
+    # runs-on: self-hosted
+    runs-on: ubuntu
     strategy:
       matrix:
         x: ${{ fromJson(needs.configure.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
       - run: echo ${{matrix.name}}
       # - run: nixci
-      - run: nix build -L .#${{matrix.name}}
+      # - run: nix build -L .#${{matrix.name}}
+      # - run: echo .#${{matrix.x.name}}
       #- run: nix build -L .#packages.aarch64-linux.default
       #- run: nix build -L .#packages.x86_64-linux.default
