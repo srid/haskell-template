@@ -14,7 +14,7 @@ jobs:
     steps:
       - id: dataStep
         run: |
-          echo "myoutput=$(nix eval .#data)" >> $GITHUB_OUTPUT
+          echo "myoutput=$(nix eval --json .#data)" >> $GITHUB_OUTPUT
   run-matrix:
     needs: setup
     runs-on: self-hosted
