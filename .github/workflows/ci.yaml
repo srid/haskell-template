@@ -22,7 +22,7 @@ jobs:
       matrix: ${{ fromJson(needs.setup.outputs.mymatrix) }}
     steps:
       - uses: actions/checkout@v4
-      - run: echo ${{matrix.target}}
+      - run: echo ${{matrix}}
       # - run: nixci
       - run: nix build -L .#${{matrix.target}}
       #- run: nix build -L .#packages.aarch64-linux.default
