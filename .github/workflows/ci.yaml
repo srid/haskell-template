@@ -7,24 +7,14 @@ on:
   pull_request:
 
 jobs:
-  configure:
-    runs-on: self-hosted
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - id: set-matrix
-        run: |
-          OUT=$(nix eval --json .#data)
-          echo "matrix=$OUT" >> $GITHUB_OUTPUT
   run-matrix:
-    needs: configure
     runs-on: self-hosted
     strategy:
       matrix:
-        out: ${{ fromJson(needs.configure.outputs.matrix) }}
+        system: [aarch64-linux, x86_64-linux, aarch64-darwin]
     steps:
       - uses: actions/checkout@v4
-      - run: echo "${{ matrix.out }}"
+      - run: echo "${{ matrix.system }}"
       # - run: nixci
       # - run: nix build -L .#${{matrix.name}}
       # - run: echo .#${{matrix.x.name}}
