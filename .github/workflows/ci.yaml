@@ -7,10 +7,23 @@ on:
   pull_request:
 
 jobs:
-  build:
+  setup:
     runs-on: self-hosted
+    outputs:
+      mymatrix: ${{ steps.dataStep.outputs.myoutput }}
+    steps:
+      - id: dataStep
+        run: |
+          echo "myoutput=$(nix eval .#data)" >> $GITHUB_OUTPUT
+  run-matrix:
+    needs: setup
+    runs-on: self-hosted
+    strategy:
+      matrix: ${{ fromJson(needs.setup.outputs.mymatrix) }}
     steps:
       - uses: actions/checkout@v4
-      - run: nixci
-      - run: nix build -L .#packages.aarch64-linux.default
-      - run: nix build -L .#packages.x86_64-linux.default
+      - run: echo ${{matrix.target}}
+      # - run: nixci
+      - run: nix build -L .#${{matrix.target}}
+      #- run: nix build -L .#packages.aarch64-linux.default
+      #- run: nix build -L .#packages.x86_64-linux.default
