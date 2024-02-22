@@ -21,10 +21,10 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        x: ${{ fromJson(needs.configure.outputs.matrix) }}
+        out: ${{ fromJson(needs.configure.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
-      - run: echo ${{matrix.x}}
+      - run: echo ${{matrix.out}}
       # - run: nixci
       # - run: nix build -L .#${{matrix.name}}
       # - run: echo .#${{matrix.x.name}}

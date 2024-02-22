@@ -25,13 +25,11 @@
             builtins.map (name: "${k}.${system}.${name}") (lib.attrNames s)
           ));
         in
-        {
-          include = lib.concatLists [
-            (perSystem "packages")
-            #(perSystem "devShells")
-            #(perSystem "checks")
-          ];
-        };
+        lib.concatLists [
+          (perSystem "packages")
+          #(perSystem "devShells")
+          #(perSystem "checks")
+        ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
         # has only one.
