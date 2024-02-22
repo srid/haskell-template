@@ -18,8 +18,7 @@ jobs:
           echo "matrix=$(cat config.json)" >> $GITHUB_OUTPUT
   run-matrix:
     needs: configure
-    # runs-on: self-hosted
-    runs-on: ubuntu
+    runs-on: self-hosted
     strategy:
       matrix:
         x: ${{ fromJson(needs.configure.outputs.matrix) }}
