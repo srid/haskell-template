@@ -10,16 +10,17 @@ jobs:
   setup:
     runs-on: self-hosted
     outputs:
-      mymatrix: ${{ steps.dataStep.outputs.myoutput }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - id: dataStep
+      - id: set-matrix
         run: |
-          echo "myoutput=$(nix eval --json .#data)" >> $GITHUB_OUTPUT
+          nix eval --json .#data > config.json
+          echo "matrix=$(jq -c . < ./config.json)" >> $GITHUB_OUTPUT
   run-matrix:
     needs: setup
     runs-on: self-hosted
     strategy:
-      matrix: ${{ fromJson(needs.setup.outputs.mymatrix) }}
+      matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
       - run: echo ${{matrix.output}}
