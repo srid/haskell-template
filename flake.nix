@@ -31,14 +31,9 @@
         # has only one.
         # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
         haskellProjects.default = {
-          # The base package set (this value is the default)
-          basePackages = inputs.horizon-platform.legacyPackages.${system};
-
-          defaults.devShell.tools = _:
-            let devtools = inputs.horizon-devtools.legacyPackages.${system};
-            in {
-              inherit (devtools) cabal-install ghcid haskell-language-server;
-            };
+          imports = [
+            (import ./nix/horizon-package-set.nix { inherit inputs; })
+          ];
 
           # Packages to add on top of `basePackages`
           packages = {
@@ -65,7 +60,6 @@
           # Development shell configuration
           devShell = {
             hlsCheck.enable = false;
-
           };
 
           # What should haskell-flake add to flake outputs?
