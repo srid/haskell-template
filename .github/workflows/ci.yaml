@@ -12,6 +12,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v22
       - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          extra-conf: |
+            trusted-public-keys = horizon.cachix.org-1:MeEEDRhRZTgv/FFGCv3479/dmJDfJ82G6kfUDxMSAw0= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://horizon.cachix.org https://cache.nixos.org/
+      - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: yaxitech/nix-install-pkgs-action@v3
         with:
           packages: "nixpkgs#nixci"
