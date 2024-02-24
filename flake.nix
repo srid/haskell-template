@@ -25,6 +25,7 @@
         inputs.haskell-flake.flakeModule
         inputs.treefmt-nix.flakeModule
         inputs.fourmolu-nix.flakeModule
+        ./nix/horizon-package-set.nix
       ];
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
@@ -32,7 +33,7 @@
         # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
         haskellProjects.default = {
           imports = [
-            (import ./nix/horizon-package-set.nix { inherit inputs; })
+            inputs.self.haskellFlakeProjectModules.horizon-package-set
           ];
 
           # Packages to add on top of `basePackages`
