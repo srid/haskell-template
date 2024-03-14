@@ -23,8 +23,8 @@
         # has only one.
         # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
         haskellProjects.default = {
-          # To avoid unnecessary rebuilds:
-          # https://github.com/srid/haskell-flake/issues/269
+          # To avoid unnecessary rebuilds, we filter projectRoot:
+          # https://community.flake.parts/haskell-flake/local#rebuild
           projectRoot = builtins.toString (lib.fileset.toSource {
             root = ./.;
             fileset = lib.fileset.unions [
