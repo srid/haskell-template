@@ -37,6 +37,18 @@
           imports = [
             inputs.self.haskellFlakeProjectModules.horizon-package-set
           ];
+          # To avoid unnecessary rebuilds, we filter projectRoot:
+          # https://community.flake.parts/haskell-flake/local#rebuild
+          projectRoot = builtins.toString (lib.fileset.toSource {
+            root = ./.;
+            fileset = lib.fileset.unions [
+              ./src
+              ./haskell-template.cabal
+            ];
+          });
+
+          # The base package set (this value is the default)
+          # basePackages = pkgs.haskellPackages;
 
           # Packages to add on top of `basePackages`
           packages = {
