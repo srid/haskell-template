@@ -106,7 +106,7 @@
             config.haskellProjects.default.outputs.devShell
             config.treefmt.build.devShell
           ];
-          nativeBuildInputs = with pkgs; [
+          packages = with pkgs; [
             just
           ];
         };
