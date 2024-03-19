@@ -1,7 +1,15 @@
 {
   description = "srid/haskell-template: Nix template for Haskell projects";
+
+  nixConfig = {
+    extra-substituters = "https://horizon.cachix.org";
+    extra-trusted-public-keys = "horizon.cachix.org-1:MeEEDRhRZTgv/FFGCv3479/dmJDfJ82G6kfUDxMSAw0=";
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    horizon-devtools.url = "git+https://gitlab.horizon-haskell.net/package-sets/horizon-devtools?ref=lts/ghc-9.6.x";
+    horizon-platform.url = "git+https://gitlab.horizon-haskell.net/package-sets/horizon-platform?ref=lts/ghc-9.6.x";
     systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
@@ -17,12 +25,18 @@
         inputs.haskell-flake.flakeModule
         inputs.treefmt-nix.flakeModule
         inputs.fourmolu-nix.flakeModule
+        (import ./nix/horizon-package-set.nix { inherit inputs; })
       ];
+      flake.flakeModules.horizon-package-set =
+        import ./nix/horizon-package-set.nix { inherit inputs; };
       perSystem = { self', system, lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
         # has only one.
         # See https://github.com/srid/haskell-flake/blob/master/example/flake.nix
         haskellProjects.default = {
+          imports = [
+            inputs.self.haskellFlakeProjectModules.horizon-package-set
+          ];
           # To avoid unnecessary rebuilds, we filter projectRoot:
           # https://community.flake.parts/haskell-flake/local#rebuild
           projectRoot = builtins.toString (lib.fileset.toSource {
