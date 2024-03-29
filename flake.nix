@@ -30,6 +30,8 @@
             fileset = lib.fileset.unions [
               ./src
               ./haskell-template.cabal
+              ./LICENSE
+              ./README.md
             ];
           });
 
