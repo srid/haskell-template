@@ -110,6 +110,7 @@
           ];
           packages = with pkgs; [
             just
+            nixd
           ];
         };
       };
