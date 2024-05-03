@@ -13,7 +13,7 @@ If you have an *existing* Haskell project, you should probably use https://githu
 
 ## Getting Started
 
-*tldr: Install Nix, enable Flakes, open in VSCode and run `just run`.*
+*tldr: [Install Nix](https://nixos.asia/en/install), [setup direnv](https://nixos.asia/en/direnv), open in VSCode, install recommended extensions and run `just run`.*
 
 Full instructions: https://srid.ca/haskell-template/start
 
