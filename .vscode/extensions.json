@@ -5,7 +5,6 @@
     "haskell.haskell",
     "bbenoist.nix",
     "jnoortheen.nix-ide",
-    "tamasfe.even-better-toml",
     "mkhl.direnv"
   ]
 }
