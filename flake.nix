@@ -18,6 +18,13 @@
         inputs.treefmt-nix.flakeModule
         inputs.fourmolu-nix.flakeModule
       ];
+
+      # TODO: Remove this. Only relevant for github:srid/haskell-template
+      flake.templates.default = {
+        description = "A batteries-included Haskell project template for Nix";
+        path = builtins.path { path = inputs.self; };
+      };
+
       perSystem = { self', lib, config, pkgs, ... }: {
         # Our only Haskell project. You can have multiple projects, but this template
         # has only one.
