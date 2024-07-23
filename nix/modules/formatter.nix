@@ -1,4 +1,9 @@
+{ inputs, ... }:
 {
+  imports = [
+    inputs.treefmt-nix.flakeModule
+    inputs.fourmolu-nix.flakeModule
+  ];
   perSystem = { config, pkgs, ... }: {
     # Auto formatters. This also adds a flake check to ensure that the
     # source tree was auto formatted.
