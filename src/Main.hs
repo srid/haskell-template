@@ -5,7 +5,7 @@ import Main.Utf8 qualified as Utf8
 {- |
  Main entry point.
 
- The `, run` script will invoke this function.
+ `just run` will invoke this function.
 -}
 main :: IO ()
 main = do
