@@ -28,21 +28,21 @@
         # Add source or Hackage overrides here
         # (Local packages are added automatically)
         /*
-            aeson.source = "1.5.0.0" # Hackage version
-            shower.source = inputs.shower; # Flake input
-            */
+        aeson.source = "1.5.0.0" # Hackage version
+        shower.source = inputs.shower; # Flake input
+        */
       };
 
       # Add your package overrides here
       settings = {
         /*
-            haskell-template = {
-              haddock = false;
-            };
-            aeson = {
-              check = false;
-            };
-            */
+        haskell-template = {
+          haddock = false;
+        };
+        aeson = {
+          check = false;
+        };
+        */
       };
 
       # Development shell configuration
