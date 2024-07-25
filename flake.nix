@@ -1,5 +1,5 @@
 {
-  description = "srid/haskell-template: Nix template for Haskell projects";
+  description = "Nix template for Haskell projects";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
@@ -15,6 +15,9 @@
       systems = import inputs.systems;
 
       # See ./nix/modules/*.nix for the modules that are imported here.
-      imports = with builtins; map (fn: ./nix/modules/${fn}) (attrNames (readDir ./nix/modules));
+      imports = with builtins;
+        map
+          (fn: ./nix/modules/${fn})
+          (attrNames (readDir ./nix/modules));
     };
 }
