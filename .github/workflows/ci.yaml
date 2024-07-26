@@ -15,8 +15,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: yaxitech/nix-install-pkgs-action@v3
+      - name: Install omnix
+        uses: yaxitech/nix-install-pkgs-action@v3
         with:
-          packages: "github:srid/nixci"
-      - run: nixci build
+          packages: "github:juspay/omnix"
+      - run: om ci build
       - run: nix develop -c ghc --version
