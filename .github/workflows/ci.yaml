@@ -16,8 +16,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Install omnix
-        uses: yaxitech/nix-install-pkgs-action@v3
-        with:
-          packages: "github:juspay/omnix"
+        run: |
+          nix --accept-flake-config profile install "github:juspay/omnix"
       - run: om ci build
       - run: nix develop -c ghc --version
