@@ -10,8 +10,8 @@
     fourmolu-nix.url = "github:jedimahdi/fourmolu-nix";
 
     # TODO: Remove after upstreaming omnix to nixpkgs.
-    omnix.url = "github:juspay/omnix/om-module";
-    omnix-flake.url = "github:juspay/omnix/om-module?dir=nix/om";
+    omnix.url = "github:juspay/omnix";
+    omnix-flake.url = "github:juspay/omnix?dir=nix/om";
   };
 
   outputs = inputs:

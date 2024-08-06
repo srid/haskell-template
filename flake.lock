@@ -382,16 +382,15 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1722970568,
-        "narHash": "sha256-FASNh+5ggWlN546guvD+GBhM9G8LNtmdYhoa9lYvF1Y=",
+        "lastModified": 1722971772,
+        "narHash": "sha256-2OBfRX+vEeCNpEQqdD1FdQI00Jmtui+QqtJO6Kd3ZBg=",
         "owner": "juspay",
         "repo": "omnix",
-        "rev": "54d1475517e2a665756d319a1dc88160743584e9",
+        "rev": "d64c7e500655966882376059298d33ff26142efa",
         "type": "github"
       },
       "original": {
         "owner": "juspay",
-        "ref": "om-module",
         "repo": "omnix",
         "type": "github"
       }
@@ -399,17 +398,16 @@
     "omnix-flake": {
       "locked": {
         "dir": "nix/om",
-        "lastModified": 1722971045,
-        "narHash": "sha256-nCVg7eokAMeuc3tcCwItpp4c7Gg9LKmca6VxnRjdKYk=",
+        "lastModified": 1722971772,
+        "narHash": "sha256-2OBfRX+vEeCNpEQqdD1FdQI00Jmtui+QqtJO6Kd3ZBg=",
         "owner": "juspay",
         "repo": "omnix",
-        "rev": "429e8c55c29d4d4ebd0a875aea58980988bdae5c",
+        "rev": "d64c7e500655966882376059298d33ff26142efa",
         "type": "github"
       },
       "original": {
         "dir": "nix/om",
         "owner": "juspay",
-        "ref": "om-module",
         "repo": "omnix",
         "type": "github"
       }
