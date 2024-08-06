@@ -8,6 +8,10 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     fourmolu-nix.url = "github:jedimahdi/fourmolu-nix";
+
+    # TODO: Remove after upstreaming omnix to nixpkgs.
+    omnix.url = "github:juspay/omnix/om-module";
+    omnix-flake.url = "github:juspay/omnix/om-module?dir=nix/om";
   };
 
   outputs = inputs:
