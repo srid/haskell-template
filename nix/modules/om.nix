@@ -15,6 +15,8 @@
       };
     };
   };
+
+  # TODO: Remove after upstreaming omnix to nixpkgs.
   perSystem = { inputs', system, ... }: {
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;

@@ -396,6 +396,24 @@
         "type": "github"
       }
     },
+    "omnix-flake": {
+      "locked": {
+        "dir": "nix/om",
+        "lastModified": 1722971045,
+        "narHash": "sha256-nCVg7eokAMeuc3tcCwItpp4c7Gg9LKmca6VxnRjdKYk=",
+        "owner": "juspay",
+        "repo": "omnix",
+        "rev": "429e8c55c29d4d4ebd0a875aea58980988bdae5c",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nix/om",
+        "owner": "juspay",
+        "ref": "om-module",
+        "repo": "omnix",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": [
@@ -454,6 +472,7 @@
         "haskell-flake": "haskell-flake",
         "nixpkgs": "nixpkgs",
         "omnix": "omnix",
+        "omnix-flake": "omnix-flake",
         "systems": "systems_3",
         "treefmt-nix": "treefmt-nix_2"
       }
