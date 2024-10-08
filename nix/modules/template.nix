@@ -43,6 +43,24 @@
           value = false;
         }
       ];
+      tests = {
+        default = {
+          params = {
+            package-name = "foo";
+            author = "John";
+            vscode = false;
+          };
+          asserts = {
+            source = {
+              ".github/workflows/ci.yaml" = true;
+              ".vscode" = false;
+            };
+            packages.default = {
+              "bin/foo" = true;
+            };
+          };
+        };
+      };
     };
   };
 }
