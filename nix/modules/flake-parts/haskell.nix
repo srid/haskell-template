@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ root, inputs, ... }:
 {
   imports = [
     inputs.haskell-flake.flakeModule
@@ -11,12 +11,12 @@
       # To avoid unnecessary rebuilds, we filter projectRoot:
       # https://community.flake.parts/haskell-flake/local#rebuild
       projectRoot = builtins.toString (lib.fileset.toSource {
-        root = ../..;
+        inherit root;
         fileset = lib.fileset.unions [
-          ../../src
-          ../../haskell-template.cabal
-          ../../LICENSE
-          ../../README.md
+          (root + /src)
+          (root + /haskell-template.cabal)
+          (root + /LICENSE)
+          (root + /README.md)
         ];
       });
 
