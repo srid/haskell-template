@@ -50,6 +50,21 @@
         "type": "github"
       }
     },
+    "nixos-unified": {
+      "locked": {
+        "lastModified": 1729436561,
+        "narHash": "sha256-cSFLo7vAlH5lMk9FB88dy34oGgf2sLGv1dVkGgH7/dI=",
+        "owner": "srid",
+        "repo": "nixos-unified",
+        "rev": "4f4262884605abc62f396f3f39b29ac427be2179",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "nixos-unified",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1729265718,
@@ -71,24 +86,9 @@
         "flake-parts": "flake-parts",
         "fourmolu-nix": "fourmolu-nix",
         "haskell-flake": "haskell-flake",
+        "nixos-unified": "nixos-unified",
         "nixpkgs": "nixpkgs",
-        "systems": "systems",
         "treefmt-nix": "treefmt-nix"
-      }
-    },
-    "systems": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
       }
     },
     "treefmt-nix": {

@@ -2,9 +2,9 @@
   description = "Nix template for Haskell projects";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+    nixos-unified.url = "github:srid/nixos-unified";
     haskell-flake.url = "github:srid/haskell-flake";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,13 +12,7 @@
   };
 
   outputs = inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = import inputs.systems;
-
-      # See ./nix/modules/*.nix for the modules that are imported here.
-      imports = with builtins;
-        map
-          (fn: ./nix/modules/${fn})
-          (attrNames (readDir ./nix/modules));
-    };
+    # https://nixos-unified.org/autowiring.html#flake-parts
+    inputs.nixos-unified.lib.mkFlake
+      { inherit inputs; root = ./.; };
 }
