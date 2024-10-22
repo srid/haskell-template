@@ -29,7 +29,7 @@ Recommended dev environment setup: https://nixos.asia/en/direnv
 ## Tips
 
 - Run `nix flake update` to update all flake inputs.
-- Run `nix run github:srid/nixci build` to build _all_ outputs.
+- Run `nix --accept-flake-config run github:juspay/omnix ci` to build _all_ outputs.
 - Run `just fmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt).
 - Run `just docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
