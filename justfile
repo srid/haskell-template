@@ -14,6 +14,6 @@ repl *ARGS:
 fmt:
     treefmt
 
-# Run ghcid -- auto-recompile and run `main` function
+# Run ghciwatch -- auto-recompile and run `main` function
 run:
-    ghcid -c "cabal repl exe:haskell-template" --warnings -T :main
+    ghciwatch --test-ghci :main
