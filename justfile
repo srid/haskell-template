@@ -14,6 +14,6 @@ repl *ARGS:
 fmt:
     treefmt
 
-# Run ghciwatch -- auto-recompile and run `main` function
+# Run ghcid -- auto-recompile and run `main` function
 run:
-    ghciwatch --test-ghci :main
+    ghcid -T :main
