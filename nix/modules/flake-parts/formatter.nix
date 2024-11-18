@@ -10,6 +10,14 @@
     treefmt.config = {
       projectRootFile = "flake.nix";
 
+      settings.global.excludes = [
+        ".*"
+        "*.sql" # https://github.com/numtide/treefmt-nix/issues/257
+        "*.md"
+        "hie.yaml"
+        "LICENSE"
+      ];
+
       programs.just.enable = true;
       settings.formatter.just.includes = [ "justfile" ];
       programs.fourmolu = {
