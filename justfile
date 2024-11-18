@@ -8,7 +8,7 @@ docs:
 
 # Run cabal repl
 repl *ARGS:
-    cabal repl {{ARGS}}
+    cabal repl {{ ARGS }}
 
 # Autoformat the project tree
 fmt:

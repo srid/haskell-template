@@ -10,6 +10,8 @@
     treefmt.config = {
       projectRootFile = "flake.nix";
 
+      programs.just.enable = true;
+      settings.formatter.just.includes = [ "justfile" ];
       programs.fourmolu = {
         enable = true;
         package = config.fourmolu.wrapper;
