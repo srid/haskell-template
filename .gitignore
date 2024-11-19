@@ -10,3 +10,5 @@ result-*
 
 # direnv
 .direnv
+
+/.pre-commit-config.yaml
