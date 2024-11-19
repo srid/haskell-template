@@ -4,7 +4,7 @@ Get a Haskell development environment up and running quickly. Thanks to Nix, thi
 
 - [Nix](https://srid.ca/haskell-nix) + [Flakes](https://serokell.io/blog/practical-nix-flakes) (via [`github:srid/haskell-flake`](https://github.com/srid/haskell-flake)) + GHC 9.6
 - VSCode + [HLS](https://github.com/haskell/haskell-language-server)
-- [fourmolu](https://github.com/fourmolu/fourmolu) autoformatting 
+- [fourmolu](https://github.com/fourmolu/fourmolu) autoformatting
 - [Relude](https://github.com/kowainik/relude) as Prelude.
   - `.hlint.yaml` is [from relude](https://github.com/kowainik/relude/blob/main/.hlint.yaml)
 - Devshell commands are provided via [just](https://just.systems/); run `just` in devshell.
@@ -30,7 +30,7 @@ Recommended dev environment setup: https://nixos.asia/en/direnv
 
 - Run `nix flake update` to update all flake inputs.
 - Run `nix --accept-flake-config run github:juspay/omnix ci` to build _all_ outputs.
-- Run `just fmt` in nix shell to autoformat the project. This uses [treefmt](https://github.com/numtide/treefmt).
+- Run `just fmt` in nix shell to autoformat the project. This uses [pre-commit].
 - Run `just docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 - Common workflows
@@ -40,3 +40,5 @@ Recommended dev environment setup: https://nixos.asia/en/direnv
 ## Discussions
 
 Questions? Ideas? Suggestions? Join our [NixOS Zulip](https://nixos.zulipchat.com/#narrow/stream/413949-haskell-flake) or post in [Github Discussions](https://github.com/srid/haskell-template/discussions).
+
+[pre-commit]: https://github.com/cachix/git-hooks.nix

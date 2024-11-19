@@ -1,32 +1,20 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.treefmt-nix.flakeModule
+    (inputs.git-hooks + /flake-module.nix)
     inputs.fourmolu-nix.flakeModule
   ];
-  perSystem = { config, pkgs, ... }: {
-    # Auto formatters. This also adds a flake check to ensure that the
-    # source tree was auto formatted.
-    treefmt.config = {
-      projectRootFile = "flake.nix";
-
-      settings.global.excludes = [
-        ".*"
-        "*.sql" # https://github.com/numtide/treefmt-nix/issues/257
-        "*.md"
-        "hie.yaml"
-        "LICENSE"
-      ];
-
-      programs.just.enable = true;
-      settings.formatter.just.includes = [ "justfile" ];
-      programs.fourmolu = {
-        enable = true;
-        package = config.fourmolu.wrapper;
+  perSystem = { config, ... }: {
+    pre-commit.settings = {
+      hooks = {
+        nixpkgs-fmt.enable = true;
+        cabal-fmt.enable = true;
+        fourmolu = {
+          enable = true;
+          package = config.fourmolu.wrapper;
+        };
+        hlint.enable = true;
       };
-      programs.nixpkgs-fmt.enable = true;
-      programs.cabal-fmt.enable = true;
-      programs.hlint.enable = true;
     };
 
     fourmolu.settings = {
