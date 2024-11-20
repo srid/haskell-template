@@ -10,10 +10,6 @@ docs:
 repl *ARGS:
     cabal repl {{ ARGS }}
 
-# Autoformat the project tree
-fmt:
-    pre-commit run --all-files
-
 # Run ghcid -- auto-recompile and run `main` function
 run:
     ghcid -T :main

@@ -30,7 +30,7 @@ Recommended dev environment setup: https://nixos.asia/en/direnv
 
 - Run `nix flake update` to update all flake inputs.
 - Run `nix --accept-flake-config run github:juspay/omnix ci` to build _all_ outputs.
-- Run `just fmt` in nix shell to autoformat the project. This uses [pre-commit].
+- [pre-commit] hooks will automatically be setup in Nix shell. You can also run `pre-commit run -a` manually to run the hooks (e.g.: to autoformat the project tree using fourmolu, nixpkgs-fmt, etc. as well run programs like hlint). The hooks will checked as part of flake checks (thus CI).
 - Run `just docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
 - Common workflows
