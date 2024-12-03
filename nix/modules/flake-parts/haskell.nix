@@ -20,8 +20,8 @@
         ];
       });
 
-      # The base package set (this value is the default)
-      # basePackages = pkgs.haskellPackages;
+      # The base package set (where you set compiler version)
+      basePackages = pkgs.haskell.packages.ghc910;
 
       # Packages to add on top of `basePackages`
       packages = {
