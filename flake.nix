@@ -13,7 +13,10 @@
   };
 
   outputs = inputs:
-    # https://nixos-unified.org/autowiring.html#flake-parts
+    # This will import ./nix/modules/flake-parts/*.nix
+    # cf. https://nixos-unified.org/autowiring.html#flake-parts
+    #
+    # To write your own Nix, add or edit files in ./nix/modules/flake-parts/
     inputs.nixos-unified.lib.mkFlake
       { inherit inputs; root = ./.; };
 }
