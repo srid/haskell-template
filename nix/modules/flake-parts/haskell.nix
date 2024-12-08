@@ -17,6 +17,7 @@
           (root + /haskell-template.cabal)
           (root + /LICENSE)
           (root + /README.md)
+          (root + /default.nix)
         ];
       });
 
