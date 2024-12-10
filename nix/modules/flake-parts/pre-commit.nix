@@ -7,13 +7,21 @@
   perSystem = { config, ... }: {
     pre-commit.settings = {
       hooks = {
-        nixpkgs-fmt.enable = true;
+        nixpkgs-fmt = {
+          enable = true;
+          # cabal2nix, nixpkgs-fmt both modifies default.nix, hence exlude fmt.
+          excludes = [ "cabal.nix" ];
+        };
         cabal-fmt.enable = true;
         fourmolu = {
           enable = true;
           package = config.fourmolu.wrapper;
         };
         hlint.enable = true;
+        cabal2nix = {
+          enable = true;
+          settings.output_filename = "cabal.nix";
+        };
       };
     };
 

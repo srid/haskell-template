@@ -38,30 +38,32 @@
     "git-hooks": {
       "flake": false,
       "locked": {
-        "lastModified": 1733318908,
-        "narHash": "sha256-SVQVsbafSM1dJ4fpgyBqLZ+Lft+jcQuMtEL3lQWx2Sk=",
-        "owner": "cachix",
+        "lastModified": 1733744945,
+        "narHash": "sha256-IKEqpBW4mxRxVIu2EOJldp7gJYwxBN+yNZxoW0QhP2w=",
+        "owner": "rsrohitsingh682",
         "repo": "git-hooks.nix",
-        "rev": "6f4e2a2112050951a314d2733a994fbab94864c6",
+        "rev": "be16516ddd761e03509849c2d037925f826740cc",
         "type": "github"
       },
       "original": {
-        "owner": "cachix",
+        "owner": "rsrohitsingh682",
+        "ref": "cabal2nix",
         "repo": "git-hooks.nix",
         "type": "github"
       }
     },
     "haskell-flake": {
       "locked": {
-        "lastModified": 1733021212,
-        "narHash": "sha256-rnEfkMDX94VKi07K+M5k+CvZJXDexpvXv5Hg29zZmxg=",
-        "owner": "srid",
+        "lastModified": 1733821413,
+        "narHash": "sha256-1/I+745OA5msBChRdqooY5lh64vQ9pLhYVDXumjob64=",
+        "owner": "rsrohitsingh682",
         "repo": "haskell-flake",
-        "rev": "c60351652c71ebeb5dd237f7da874412a7a96970",
+        "rev": "81599f78edabade801f9fa6a445c9ea23b8ba01c",
         "type": "github"
       },
       "original": {
-        "owner": "srid",
+        "owner": "rsrohitsingh682",
+        "ref": "cache-cabal2nix",
         "repo": "haskell-flake",
         "type": "github"
       }
