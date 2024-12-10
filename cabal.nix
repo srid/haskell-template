@@ -1,18 +1,6 @@
-{ mkDerivation
-, aeson
-, async
-, base
-, data-default
-, directory
-, filepath
-, lib
-, mtl
-, optics-core
-, profunctors
-, relude
-, shower
-, time
-, with-utf8
+{ mkDerivation, aeson, async, base, data-default, directory
+, filepath, lib, mtl, optics-core, profunctors, relude, shower
+, time, with-utf8
 }:
 mkDerivation {
   pname = "haskell-template";
@@ -21,19 +9,8 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    aeson
-    async
-    base
-    data-default
-    directory
-    filepath
-    mtl
-    optics-core
-    profunctors
-    relude
-    shower
-    time
-    with-utf8
+    aeson async base data-default directory filepath mtl optics-core
+    profunctors relude shower time with-utf8
   ];
   homepage = "https://srid.ca/haskell-template";
   description = "A template for Haskell projects using Nix";
