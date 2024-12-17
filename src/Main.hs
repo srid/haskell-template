@@ -1,6 +1,14 @@
+{-# LANGUAGE StrictData #-}
+
 module Main where
 
 import Main.Utf8 qualified as Utf8
+
+data Example = Example
+  { name :: Text
+  , age :: Int
+  }
+  deriving stock (Show, Eq)
 
 {- |
  Main entry point.
