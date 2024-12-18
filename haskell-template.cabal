@@ -41,6 +41,7 @@ common shared
     MultiWayIf
     NoStarIsType
     OverloadedStrings
+    StrictData
     TypeFamilies
     ViewPatterns
 
