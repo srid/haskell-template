@@ -41,10 +41,11 @@
 
       # Add your package overrides here
       settings = {
-        /*
         haskell-template = {
-          haddock = false;
+          stan = true;
+          # haddock = false;
         };
+        /*
         aeson = {
           check = false;
         };
