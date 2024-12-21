@@ -10,7 +10,7 @@
         nixpkgs-fmt = {
           enable = true;
           # cabal2nix, nixpkgs-fmt both modifies default.nix, hence exlude fmt.
-          excludes = [ "cabal.nix" ];
+          excludes = [ config.pre-commit.settings.hooks.cabal2nix.settings.outputFilename ];
         };
         cabal-fmt.enable = true;
         fourmolu = {
@@ -20,7 +20,7 @@
         hlint.enable = true;
         cabal2nix = {
           enable = true;
-          settings.output_filename = "cabal.nix";
+          settings.outputFilename = "cabal.nix";
         };
       };
     };
