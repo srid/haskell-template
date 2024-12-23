@@ -17,6 +17,7 @@
           (root + /haskell-template.cabal)
           (root + /LICENSE)
           (root + /README.md)
+          (root + /cabal.nix)
         ];
       });
 
@@ -25,6 +26,11 @@
 
       # Packages to add on top of `basePackages`
       packages = {
+        # For IFD-less evaluation, you can point to pre-generated `cabal2nix` expression 
+        # here for each package,
+        # haskell-flake will use this file to build the package.
+        # By default haskell-flake refers to `cabal.nix`
+        haskell-template.cabal2NixFile = config.pre-commit.settings.hooks.cabal2nix.settings.outputFilename;
         # Add source or Hackage overrides here
         # (Local packages are added automatically)
         /*

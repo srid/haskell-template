@@ -38,11 +38,11 @@
     "git-hooks": {
       "flake": false,
       "locked": {
-        "lastModified": 1733318908,
-        "narHash": "sha256-SVQVsbafSM1dJ4fpgyBqLZ+Lft+jcQuMtEL3lQWx2Sk=",
+        "lastModified": 1734797603,
+        "narHash": "sha256-ulZN7ps8nBV31SE+dwkDvKIzvN6hroRY8sYOT0w+E28=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "6f4e2a2112050951a314d2733a994fbab94864c6",
+        "rev": "f0f0dc4920a903c3e08f5bdb9246bb572fcae498",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
     },
     "haskell-flake": {
       "locked": {
-        "lastModified": 1734464164,
-        "narHash": "sha256-5JCCyrgy7IMnipyYMQzIAXncGt2XVlW1aK71A+FTXDs=",
+        "lastModified": 1734920822,
+        "narHash": "sha256-YQo6LBiVVT05AcznDtlMuJkigM04FKW+lXQ5uRuT1yQ=",
         "owner": "srid",
         "repo": "haskell-flake",
-        "rev": "e280b39efdd72b6a5bdaa982b67f150c819be642",
+        "rev": "d8a21e6d8c6c01416e20bc944d7157eaf39ae93c",
         "type": "github"
       },
       "original": {
