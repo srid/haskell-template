@@ -15,8 +15,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
       - name: Install omnix
-        run: nix --accept-flake-config profile install "github:juspay/omnix"
+        run: | 
+          nix --accept-flake-config profile install "github:juspay/omnix"
+          nix --version
       - name: Build all flake outputs
-        run: nix --version && om ci
+        run: om ci run -- -v
       - name: What GHC version?
         run: nix develop -c ghc --version
