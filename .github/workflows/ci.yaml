@@ -19,6 +19,6 @@ jobs:
           nix --accept-flake-config profile install "github:juspay/omnix"
           nix --version
       - name: Build all flake outputs
-        run: om ci run -- -v
+        run: om ci
       - name: What GHC version?
         run: nix develop -c ghc --version
