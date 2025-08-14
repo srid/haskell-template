@@ -16,7 +16,7 @@ If you have an *existing* Haskell project, you should probably use https://githu
 Initialize this template using:
 
 ```sh
-nix --accept-flake-config run github:juspay/omnix -- \
+nix run nixpkgs#omnix -- \
   init github:srid/haskell-template -o ./yourproject
 ```
 
@@ -29,7 +29,7 @@ Recommended dev environment setup: https://nixos.asia/en/direnv
 ## Tips
 
 - Run `nix flake update` to update all flake inputs.
-- Run `nix --accept-flake-config run github:juspay/omnix ci` to build _all_ outputs.
+- Run `nix run nixpkgs#omnix ci` to build _all_ outputs.
 - [pre-commit] hooks will automatically be setup in Nix shell. You can also run `pre-commit run -a` manually to run the hooks (e.g.: to autoformat the project tree using fourmolu, nixpkgs-fmt, etc. as well run programs like hlint). The hooks will checked as part of flake checks (thus CI).
 - Run `just docs` to start Hoogle with packages in your cabal file.
 - Run the application without installing: `nix run github:srid/haskell-template` (or `nix run .` from checkout)
@@ -39,6 +39,6 @@ Recommended dev environment setup: https://nixos.asia/en/direnv
 
 ## Discussions
 
-Questions? Ideas? Suggestions? Join our [NixOS Zulip](https://nixos.zulipchat.com/#narrow/stream/413949-haskell-flake) or post in [Github Discussions](https://github.com/srid/haskell-template/discussions).
+Questions? Ideas? Suggestions? Join our [NixOS Asia community](https://nixos.asia/en/#community) or post in [Github Discussions](https://github.com/srid/haskell-template/discussions).
 
 [pre-commit]: https://github.com/cachix/git-hooks.nix

@@ -1,3 +1,5 @@
+# haskell-flake configuration goes in this module.
+
 { root, inputs, ... }:
 {
   imports = [
@@ -44,11 +46,6 @@
           check = false;
         };
         */
-      };
-
-      # Development shell configuration
-      devShell = {
-        hlsCheck.enable = false;
       };
 
       # What should haskell-flake add to flake outputs?
