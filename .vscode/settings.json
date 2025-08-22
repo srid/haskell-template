@@ -6,6 +6,7 @@
   // "nixEnvSelector.args": "--pure"
   "haskell.formattingProvider": "fourmolu",
   "haskell.manageHLS": "PATH",
+  "haskell.sessionLoading": "multipleComponents",
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nixd"
 }
