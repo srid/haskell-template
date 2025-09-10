@@ -13,7 +13,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: nixbuild/nix-quick-install-action@v33
       - name: Install omnix
         run: | 
           nix --accept-flake-config profile install "github:juspay/omnix"
