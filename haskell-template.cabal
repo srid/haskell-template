@@ -26,7 +26,8 @@ common shared
   ghc-options:
     -Wall -Wincomplete-record-updates -Wincomplete-uni-patterns
     -Wmissing-deriving-strategies -Wunused-foralls -Wunused-foralls
-    -fprint-explicit-foralls -fprint-explicit-kinds -Werror
+    -Wunused-packages -fprint-explicit-foralls -fprint-explicit-kinds
+    -Werror -Wwarn=unused-packages
 
   mixins:
     base hiding (Prelude),
