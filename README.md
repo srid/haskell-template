@@ -13,16 +13,11 @@ If you have an *existing* Haskell project, you should probably use https://githu
 
 ## Getting Started
 
-Initialize this template using:
-
-```sh
-nix run nixpkgs#omnix -- \
-  init github:srid/haskell-template -o ./yourproject
-```
-
-*tldr: [Install Nix](https://nixos.asia/en/install), [setup direnv](https://nixos.asia/en/direnv), open in VSCode, install recommended extensions and run `just run`.*
+Initialize this template using the green "Use this template" button above or just clone it, and then [rename it](https://srid.ca/haskell-template/start#rename-the-project).
 
 Full instructions: https://srid.ca/haskell-template/start
+
+*tldr: [Install Nix](https://nixos.asia/en/install), [setup direnv](https://nixos.asia/en/direnv), open in VSCode, install recommended extensions and run `just run`.*
 
 Recommended dev environment setup: https://nixos.asia/en/direnv
 
