@@ -19,8 +19,6 @@ Full instructions: https://srid.ca/haskell-template/start
 
 *tldr: [Install Nix](https://nixos.asia/en/install), [setup direnv](https://nixos.asia/en/direnv), open in VSCode, install recommended extensions and run `just run`.*
 
-Recommended dev environment setup: https://nixos.asia/en/direnv
-
 ## Tips
 
 - Run `nix flake update` to update all flake inputs.
@@ -34,6 +32,6 @@ Recommended dev environment setup: https://nixos.asia/en/direnv
 
 ## Discussions
 
-Questions? Ideas? Suggestions? Join our [NixOS Asia community](https://nixos.asia/en/#community) or post in [Github Discussions](https://github.com/srid/haskell-template/discussions).
+Questions? Ideas? Suggestions? Post in [Github Discussions](https://github.com/srid/haskell-template/discussions).
 
 [pre-commit]: https://github.com/cachix/git-hooks.nix
