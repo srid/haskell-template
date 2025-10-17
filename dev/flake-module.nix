@@ -6,7 +6,6 @@
   imports = [
     (inputs.git-hooks + /flake-module.nix)
     inputs.fourmolu-nix.flakeModule
-    ../haskell.nix
   ];
 
   perSystem = { config, pkgs, ... }: {

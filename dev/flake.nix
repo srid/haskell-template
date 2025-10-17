@@ -9,5 +9,6 @@
     haskell-flake.url = "github:srid/haskell-flake";
   };
 
+  # This flake exists only for its inputs; see ./flake-module.nix for outputs.
   outputs = { ... }: { };
 }
