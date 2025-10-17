@@ -1,12 +1,35 @@
-# Git pre-commit hooks are defined here.
+# Development-only flake-parts module
+# This module is loaded in the "dev" partition and includes devShell, pre-commit hooks, etc.
 
 { inputs, ... }:
 {
   imports = [
     (inputs.git-hooks + /flake-module.nix)
     inputs.fourmolu-nix.flakeModule
+    ../haskell.nix
   ];
-  perSystem = { config, ... }: {
+
+  perSystem = { config, pkgs, ... }: {
+    # Development shell
+    devShells.default = pkgs.mkShell {
+      name = "haskell-template";
+      meta.description = "Haskell development environment";
+
+      # See https://community.flake.parts/haskell-flake/devshell#composing-devshells
+      inputsFrom = [
+        config.haskellProjects.default.outputs.devShell
+        config.pre-commit.devShell
+      ];
+
+      # Development packages
+      packages = with pkgs; [
+        just
+        nixd
+        ghciwatch
+      ];
+    };
+
+    # Git pre-commit hooks
     pre-commit.settings = {
       hooks = {
         nixpkgs-fmt.enable = true;
