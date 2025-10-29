@@ -38,5 +38,5 @@ _exclude:
   - "*.pyc"
   - __pycache__
 
-# Template without suffix - all files with Jinja syntax will be templated
-_templates_suffix: ""
+# Use .jinja suffix for templates
+_templates_suffix: .jinja

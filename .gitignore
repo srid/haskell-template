@@ -15,3 +15,8 @@ result-*
 
 # LLM
 /.claude/settings.local.json
+
+# Template working files (originals are in .jinja files)
+LICENSE
+haskell-template.cabal
+src/Main.hs

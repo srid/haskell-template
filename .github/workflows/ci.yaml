@@ -33,7 +33,7 @@ jobs:
           # Verify templating worked
           grep "Test Author" LICENSE
           grep "test-project" test-project.cabal
-          test -f test-project.cabal  # Verify cabal file has correct name
+          test -f test-project.cabal  # Verify cabal file has templated name
 
           # Build the project
           nix build
