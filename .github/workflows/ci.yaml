@@ -15,10 +15,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: nixbuild/nix-quick-install-action@v33
 
+      - name: Install copier
+        run: nix profile install nixpkgs#copier
+
       - name: Test template initialization with copier
         run: |
           # Initialize template with sample variables
-          nix run nixpkgs#copier -- copy --defaults \
+          copier copy --defaults \
             --data author="Test Author" \
             --data package_name="test-project" \
             --data vscode=false \
