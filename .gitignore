@@ -20,3 +20,4 @@ result-*
 LICENSE
 haskell-template.cabal
 src/Main.hs
+nix/modules/flake/haskell.nix
