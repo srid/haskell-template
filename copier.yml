@@ -1,0 +1,42 @@
+# Copier template configuration for haskell-template
+# https://copier.readthedocs.io/
+
+_min_copier_version: "9.0.0"
+
+# Answers file location
+_answers_file: .copier-answers.yml
+
+# Template questions
+author:
+  type: str
+  help: Author name
+  default: Sridhar Ratnakumar
+  placeholder: "{{ author }}"
+
+package_name:
+  type: str
+  help: Name of the Haskell package
+  default: haskell-template
+  placeholder: "{{ package_name }}"
+
+vscode:
+  type: bool
+  help: Include the VSCode settings folder (./.vscode)?
+  default: true
+
+github_ci:
+  type: bool
+  help: Include GitHub Actions workflow configuration (./.github)?
+  default: true
+
+# Exclude patterns based on user choices
+_exclude:
+  - "{% if not vscode %}.vscode{% endif %}"
+  - "{% if not github_ci %}.github{% endif %}"
+  - .git
+  - .copier-answers.yml
+  - "*.pyc"
+  - __pycache__
+
+# Template without suffix - all files with Jinja syntax will be templated
+_templates_suffix: ""

@@ -16,8 +16,7 @@ If you have an *existing* Haskell project, you should probably use https://githu
 Initialize this template using:
 
 ```sh
-nix run nixpkgs#omnix -- \
-  init github:srid/haskell-template -o ./yourproject
+nix run nixpkgs#copier -- copy gh:srid/haskell-template ./yourproject
 ```
 
 *tldr: [Install Nix](https://nixos.asia/en/install), [setup direnv](https://nixos.asia/en/direnv), open in VSCode, install recommended extensions and run `just run`.*

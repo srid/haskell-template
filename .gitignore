@@ -12,3 +12,6 @@ result-*
 .direnv
 
 /.pre-commit-config.yaml
+
+# LLM
+/.claude/settings.local.json

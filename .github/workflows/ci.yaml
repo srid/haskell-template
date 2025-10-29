@@ -6,7 +6,7 @@ on:
       - master
   pull_request:
 jobs:
-  build:
+  template-test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -14,11 +14,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: nixbuild/nix-quick-install-action@v33
-      - name: Install omnix
-        run: | 
-          nix --accept-flake-config profile install "github:juspay/omnix"
-          nix --version
-      - name: Build all flake outputs
-        run: om ci
+
+      - name: Test template initialization with copier
+        run: |
+          # Initialize template with sample variables
+          nix run nixpkgs#copier -- copy --defaults \
+            --data author="Test Author" \
+            --data package_name="test-project" \
+            --data vscode=false \
+            --data github_ci=false \
+            . ../test-project
+
+          cd ../test-project
+
+          # Verify templating worked
+          grep "Test Author" LICENSE
+          grep "test-project" test-project.cabal
+
+          # Build the project
+          nix build
+
+          # Run the executable
+          ./result/bin/test-project
+
       - name: What GHC version?
         run: nix develop -c ghc --version

@@ -1,12 +1,12 @@
 cabal-version:      2.4
-name:               haskell-template
+name:               {{ package_name }}
 version:            0.1.0.0
 license:            MIT
-copyright:          2022 Sridhar Ratnakumar
+copyright:          {{ now().year }} {{ author }}
 maintainer:         srid@srid.ca
-author:             Sridhar Ratnakumar
+author:             {{ author }}
 category:           Web
-homepage:           https://srid.ca/haskell-template
+homepage:           https://github.com/srid/haskell-template
 
 -- TODO: Before hackage release.
 -- A short (one-line) description of the package.
@@ -63,6 +63,6 @@ common shared
   hs-source-dirs:     src
   default-language:   GHC2021
 
-executable haskell-template
+executable {{ package_name }}
   import:  shared
   main-is: Main.hs
