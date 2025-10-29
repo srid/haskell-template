@@ -2,7 +2,7 @@ cabal-version:      2.4
 name:               {{ package_name }}
 version:            0.1.0.0
 license:            MIT
-copyright:          {{ now().year }} {{ author }}
+copyright:          {{ '%Y' | strftime }} {{ author }}
 maintainer:         srid@srid.ca
 author:             {{ author }}
 category:           Web
