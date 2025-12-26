@@ -14,11 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: nixbuild/nix-quick-install-action@v33
-      - name: Install vira
+      - name: Install omnix
         run: | 
-          nix --accept-flake-config profile install "github:juspay/vira"
+          nix install nixpkgs#omnix
           nix --version
       - name: Build all flake outputs
-        run: vira ci
+        run: om ci
       - name: What GHC version?
         run: nix develop -c ghc --version
