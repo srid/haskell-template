@@ -14,8 +14,12 @@
         fourmolu = {
           enable = true;
           package = config.fourmolu.wrapper;
+          excludes = [ "vira\.hs" ];
         };
-        hlint.enable = true;
+        hlint = {
+          enable = true;
+          excludes = [ "vira\.hs" ];
+        };
       };
     };
 
