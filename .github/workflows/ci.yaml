@@ -16,7 +16,7 @@ jobs:
       - uses: nixbuild/nix-quick-install-action@v33
       - name: Install omnix
         run: | 
-          nix install nixpkgs#omnix
+          nix profile install nixpkgs#omnix
           nix --version
       - name: Build all flake outputs
         run: om ci
